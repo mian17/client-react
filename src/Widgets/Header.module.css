@@ -1,0 +1,22 @@
+.mobile-menu-list {
+    list-style: none;
+}
+
+.mobile-menu-list li {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #e8e8e8;
+
+    transition: all 0.3s;
+}
+
+.mobile-menu-list li:hover,
+.mobile-menu-list li:active{
+    background-color: #eee;
+}
+
+.mobile-menu-list li a:link,
+.mobile-menu-list li a:visited {
+    color: #000;
+}
+
