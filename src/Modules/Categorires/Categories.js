@@ -7,6 +7,7 @@ import { Navigation } from "swiper";
 
 import "swiper/css/bundle";
 
+// Imports from local data
 import cat_1 from "../../Assets/img/categories/cat-1.jpg";
 import cat_2 from "../../Assets/img/categories/cat-2.jpg";
 import cat_3 from "../../Assets/img/categories/cat-3.jpg";
