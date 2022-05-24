@@ -1,4 +1,4 @@
-import hero from "../Assets/img/hero/banner.jpg";
+import hero from "../../Assets/img/hero/banner.jpg";
 import { Component } from "react";
 import $ from "jquery";
 
@@ -20,37 +20,59 @@ class Hero extends Component {
                 </div>
                 <ul>
                   <li>
-                    <a href="/">Fresh Meat</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fresh Meat
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Vegetables</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Vegetables
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Fruit & Nut Gifts</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fruit & Nut Gifts
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Fresh Berries</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fresh Berries
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Ocean Foods</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Ocean Foods
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Butter & Eggs</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Butter & Eggs
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Fastfood</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fastfood
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Fresh Onion</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fresh Onion
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Papayaya & Crisps</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Papayaya & Crisps
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Oatmeal</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Oatmeal
+                    </a>
                   </li>
                   <li>
-                    <a href="/">Fresh Bananas</a>
+                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      Fresh Bananas
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -58,7 +80,7 @@ class Hero extends Component {
             <div className="col-lg-9">
               <div className="hero__search">
                 <div className="hero__search__form">
-                  <form action="#">
+                  <form action="src/Modules/Hero/Hero#">
                     <div className="hero__search__categories">
                       All Categories
                       <span className="arrow_carrot-down"></span>
@@ -93,7 +115,10 @@ class Hero extends Component {
                     100% Organic
                   </h2>
                   <p>Free Pickup and Delivery Available</p>
-                  <a href="/" className="primary-btn">
+                  <a
+                    href="/home/night/WebstormProjects/client-site-ogani/public"
+                    className="primary-btn"
+                  >
                     SHOP NOW
                   </a>
                 </div>
