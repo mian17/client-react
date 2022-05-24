@@ -4,6 +4,7 @@ import Categories from "../Modules/Categorires/Categories";
 import Featured from "../Modules/Featured/Featured";
 import Banner from "../Modules/Banner/Banner";
 import Products from "../Modules/Products/Products";
+import Blog from "../Modules/Blog/Blog";
 
 class Content extends Component {
   render() {
@@ -14,6 +15,7 @@ class Content extends Component {
         <Featured />
         <Banner />
         <Products />
+        <Blog />
       </div>
     );
   }

@@ -3,7 +3,8 @@
 html,
 body {
   height: 100%;
-  font-family: 'Cairo', sans-serif;
+  /*font-family: 'Cairo', sans-serif;*/
+  font-family: 'Inter', sans-serif;
 }
 
 h1,
