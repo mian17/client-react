@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import LatestProducts from "./LatestProducts/LatestProducts";
+import TopRatedProducts from "./TopRatedProducts/TopRatedProducts";
+import ReviewProducts from "./ReviewProducts/ReviewProducts";
 
 class Products extends Component {
   render() {
@@ -8,6 +10,8 @@ class Products extends Component {
         <div className="container">
           <div className="row">
             <LatestProducts />
+            <TopRatedProducts />
+            <ReviewProducts />
           </div>
         </div>
       </section>

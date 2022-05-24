@@ -10,12 +10,12 @@ import lp1 from "../../../Assets/img/latest-product/lp-1.jpg";
 import lp2 from "../../../Assets/img/latest-product/lp-2.jpg";
 import lp3 from "../../../Assets/img/latest-product/lp-3.jpg";
 
-class LatestProducts extends Component {
+class ReviewProducts extends Component {
   render() {
     return (
       <div className="col-lg-4 col-md-6">
         <div className="latest-product__text">
-          <h4>Latest Products</h4>
+          <h4>Review Products</h4>
           <Swiper
             modules={[Navigation, Autoplay]}
             autoplay={{ delay: 5000 }}
@@ -87,4 +87,4 @@ class LatestProducts extends Component {
   }
 }
 
-export default LatestProducts;
+export default ReviewProducts;
