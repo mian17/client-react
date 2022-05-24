@@ -37,22 +37,22 @@ class Featured extends Component {
                 <div
                   className="featured__item__pic"
                   style={{
-                    backgroundImage: "url(" + featured_1 + ")",
+                    background: `url("${featured_1}") no-repeat center`,
                   }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -60,9 +60,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      1
-                    </a>
+                    <a href="/">1</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -72,21 +70,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic"
-                  style={{ background: "url(" + featured_2 + ")" }}
+                  style={{
+                    background: `url("${featured_2}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -94,9 +94,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      2
-                    </a>
+                    <a href="/">2</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -106,21 +104,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_3 + ")" }}
+                  style={{
+                    background: `url("${featured_3}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -128,9 +128,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      3
-                    </a>
+                    <a href="/">3</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -140,21 +138,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_4 + ")" }}
+                  style={{
+                    background: `url("${featured_4}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -162,9 +162,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      4
-                    </a>
+                    <a href="/">4</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -174,21 +172,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_5 + ")" }}
+                  style={{
+                    background: `url("${featured_5}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -196,9 +196,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      5
-                    </a>
+                    <a href="/">5</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -208,21 +206,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_6 + ")" }}
+                  style={{
+                    background: `url("${featured_6}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -230,9 +230,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      6
-                    </a>
+                    <a href="/">6</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -242,21 +240,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_7 + ")" }}
+                  style={{
+                    background: `url("${featured_7}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -264,9 +264,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      7
-                    </a>
+                    <a href="/">7</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
@@ -276,21 +274,23 @@ class Featured extends Component {
               <div className="featured__item">
                 <div
                   className="featured__item__pic "
-                  style={{ background: "url(" + featured_8 + ")" }}
+                  style={{
+                    background: `url("${featured_8}") no-repeat center`,
+                  }}
                 >
                   <ul className="featured__item__pic__hover">
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-retweet"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="/home/night/WebstormProjects/client-site-ogani/public">
+                      <a href="/">
                         <i className="fa fa-shopping-cart"></i>
                       </a>
                     </li>
@@ -298,9 +298,7 @@ class Featured extends Component {
                 </div>
                 <div className="featured__item__text">
                   <h6>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      8
-                    </a>
+                    <a href="/">8</a>
                   </h6>
                   <h5>$30.00</h5>
                 </div>
