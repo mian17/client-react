@@ -10,7 +10,7 @@ class Blog extends Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="section-title from-blog__title">
-                <h2>From The Blog</h2>
+                <h2>Góc nội trợ</h2>
               </div>
             </div>
           </div>
@@ -23,14 +23,14 @@ class Blog extends Component {
                 <div className="blog__item__text">
                   <ul>
                     <li>
-                      <i className="fa fa-calendar-o"></i> May 4,2019
+                      <i className="fa fa-calendar-o"></i> 4/5/2019
                     </li>
                     <li>
                       <i className="fa fa-comment-o"></i> 5
                     </li>
                   </ul>
                   <h5>
-                    <a href="/">Cooking tips make cooking simple</a>
+                    <a href="/">Các tuyệt chiêu nấu ăn đơn giản</a>
                   </h5>
                   <p>
                     Sed quia non numquam modi tempora indunt ut labore et dolore
@@ -47,14 +47,16 @@ class Blog extends Component {
                 <div className="blog__item__text">
                   <ul>
                     <li>
-                      <i className="fa fa-calendar-o"></i> May 4,2019
+                      <i className="fa fa-calendar-o"></i> 4/5/2019
                     </li>
                     <li>
                       <i className="fa fa-comment-o"></i> 5
                     </li>
                   </ul>
                   <h5>
-                    <a href="/">6 ways to prepare breakfast for 30</a>
+                    <a href="/">
+                      6 cách chuẩn bị bữa sáng chỉ trong vòng 30 phút
+                    </a>
                   </h5>
                   <p>
                     Sed quia non numquam modi tempora indunt ut labore et dolore
@@ -71,14 +73,14 @@ class Blog extends Component {
                 <div className="blog__item__text">
                   <ul>
                     <li>
-                      <i className="fa fa-calendar-o"></i> May 4,2019
+                      <i className="fa fa-calendar-o"></i> 4/5/2019
                     </li>
                     <li>
                       <i className="fa fa-comment-o"></i> 5
                     </li>
                   </ul>
                   <h5>
-                    <a href="/">Visit the clean farm in the US</a>
+                    <a href="/">Tham quan nông trại tại Việt Nam</a>
                   </h5>
                   <p>
                     Sed quia non numquam modi tempora indunt ut labore et dolore

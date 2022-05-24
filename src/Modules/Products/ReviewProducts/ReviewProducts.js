@@ -15,7 +15,7 @@ class ReviewProducts extends Component {
     return (
       <div className="col-lg-4 col-md-6">
         <div className="latest-product__text">
-          <h4>Review Products</h4>
+          <h4>Đánh giá sản phẩm</h4>
           <Swiper
             modules={[Navigation, Autoplay]}
             autoplay={{ delay: 5000 }}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "../Assets/img/logo.png";
 import payment_item from "../Assets/img/payment-item.png";
+
 class Footer extends Component {
   render() {
     return (
@@ -15,8 +16,8 @@ class Footer extends Component {
                   </a>
                 </div>
                 <ul>
-                  <li>Address: 1317 Harry Place 28204 NC</li>
-                  <li>Phone: 704-768-7449</li>
+                  <li>Địa chỉ: Quận 1, TP. HCM</li>
+                  <li>Phone: 123-456-7890</li>
                   <li>Email: info@ogani.com</li>
                 </ul>
               </div>
@@ -24,45 +25,42 @@ class Footer extends Component {
 
             <div className="col-lg-4 offset-lg-1 col-md-6 col-sm-6">
               <div className="footer__widget">
-                <h6>Useful Links</h6>
+                <h6>Các đường dẫn hữu ích</h6>
                 <ul>
                   <li>
-                    <a href="/">About Us</a>
+                    <a href="/">Về chúng tôi</a>
                   </li>
                   <li>
-                    <a href="/">About Our Shop</a>
+                    <a href="/">Về cửa hàng chúng tôi</a>
                   </li>
                   <li>
-                    <a href="/">Secure Shopping</a>
+                    <a href="/">Mua sắm an toàn</a>
                   </li>
                   <li>
-                    <a href="/">Delivery infomation</a>
+                    <a href="/">Thông tin vận chuyển</a>
                   </li>
                   <li>
-                    <a href="/">Privacy Policy</a>
+                    <a href="/">Chính sách bảo mật</a>
                   </li>
                   <li>
-                    <a href="/">Our Sitemap</a>
+                    <a href="/">Sơ đồ website</a>
                   </li>
                 </ul>
                 <ul>
                   <li>
-                    <a href="/">Who Are We</a>
+                    <a href="/">Dịch vụ</a>
                   </li>
                   <li>
-                    <a href="/">Our Services</a>
+                    <a href="/">Dự án</a>
                   </li>
                   <li>
-                    <a href="/">Projects</a>
+                    <a href="/">Liên hệ</a>
                   </li>
                   <li>
-                    <a href="/">Contact</a>
+                    <a href="/">Đổi mới sáng tạo</a>
                   </li>
                   <li>
-                    <a href="/">Innovation</a>
-                  </li>
-                  <li>
-                    <a href="/">Testimonials</a>
+                    <a href="/">Điều trần</a>
                   </li>
                 </ul>
               </div>
@@ -70,14 +68,15 @@ class Footer extends Component {
 
             <div className="col-lg-4 col-md-12">
               <div className="footer__widget">
-                <h6>Join Our Newsletter Now</h6>
+                <h6>Hãy Tham gia Hộp thư của Chúng tôi</h6>
                 <p>
-                  Get E-mail updates about our latest shop and special offers.
+                  Nhận tin báo email về các sản phẩm mới nhất và phiếu giảm gía
+                  (nếu có).
                 </p>
                 <form action="#">
-                  <input type="text" placeholder="Enter your mail" />
+                  <input type="text" placeholder="Email của bạn" />
                   <button type="submit" className="site-btn">
-                    Subscribe
+                    Đăng ký
                   </button>
                 </form>
                 <div className="footer__widget__social">

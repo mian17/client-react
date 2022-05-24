@@ -55,9 +55,7 @@ class Categories extends Component {
                   className="categories__item"
                 >
                   <h5>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Fruit
-                    </a>
+                    <a href="/">Trái cây tươi</a>
                   </h5>
                 </div>
               </SwiperSlide>
@@ -69,9 +67,7 @@ class Categories extends Component {
                   className="categories__item"
                 >
                   <h5>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Dried Fruit
-                    </a>
+                    <a href="/">Trái cây sấy</a>
                   </h5>
                 </div>
               </SwiperSlide>
@@ -83,9 +79,7 @@ class Categories extends Component {
                   className="categories__item"
                 >
                   <h5>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Vegetables
-                    </a>
+                    <a href="/">Rau củ</a>
                   </h5>
                 </div>
               </SwiperSlide>
@@ -97,9 +91,7 @@ class Categories extends Component {
                   className="categories__item"
                 >
                   <h5>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fruit Drinks
-                    </a>
+                    <a href="/">Nước trái cây</a>
                   </h5>
                 </div>
               </SwiperSlide>
@@ -111,9 +103,7 @@ class Categories extends Component {
                   className="categories__item"
                 >
                   <h5>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Meat
-                    </a>
+                    <a href="/">Thịt tươi</a>
                   </h5>
                 </div>
               </SwiperSlide>

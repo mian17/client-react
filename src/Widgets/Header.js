@@ -41,17 +41,17 @@ class Header extends Component {
               </li>
             </ul>
             <div className="header__cart__price">
-              <span>$10.00</span>
+              <span>100.000 VNĐ</span>
             </div>
           </div>
           <div className="hamburger__menu__widget">
             <div className="header__top__right__language">
               <img src={language} alt="" />
-              <div>English</div>
+              <div>Tiếng Việt</div>
               <span className="arrow_carrot-down"></span>
               <ul>
                 <li>
-                  <a href="/">Spanish</a>
+                  <a href="/">Tiếng Việt</a>
                 </li>
                 <li>
                   <a href="/">English</a>
@@ -60,17 +60,17 @@ class Header extends Component {
             </div>
             <div className="header__top__right__auth">
               <a href="/">
-                <i className="fa fa-user"></i> Login
+                <i className="fa fa-user"></i> Đăng nhập
               </a>
             </div>
           </div>
           <nav className="mobile-menu">
             <ul className={classes["mobile-menu-list"]}>
               <li className="active">
-                <a href="/">Home</a>
+                <a href="/">Trang chủ</a>
               </li>
               <li>
-                <a href="%PUBLIC_URL%/shop.html">Shop</a>
+                <a href="%PUBLIC_URL%/shop.html">Mua sắm</a>
               </li>
               <li>
                 <a href="/">Pages</a>
@@ -79,7 +79,7 @@ class Header extends Component {
                 <a href="%PUBLIC_URL%/blog.html">Blog</a>
               </li>
               <li>
-                <a href="%PUBLIC_URL%/contact.html">Contact</a>
+                <a href="%PUBLIC_URL%/contact.html">Liên hệ</a>
               </li>
             </ul>
           </nav>
@@ -103,7 +103,7 @@ class Header extends Component {
               <li>
                 <i className="fa fa-envelope"></i> info@ogani.com
               </li>
-              <li>Free shipping for all orders over $50</li>
+              <li>Miễn phí vận chuyển cho đơn hàng từ 200.000 VNĐ.</li>
             </ul>
           </div>
         </div>
@@ -117,7 +117,7 @@ class Header extends Component {
                       <li>
                         <i className="fa fa-envelope"></i> info@ogani.com
                       </li>
-                      <li>Free shipping for all orders over $50</li>
+                      <li>Miễn phí vận chuyển cho đơn hàng từ 200.000 VNĐ.</li>
                     </ul>
                   </div>
                 </div>
@@ -139,17 +139,17 @@ class Header extends Component {
                     </div>
                     <div className="header__top__right__language">
                       <img src={language} alt="" />
-                      <div>English</div>
+                      <div>Tiếng Việt</div>
                       <span className="arrow_carrot-down"></span>
                       <ul>
                         <li>
-                          <a href="/">Tiếng Việt</a>
+                          <a href="/">English</a>
                         </li>
                       </ul>
                     </div>
                     <div className="header__top__right__auth">
                       <a href="/">
-                        <i className="fa fa-user"></i> Login
+                        <i className="fa fa-user"></i> Đăng nhập
                       </a>
                     </div>
                   </div>
@@ -170,39 +170,39 @@ class Header extends Component {
                 <nav className="header__menu">
                   <ul>
                     <li className="active">
-                      <a href="/">Home</a>
+                      <a href="/">Trang chủ</a>
                     </li>
                     <li>
-                      <a href="%PUBLIC_URL%/shop.html">Shop</a>
+                      <a href="%PUBLIC_URL%/shop.html">Mua sắm</a>
                     </li>
-                    <li>
-                      <a href="/">Pages</a>
-                      <ul className="header__menu__dropdown">
-                        <li>
-                          <a href="%PUBLIC_URL%/shop-details.html">
-                            Shop Details
-                          </a>
-                        </li>
-                        <li>
-                          <a href="%PUBLIC_URL%/shopping-cart.html">
-                            Shoping Cart
-                          </a>
-                        </li>
-                        <li>
-                          <a href="%PUBLIC_URL%/checkout.html">Check Out</a>
-                        </li>
-                        <li>
-                          <a href="%PUBLIC_URL%/blog-details.html">
-                            Blog Details
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
+                    {/*<li>*/}
+                    {/*  <a href="/">Pages</a>*/}
+                    {/*  <ul className="header__menu__dropdown">*/}
+                    {/*    <li>*/}
+                    {/*      <a href="%PUBLIC_URL%/shop-details.html">*/}
+                    {/*        Shop Details*/}
+                    {/*      </a>*/}
+                    {/*    </li>*/}
+                    {/*//     <li>*/}
+                    {/*      <a href="%PUBLIC_URL%/shopping-cart.html">*/}
+                    {/*        Shoping Cart*/}
+                    {/*      </a>*/}
+                    {/*    </li>*/}
+                    {/*    <li>*/}
+                    {/*      <a href="%PUBLIC_URL%/checkout.html">Check Out</a>*/}
+                    {/*    </li>*/}
+                    {/*    <li>*/}
+                    {/*      <a href="%PUBLIC_URL%/blog-details.html">*/}
+                    {/*        Blog Details*/}
+                    {/*      </a>*/}
+                    {/*    </li>*/}
+                    {/*  </ul>*/}
+                    {/*</li>*/}
                     <li>
                       <a href="%PUBLIC_URL%/blog.html">Blog</a>
                     </li>
                     <li>
-                      <a href="%PUBLIC_URL%/contact.html">Contact</a>
+                      <a href="%PUBLIC_URL%/contact.html">Liên hệ</a>
                     </li>
                   </ul>
                 </nav>
@@ -222,7 +222,7 @@ class Header extends Component {
                     </li>
                   </ul>
                   <div className="header__cart__price">
-                    <span>$10.00</span>
+                    <span>100.000 VNĐ</span>
                   </div>
                 </div>
               </div>

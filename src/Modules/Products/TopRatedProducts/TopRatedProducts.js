@@ -15,7 +15,7 @@ class TopRatedProducts extends Component {
     return (
       <div className="col-lg-4 col-md-6">
         <div className="latest-product__text">
-          <h4>Top Rated Products</h4>
+          <h4>Sản phẩm phổ biến</h4>
           <Swiper
             modules={[Navigation, Autoplay]}
             autoplay={{ delay: 5000 }}

@@ -16,63 +16,30 @@ class Hero extends Component {
               <div className="hero__categories">
                 <div className="hero__categories__all" onClick={toggleSlide}>
                   <i className="fa fa-bars"></i>
-                  <span>All Departments</span>
+                  <span>Danh mục</span>
                 </div>
                 <ul>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Meat
-                    </a>
+                    <a href="/">Thịt tươi</a>
                   </li>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Vegetables
-                    </a>
+                    <a href="/">Rau củ</a>
                   </li>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fruit & Nut Gifts
-                    </a>
+                    <a href="/">Trái cây</a>
+                  </li>
+
+                  <li>
+                    <a href="/">Thủy sản</a>
                   </li>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Berries
-                    </a>
+                    <a href="/">Bơ và Trứng</a>
                   </li>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Ocean Foods
-                    </a>
+                    <a href="/">Thức ăn nhanh</a>
                   </li>
                   <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Butter & Eggs
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fastfood
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Onion
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Papayaya & Crisps
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Oatmeal
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/home/night/WebstormProjects/client-site-ogani/public">
-                      Fresh Bananas
-                    </a>
+                    <a href="/">Yến mạch </a>
                   </li>
                 </ul>
               </div>
@@ -82,15 +49,12 @@ class Hero extends Component {
                 <div className="hero__search__form">
                   <form action="src/Modules/Hero/Hero#">
                     <div className="hero__search__categories">
-                      All Categories
+                      Danh mục
                       <span className="arrow_carrot-down"></span>
                     </div>
-                    <input
-                      type="text"
-                      placeholder="What are you looking for?"
-                    />
+                    <input type="text" placeholder="Tìm kiếm sản phẩm" />
                     <button type="submit" className="site-btn">
-                      SEARCH
+                      TÌM KIẾM
                     </button>
                   </form>
                 </div>
@@ -99,8 +63,8 @@ class Hero extends Component {
                     <i className="fa fa-phone"></i>
                   </div>
                   <div className="hero__search__phone__text">
-                    <h5>704-768-7449</h5>
-                    <span>24/7 Support</span>
+                    <h5>123-456-7890</h5>
+                    <span>Hỗ trợ 24/7</span>
                   </div>
                 </div>
               </div>
@@ -109,17 +73,14 @@ class Hero extends Component {
                 style={{ backgroundImage: "url(" + hero + ")" }}
               >
                 <div className="hero__text">
-                  <span>FRESH FRUIT</span>
+                  <span>Rau củ quả tươi</span>
                   <h2>
-                    Vegetable <br />
+                    Rau củ <br />
                     100% Organic
                   </h2>
-                  <p>Free Pickup and Delivery Available</p>
-                  <a
-                    href="/home/night/WebstormProjects/client-site-ogani/public"
-                    className="primary-btn"
-                  >
-                    SHOP NOW
+                  <p>Chúng tôi có hỗ trợ miễn phí vận chuyển</p>
+                  <a href="/" className="primary-btn">
+                    MUA NGAY
                   </a>
                 </div>
               </div>
