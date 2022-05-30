@@ -1,68 +1,54 @@
 import React, { Component } from "react";
+import PriceRangeSlider from "./RangeSlider/PriceRangeSlider";
 
 class Sidebar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: [20, 37] };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event, newValue) {
+    this.setState((prevState) => {
+      prevState = newValue;
+      return prevState;
+    });
+  }
+
   render() {
     return (
       <div className="sidebar">
         <div className="sidebar__item">
-          <h4>Department</h4>
+          <h4>Danh mục</h4>
           <ul>
             <li>
-              <a href="/">Fresh Meat</a>
+              <a href="/">Thịt tươi</a>
             </li>
             <li>
-              <a href="/">Vegetables</a>
+              <a href="/">Rau củ</a>
             </li>
             <li>
-              <a href="/">Fruit & Nut Gifts</a>
+              <a href="/">Trái cây</a>
             </li>
             <li>
-              <a href="/">Fresh Berries</a>
+              <a href="/">Thủy sản</a>
             </li>
             <li>
-              <a href="/">Ocean Foods</a>
+              <a href="/">Bơ và Trứng</a>
             </li>
             <li>
-              <a href="/">Butter & Eggs</a>
+              <a href="/">Thức ăn nhanh</a>
             </li>
             <li>
-              <a href="/">Fastfood</a>
-            </li>
-            <li>
-              <a href="/">Fresh Onion</a>
-            </li>
-            <li>
-              <a href="/">Papayaya & Crisps</a>
-            </li>
-            <li>
-              <a href="/">Oatmeal</a>
+              <a href="/">Yến mạch </a>
             </li>
           </ul>
         </div>
         <div className="sidebar__item">
-          <h4>Price</h4>
+          <h4>Giá</h4>
           <div className="price-range-wrap">
-            <div
-              className="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-              data-min="10"
-              data-max="540"
-            >
-              <div className="ui-slider-range ui-corner-all ui-widget-header"></div>
-              <span
-                tabIndex="0"
-                className="ui-slider-handle ui-corner-all ui-state-default"
-              ></span>
-              <span
-                tabIndex="0"
-                className="ui-slider-handle ui-corner-all ui-state-default"
-              ></span>
-            </div>
-            <div className="range-slider">
-              <div className="price-input">
-                <input type="text" id="minamount" />
-                <input type="text" id="maxamount" />
-              </div>
-            </div>
+            <PriceRangeSlider />
           </div>
         </div>
         <div className="sidebar__item sidebar__item__color--option">
