@@ -1,10 +1,23 @@
 import React, { Component } from "react";
-import pd_1 from "../../../../Assets/img/product/discount/pd-1.jpg";
+
+const currentFormatOptions = {
+  style: "currency",
+  currency: "VND",
+};
 
 class ProductItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      formattedDiscountedPrice: new Intl.NumberFormat(
+        "vi-VN",
+        currentFormatOptions
+      ).format(this.props.discountedPrice),
+      formattedOldPrice: new Intl.NumberFormat(
+        "vi-VN",
+        currentFormatOptions
+      ).format(this.props.oldPrice),
+    };
   }
 
   render() {
@@ -13,10 +26,12 @@ class ProductItem extends Component {
         <div
           className="product__discount__item__pic"
           style={{
-            background: `url("${pd_1}") no-repeat center`,
+            background: `url("${this.props.imageUrl}") no-repeat center`,
           }}
         >
-          <div className="product__discount__percent">-20%</div>
+          <div className="product__discount__percent">
+            -{this.props.discountedRatio}%
+          </div>
           <ul className="product__item__pic__hover">
             <li>
               <a href="/">
@@ -36,12 +51,13 @@ class ProductItem extends Component {
           </ul>
         </div>
         <div className="product__discount__item__text">
-          <span>Trái cây khô</span>
+          <span>{this.props.category}</span>
           <h5>
-            <a href="/">Nho khô</a>
+            <a href="/">{this.props.productName}</a>
           </h5>
           <div className="product__item__price">
-            $30.00 <span>$36.00</span>
+            {this.state.formattedDiscountedPrice}{" "}
+            <span>{this.state.formattedOldPrice}</span>
           </div>
         </div>
       </div>
