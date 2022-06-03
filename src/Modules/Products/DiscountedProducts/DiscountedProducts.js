@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import ProductItem from "../ProductItems/ProductItem/ProductItem";
+import DiscountedProductItem from "./DiscountedProduct/DiscountedProductItem";
 
 import pd_1 from "../../../Assets/img/product/discount/pd-1.jpg";
 import pd_2 from "../../../Assets/img/product/discount/pd-2.jpg";
@@ -11,7 +11,7 @@ import pd_4 from "../../../Assets/img/product/discount/pd-4.jpg";
 import pd_5 from "../../../Assets/img/product/discount/pd-5.jpg";
 import pd_6 from "../../../Assets/img/product/discount/pd-6.jpg";
 
-const images = [
+const discountedProducts = [
   {
     imageUrl: pd_1,
     productName: "Hạt khô",
@@ -89,10 +89,10 @@ class DiscountedProducts extends Component {
           slidesPerView={3}
           className="row"
         >
-          {images.map((image) => {
+          {discountedProducts.map((image, index) => {
             return (
-              <SwiperSlide className="col-lg-4">
-                <ProductItem
+              <SwiperSlide key={index} className="col-lg-4">
+                <DiscountedProductItem
                   imageUrl={image.imageUrl}
                   productName={image.productName}
                   discountedPrice={image.discountedPrice}

@@ -6,6 +6,8 @@ import FilterProductItems from "../Modules/Products/FilterProductItems/FilterPro
 import ProductItems from "../Modules/Products/ProductItems/ProductItems";
 import ProductPagination from "../Modules/Products/ProductPagination/ProductPagination";
 
+// TODO: FIX SMALL FLICKERING WHEN OPENING MUI'S SELECT
+
 class Shop extends Component {
   render() {
     return (
