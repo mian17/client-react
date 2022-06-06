@@ -6,13 +6,18 @@ import FilterProductItems from "../Modules/Products/FilterProductItems/FilterPro
 import ProductItems from "../Modules/Products/ProductItems/ProductItems";
 import ProductPagination from "../Modules/Products/ProductPagination/ProductPagination";
 
-// TODO: FIX SMALL FLICKERING WHEN OPENING MUI'S SELECT
+// TODO: FIX SMALL FLICKERING WHEN OPENING MUI'S SELECT WHILE ON FIREFOX
+//       CHROME HAS NO ISSUE WITH THIS BUG
 
 class Shop extends Component {
   render() {
     return (
       <div>
-        <Breadcrumb />
+        <Breadcrumb
+          pageName="Cửa hàng Ogani"
+          prevPages={["Trang chủ"]}
+          curPage="Mua sắm"
+        />
         <section className="product spad">
           <div className="container">
             <div className="row">

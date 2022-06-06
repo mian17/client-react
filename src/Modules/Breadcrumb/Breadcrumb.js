@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import breadcrumb from "../../Assets/img/breadcrumb.jpg";
 class Breadcrumb extends Component {
+  constructor(props) {
+    super(props);
+
+  }
+
   render() {
     return (
       <section
@@ -13,10 +18,12 @@ class Breadcrumb extends Component {
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="breadcrumb__text">
-                <h2>Cửa hàng Ogani</h2>
+                <h2>{this.props.pageName}</h2>
                 <div className="breadcrumb__option">
-                  <a href="/">Trang chủ</a>
-                  <span>Mua sắm</span>
+                  {this.props.prevPages.map((page, index) => {
+                    return <a key={index} href="/">{page}</a>
+                  })}
+                  <span>{this.props.curPage}</span>
                 </div>
               </div>
             </div>

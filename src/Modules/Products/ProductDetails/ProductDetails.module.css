@@ -1,0 +1,11 @@
+.product-details-swiperslide-pic {
+    width: 124px;
+}
+
+.product-details-info-list li {
+    display: flex;
+}
+
+.product-details-info-list li strong {
+    flex: 1;
+}
