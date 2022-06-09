@@ -20,7 +20,7 @@ const product_details_images = [
   product_details_5,
 ];
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
   return (
     <section className="product-details spad">
       <div className="container">
@@ -59,7 +59,7 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="col-lg-6 col-md-6">
-            <ProductDetailsBasicInfo />
+            <ProductDetailsBasicInfo productName={props.productName} />
           </div>
           <ProductDetailsMoreInfo reviewNum={1} />
         </div>

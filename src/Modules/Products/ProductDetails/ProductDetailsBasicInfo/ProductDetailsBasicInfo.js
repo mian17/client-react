@@ -8,7 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import classes from "./ProductDetailsBasicInfo.module.css";
 
-const ProductDetailsBasicInfo = () => {
+const ProductDetailsBasicInfo = (props) => {
   const [productNum, setProductNum] = useState(1);
 
   const increaseProductNum = () => {
@@ -29,10 +29,7 @@ const ProductDetailsBasicInfo = () => {
   // {productName, productReviewNum, productBasicInfo, productShippingTime, productWeight}
   return (
     <div className="product__details__text">
-      <h3>
-        {/*{props.productName}*/}
-        Tên sản phẩm
-      </h3>
+      <h3>{props.productName}</h3>
       <div className="product__details__rating">
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
