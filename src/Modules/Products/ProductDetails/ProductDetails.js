@@ -12,9 +12,38 @@ import product_details_2 from "../../../Assets/img/product/details/product-detai
 import product_details_3 from "../../../Assets/img/product/details/product-details-3.jpg";
 import product_details_4 from "../../../Assets/img/product/details/product-details-4.jpg";
 import product_details_5 from "../../../Assets/img/product/details/product-details-5.jpg";
+
 import { Button, IconButton } from "@mui/material";
 
 class ProductDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productNum: 1,
+    };
+    this.increaseProductNum = this.increaseProductNum.bind(this);
+    this.decreaseProductNum = this.decreaseProductNum.bind(this);
+  }
+  increaseProductNum() {
+    if (this.state.productNum <= 100) {
+      this.setState((prevState) => {
+        return {
+          productNum: prevState.productNum + 1,
+        };
+      });
+    }
+  }
+
+  decreaseProductNum = () => {
+    if (this.state.productNum > 1) {
+      this.setState((prevState) => {
+        return {
+          productNum: prevState.productNum - 1,
+        };
+      });
+    }
+  };
+
   render() {
     return (
       <section className="product-details spad">
@@ -98,20 +127,21 @@ class ProductDetails extends Component {
                   tortor risus.
                 </p>
 
-                <IconButton>
+                <IconButton onClick={this.decreaseProductNum}>
                   <RemoveIcon />
                 </IconButton>
                 <Input
                   type="number"
-                  defaultValue="1"
+                  value={this.state.productNum}
                   inputProps={{
                     inputMode: "numeric",
                     pattern: "[0-9]*",
                   }}
                   min="1"
                   sx={{ width: "30%" }}
+                  required
                 />
-                <IconButton>
+                <IconButton onClick={this.increaseProductNum}>
                   <AddIcon />
                 </IconButton>
 

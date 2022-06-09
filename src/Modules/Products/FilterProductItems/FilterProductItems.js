@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function FilterProductItems() {
+const FilterProductItems = () => {
   const [filter, setFilter] = useState("");
 
   const handleChange = (event) => {
@@ -51,6 +51,6 @@ function FilterProductItems() {
       </div>
     </div>
   );
-}
+};
 
 export default FilterProductItems;

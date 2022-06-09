@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import Sidebar from "../Modules/Sidebar/Sidebar";
 import DiscountedProducts from "../Modules/Products/DiscountedProducts/DiscountedProducts";
@@ -9,33 +9,31 @@ import ProductPagination from "../Modules/Products/ProductPagination/ProductPagi
 // TODO: FIX SMALL FLICKERING WHEN OPENING MUI'S SELECT WHILE ON FIREFOX
 //       CHROME HAS NO ISSUE WITH THIS BUG
 
-class Shop extends Component {
-  render() {
-    return (
-      <div>
-        <Breadcrumb
-          pageName="Cửa hàng Ogani"
-          prevPages={["Trang chủ"]}
-          curPage="Mua sắm"
-        />
-        <section className="product spad">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-3 col-md-5">
-                <Sidebar />
-              </div>
-              <div className="col-lg-9 col-md-7">
-                <DiscountedProducts />
-                <FilterProductItems />
-                <ProductItems />
-                <ProductPagination />
-              </div>
+const Shop = () => {
+  return (
+    <div>
+      <Breadcrumb
+        pageName="Cửa hàng Ogani"
+        prevPages={["Trang chủ"]}
+        curPage="Mua sắm"
+      />
+      <section className="product spad">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-5">
+              <Sidebar />
+            </div>
+            <div className="col-lg-9 col-md-7">
+              <DiscountedProducts />
+              <FilterProductItems />
+              <ProductItems />
+              <ProductPagination />
             </div>
           </div>
-        </section>
-      </div>
-    );
-  }
-}
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default Shop;

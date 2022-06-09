@@ -1,6 +1,4 @@
 // Imports from React
-import { Component } from "react";
-
 // Imports from Swiper API (documentation link:https://swiperjs.com/react#installation=)
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
@@ -35,84 +33,82 @@ const categoriesBreakpointsOption = {
   },
 };
 
-class Categories extends Component {
-  render() {
-    return (
-      <section className="categories">
-        <div className="container">
-          <div className="row">
-            <Swiper
-              breakpoints={categoriesBreakpointsOption}
-              modules={[Navigation]}
-              slidesPerView={4}
-              navigation={true}
-            >
-              <SwiperSlide className="col-lg-3">
-                <div
-                  style={{
-                    background: `url("${cat_1}") no-repeat center`,
-                  }}
-                  className="categories__item"
-                >
-                  <h5>
-                    <a href="/">Trái cây tươi</a>
-                  </h5>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="col-lg-3">
-                <div
-                  style={{
-                    background: `url("${cat_2}") no-repeat center`,
-                  }}
-                  className="categories__item"
-                >
-                  <h5>
-                    <a href="/">Trái cây sấy</a>
-                  </h5>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="col-lg-3">
-                <div
-                  style={{
-                    background: `url("${cat_3}") no-repeat center`,
-                  }}
-                  className="categories__item"
-                >
-                  <h5>
-                    <a href="/">Rau củ</a>
-                  </h5>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="col-lg-3">
-                <div
-                  style={{
-                    background: `url("${cat_4}") no-repeat center`,
-                  }}
-                  className="categories__item"
-                >
-                  <h5>
-                    <a href="/">Nước trái cây</a>
-                  </h5>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className="col-lg-3">
-                <div
-                  style={{
-                    background: `url("${cat_5}") no-repeat center`,
-                  }}
-                  className="categories__item"
-                >
-                  <h5>
-                    <a href="/">Thịt tươi</a>
-                  </h5>
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
+const Categories = () => {
+  return (
+    <section className="categories">
+      <div className="container">
+        <div className="row">
+          <Swiper
+            breakpoints={categoriesBreakpointsOption}
+            modules={[Navigation]}
+            slidesPerView={4}
+            navigation={true}
+          >
+            <SwiperSlide className="col-lg-3">
+              <div
+                style={{
+                  background: `url("${cat_1}") no-repeat center`,
+                }}
+                className="categories__item"
+              >
+                <h5>
+                  <a href="/">Trái cây tươi</a>
+                </h5>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="col-lg-3">
+              <div
+                style={{
+                  background: `url("${cat_2}") no-repeat center`,
+                }}
+                className="categories__item"
+              >
+                <h5>
+                  <a href="/">Trái cây sấy</a>
+                </h5>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="col-lg-3">
+              <div
+                style={{
+                  background: `url("${cat_3}") no-repeat center`,
+                }}
+                className="categories__item"
+              >
+                <h5>
+                  <a href="/">Rau củ</a>
+                </h5>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="col-lg-3">
+              <div
+                style={{
+                  background: `url("${cat_4}") no-repeat center`,
+                }}
+                className="categories__item"
+              >
+                <h5>
+                  <a href="/">Nước trái cây</a>
+                </h5>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="col-lg-3">
+              <div
+                style={{
+                  background: `url("${cat_5}") no-repeat center`,
+                }}
+                className="categories__item"
+              >
+                <h5>
+                  <a href="/">Thịt tươi</a>
+                </h5>
+              </div>
+            </SwiperSlide>
+          </Swiper>
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
 
 export default Categories;
