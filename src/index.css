@@ -13,17 +13,19 @@ code {
 }
 
 
-.swiper-button-next:after {
-  font-size: 18px;
-  color: #1c1c1c;
-  height: 70px;
-  width: 30px;
-  line-height: 70px;
-  text-align: center;
-  border: 1px solid #ebebeb;
-  position: absolute;
-  left: -35px;
-  top: 50%;
-  /*-webkit-transform: translateY(-35px);*/
-  background: #ffffff;
-}
+/*.swiper-button-next:after {*/
+/*  font-size: 18px;*/
+/*  color: #1c1c1c;*/
+/*  height: 70px;*/
+/*  width: 30px;*/
+/*  line-height: 70px;*/
+/*  text-align: center;*/
+/*  border: 1px solid #ebebeb;*/
+/*  position: absolute;*/
+/*  left: -35px;*/
+/*  top: 50%;*/
+/*  !*-webkit-transform: translateY(-35px);*!*/
+/*  background: #ffffff;*/
+/*}*/
+
+

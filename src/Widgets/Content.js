@@ -1,12 +1,13 @@
 import React from "react";
 import Homepage from "../Pages/Homepage";
+import ShopDetails from "../Pages/ShopDetails";
 
 const Content = () => {
   return (
     <div>
-      <Homepage />
+      {/*<Homepage />*/}
       {/*<Shop />*/}
-      {/*<ShopDetails />*/}
+      <ShopDetails />
     </div>
   );
 };
