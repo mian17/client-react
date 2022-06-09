@@ -1,39 +1,52 @@
+import { useState } from "react";
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
+
+import { currentFormatOptions } from "../utils/utils";
 
 import cart_1 from "../Assets/img/cart/cart-1.jpg";
 import cart_2 from "../Assets/img/cart/cart-2.jpg";
 import cart_3 from "../Assets/img/cart/cart-3.jpg";
-
-const cart_images = [cart_1, cart_2, cart_3];
-
-const totalPricePerProduct = (productPrice, productQuantity) => {
-  return productPrice * productQuantity;
-};
-
-const products_in_cart = [
-  {
-    productName: "Vegetable’s Package",
-    productPrice: 55000,
-    productQuantity: 1,
-    productTotal: totalPricePerProduct(this.productPrice, this.productQuantity),
-  },
-
-  {
-    productName: "Fresh Garden Vegetable",
-    productPrice: 39000,
-    productQuantity: 1,
-    productTotal: totalPricePerProduct(this.productPrice, this.productQuantity),
-  },
-
-  {
-    productName: "Organic Bananas",
-    productPrice: 68000,
-    productQuantity: 1,
-    productTotal: totalPricePerProduct(this.productPrice, this.productQuantity),
-  },
-];
+import ProductInCart from "../Modules/ProductInCart/ProductInCart";
 
 const ShoppingCart = () => {
+  const [productsInCart, setProductsInCart] = useState([
+    {
+      cartId: 0,
+      productImgUrl: cart_1,
+      productName: "Vegetable’s Package",
+      productPrice: 55000,
+      productQuantity: 1,
+      productTotalPrice: 0,
+    },
+    {
+      cartId: 1,
+      productImgUrl: cart_2,
+      productName: "Fresh Garden Vegetable",
+      productPrice: 39000,
+      productQuantity: 1,
+      productTotalPrice: 0,
+    },
+    {
+      cartId: 2,
+      productImgUrl: cart_3,
+      productName: "Organic Bananas",
+      productPrice: 68000,
+      productQuantity: 1,
+      productTotalPrice: 0,
+    },
+  ]);
+  const editProductInCartQuantity = (e) => {
+    setProductsInCart((prevState) => {
+      for (let i = 0; i < prevState.length; i++) {
+        if (prevState[i].cartId === +e.target.closest("tr").dataset.cartId) {
+          prevState[i].productQuantity += e.target.value;
+        }
+      }
+      console.log(prevState);
+      return prevState;
+    });
+  };
+
   return (
     <>
       <Breadcrumb
@@ -49,69 +62,30 @@ const ShoppingCart = () => {
                 <table>
                   <thead>
                     <tr>
-                      <th className="shoping__product">Products</th>
-                      <th>Price</th>
-                      <th>Quantity</th>
-                      <th>Total</th>
+                      <th className="shoping__product">Các sản phẩm</th>
+                      <th>Đơn giá</th>
+                      <th>Số lượng</th>
+                      <th>Tổng tiền</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="shoping__cart__item">
-                        <img src={cart_1} alt="" />
-                        <h5>Vegetable’s Package</h5>
-                      </td>
-                      <td className="shoping__cart__price">$55.00</td>
-
-                      <td className="shoping__cart__quantity">
-                        <div className="quantity">
-                          <div className="pro-qty">
-                            <input type="text" value="1" />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="shoping__cart__total">$110.00</td>
-                      <td className="shoping__cart__item__close">
-                        <span className="icon_close"></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="shoping__cart__item">
-                        <img src={cart_2} alt="" />
-                        <h5>Fresh Garden Vegetable</h5>
-                      </td>
-                      <td className="shoping__cart__price">$39.00</td>
-                      <td className="shoping__cart__quantity">
-                        <div className="quantity">
-                          <div className="pro-qty">
-                            <input type="text" value="1" />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="shoping__cart__total">$39.99</td>
-                      <td className="shoping__cart__item__close">
-                        <span className="icon_close"></span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="shoping__cart__item">
-                        <img src={cart_3} alt="" />
-                        <h5>Organic Bananas</h5>
-                      </td>
-                      <td className="shoping__cart__price">$69.00</td>
-                      <td className="shoping__cart__quantity">
-                        <div className="quantity">
-                          <div className="pro-qty">
-                            <input type="text" value="1" />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="shoping__cart__total">$69.99</td>
-                      <td className="shoping__cart__item__close">
-                        <span className="icon_close"></span>
-                      </td>
-                    </tr>
+                    {productsInCart.map((product, index) => {
+                      return (
+                        <ProductInCart
+                          key={index}
+                          cartId={index}
+                          productImgUrl={product.productImgUrl}
+                          productName={product.productName}
+                          productPrice={product.productPrice}
+                          productQuantity={product.productQuantity}
+                          productTotalPrice={
+                            product.productQuantity * product.productPrice
+                          }
+                          editProductInCartQuantity={editProductInCartQuantity}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -121,22 +95,22 @@ const ShoppingCart = () => {
             <div className="col-lg-12">
               <div className="shoping__cart__btns">
                 <a href="/" className="primary-btn cart-btn">
-                  CONTINUE SHOPPING
+                  TIẾP TỤC MUA SẮM
                 </a>
                 <a href="/" className="primary-btn cart-btn cart-btn-right">
                   <span className="icon_loading"></span>
-                  UPDATE CART
+                  CẬP NHẬT GIỎ HÀNG
                 </a>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="shoping__continue">
                 <div className="shoping__discount">
-                  <h5>Discount Codes</h5>
-                  <form action="#">
+                  <h5>MÃ GIẢM GIÁ</h5>
+                  <form action="">
                     <input type="text" placeholder="Enter your coupon code" />
                     <button type="submit" className="site-btn">
-                      APPLY COUPON
+                      NHẬP
                     </button>
                   </form>
                 </div>
@@ -144,17 +118,17 @@ const ShoppingCart = () => {
             </div>
             <div className="col-lg-6">
               <div className="shoping__checkout">
-                <h5>Cart Total</h5>
+                <h5>TỔNG GIÁ TRỊ GIỎ HÀNG</h5>
                 <ul>
                   <li>
-                    Subtotal <span>$454.98</span>
+                    Tạm tính<span>$454.98</span>
                   </li>
                   <li>
-                    Total <span>$454.98</span>
+                    Tổng giá trị <span>$454.98</span>
                   </li>
                 </ul>
                 <a href="/" className="primary-btn">
-                  PROCEED TO CHECKOUT
+                  THANH TOÁN
                 </a>
               </div>
             </div>
