@@ -8,6 +8,14 @@ import cart_1 from "../Assets/img/cart/cart-1.jpg";
 import cart_2 from "../Assets/img/cart/cart-2.jpg";
 import cart_3 from "../Assets/img/cart/cart-3.jpg";
 
+const calculateTotalMoney = (products) => {
+  return products.reduce((prevTotalMoney, curProduct) => {
+    return (
+      prevTotalMoney + curProduct.productPrice * curProduct.productQuantity
+    );
+  }, 0);
+};
+
 const DUMMY_DATA = [
   {
     cartId: 0,
@@ -37,11 +45,7 @@ const DUMMY_DATA = [
 
 const defaultCartState = {
   items: DUMMY_DATA,
-  totalMoney: DUMMY_DATA.reduce((prevTotalMoney, curProduct) => {
-    return (
-      prevTotalMoney + curProduct.productPrice * curProduct.productQuantity
-    );
-  }, 0),
+  totalMoney: calculateTotalMoney(DUMMY_DATA),
 };
 
 const CartProvider = (props) => {
@@ -50,6 +54,12 @@ const CartProvider = (props) => {
   const addItemToCartHandler = (item) => {};
   const removeItemFromCartHandler = (id) => {
     // const removeCartId = e.target.closest("tr").dataset.cartId;
+    console.log(id);
+    const newState = { ...cartState };
+    newState.items = newState.items.filter((product) => product.cartId !== id);
+    newState.totalMoney = calculateTotalMoney(newState.items);
+
+    setCartState(newState);
   };
 
   const editItemQuantityHandler = (e) => {
@@ -68,15 +78,7 @@ const CartProvider = (props) => {
         const newState = { ...cartState };
 
         newState.items[i].productQuantity = +e.target.value;
-        newState.totalMoney = newState.items.reduce(
-          (prevTotalMoney, curProduct) => {
-            return (
-              prevTotalMoney +
-              curProduct.productPrice * curProduct.productQuantity
-            );
-          },
-          0
-        );
+        newState.totalMoney = calculateTotalMoney(newState.items);
 
         setCartState(newState);
       }

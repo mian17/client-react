@@ -48,10 +48,7 @@ const ProductInCart = (props) => {
           props.product.productPrice * props.product.productQuantity
         )}
       </td>
-      <td
-        className="shoping__cart__item__close"
-        // onClick={props.deleteProductInCartHandler}
-      >
+      <td className="shoping__cart__item__close" onClick={props.removeItem}>
         <span className="icon_close"></span>
       </td>
     </tr>

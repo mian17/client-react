@@ -48,16 +48,28 @@ const ShoppingCart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartCtx.items.map((product, index) => {
-                      return (
-                        <ProductInCart
-                          product={product}
-                          key={index}
-                          cartId={index}
-                          editItemQuantity={cartCtx.editItemQuantity}
-                        />
-                      );
-                    })}
+                    {cartCtx.items.length !== 0 ? (
+                      cartCtx.items.map((product, index) => {
+                        return (
+                          <ProductInCart
+                            product={product}
+                            key={index}
+                            cartId={index}
+                            editItemQuantity={cartCtx.editItemQuantity}
+                            removeItem={cartCtx.removeItem.bind(
+                              null,
+                              product.cartId
+                            )}
+                          />
+                        );
+                      })
+                    ) : (
+                      <tr>
+                        <td colSpan={4}>
+                          Không có sản phẩm nào trong đơn hàng
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
