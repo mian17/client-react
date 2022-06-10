@@ -1,11 +1,20 @@
+import { useContext } from "react";
+
 import logo from "../Assets/img/logo.png";
 import language from "../Assets/img/language.png";
 
+import CartContext from "../store/cart-context";
 import $ from "jquery";
 
 import classes from "./Header.module.css";
 
 const Header = () => {
+  const cartCtx = useContext(CartContext);
+
+  const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
+    return currentNumber + item.productQuantity;
+  }, 0);
+
   return (
     <>
       <div
@@ -33,7 +42,8 @@ const Header = () => {
             </li>
             <li>
               <a href="/">
-                <i className="fa fa-shopping-bag"></i> <span>3</span>
+                <i className="fa fa-shopping-bag"></i>{" "}
+                <span>{numberOfCartItems}</span>
               </a>
             </li>
           </ul>
@@ -214,7 +224,8 @@ const Header = () => {
                   </li>
                   <li>
                     <a href="/">
-                      <i className="fa fa-shopping-bag"></i> <span>3</span>
+                      <i className="fa fa-shopping-bag"></i>{" "}
+                      <span>{numberOfCartItems}</span>
                     </a>
                   </li>
                 </ul>

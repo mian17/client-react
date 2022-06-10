@@ -1,51 +1,29 @@
-import { useState } from "react";
+// React library imports
+import { useContext } from "react";
+
+// Component imports
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
-
-import { currentFormatOptions } from "../utils/utils";
-
-import cart_1 from "../Assets/img/cart/cart-1.jpg";
-import cart_2 from "../Assets/img/cart/cart-2.jpg";
-import cart_3 from "../Assets/img/cart/cart-3.jpg";
 import ProductInCart from "../Modules/ProductInCart/ProductInCart";
 
+// Context import
+import CartContext from "../store/cart-context";
+
+// Utilities import
+import { currentFormatOptions } from "../utils/utils";
+
 const ShoppingCart = () => {
-  const [productsInCart, setProductsInCart] = useState([
-    {
-      cartId: 0,
-      productImgUrl: cart_1,
-      productName: "Vegetable’s Package",
-      productPrice: 55000,
-      productQuantity: 1,
-      productTotalPrice: 0,
-    },
-    {
-      cartId: 1,
-      productImgUrl: cart_2,
-      productName: "Fresh Garden Vegetable",
-      productPrice: 39000,
-      productQuantity: 1,
-      productTotalPrice: 0,
-    },
-    {
-      cartId: 2,
-      productImgUrl: cart_3,
-      productName: "Organic Bananas",
-      productPrice: 68000,
-      productQuantity: 1,
-      productTotalPrice: 0,
-    },
-  ]);
-  const editProductInCartQuantity = (e) => {
-    setProductsInCart((prevState) => {
-      for (let i = 0; i < prevState.length; i++) {
-        if (prevState[i].cartId === +e.target.closest("tr").dataset.cartId) {
-          prevState[i].productQuantity += e.target.value;
-        }
-      }
-      console.log(prevState);
-      return prevState;
-    });
-  };
+  const cartCtx = useContext(CartContext);
+
+  const totalCartMoney = new Intl.NumberFormat(
+    "vi-VN",
+    currentFormatOptions
+  ).format(cartCtx.totalMoney);
+
+  // TODO: ADD DISCOUNT PROCESS
+  const finalTotalCartMoney = new Intl.NumberFormat(
+    "vi-VN",
+    currentFormatOptions
+  ).format(cartCtx.totalMoney);
 
   return (
     <>
@@ -70,19 +48,13 @@ const ShoppingCart = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {productsInCart.map((product, index) => {
+                    {cartCtx.items.map((product, index) => {
                       return (
                         <ProductInCart
+                          product={product}
                           key={index}
                           cartId={index}
-                          productImgUrl={product.productImgUrl}
-                          productName={product.productName}
-                          productPrice={product.productPrice}
-                          productQuantity={product.productQuantity}
-                          productTotalPrice={
-                            product.productQuantity * product.productPrice
-                          }
-                          editProductInCartQuantity={editProductInCartQuantity}
+                          editItemQuantity={cartCtx.editItemQuantity}
                         />
                       );
                     })}
@@ -108,7 +80,7 @@ const ShoppingCart = () => {
                 <div className="shoping__discount">
                   <h5>MÃ GIẢM GIÁ</h5>
                   <form action="">
-                    <input type="text" placeholder="Enter your coupon code" />
+                    <input type="text" placeholder="Nhập ở đây" />
                     <button type="submit" className="site-btn">
                       NHẬP
                     </button>
@@ -121,10 +93,11 @@ const ShoppingCart = () => {
                 <h5>TỔNG GIÁ TRỊ GIỎ HÀNG</h5>
                 <ul>
                   <li>
-                    Tạm tính<span>$454.98</span>
+                    Tạm tính
+                    <span>{totalCartMoney}</span>
                   </li>
                   <li>
-                    Tổng giá trị <span>$454.98</span>
+                    Tổng giá trị <span>{finalTotalCartMoney}</span>
                   </li>
                 </ul>
                 <a href="/" className="primary-btn">

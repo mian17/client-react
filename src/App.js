@@ -2,6 +2,7 @@ import Header from "./Widgets/Header";
 import Content from "./Widgets/Content";
 import Footer from "./Widgets/Footer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CartProvider from "./store/CartProvider";
 
 const theme = createTheme({
   palette: {
@@ -13,9 +14,11 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Header />
-      <Content />
-      <Footer />
+      <CartProvider>
+        <Header />
+        <Content />
+        <Footer />
+      </CartProvider>
     </ThemeProvider>
   );
 }
