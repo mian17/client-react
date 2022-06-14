@@ -1,49 +1,48 @@
-const currentFormatOptions = {
-  style: "currency",
-  currency: "VND",
-};
+import ProductItemGrid from "./ProductItemGrid";
+import ProductItemList from "./ProductItemList";
+
+import { useContext } from "react";
+import CartContext from "../../../../store/cart-context";
+import cart_3 from "../../../../Assets/img/cart/cart-3.jpg";
 
 const ProductItem = (props) => {
+  const cartCtx = useContext(CartContext);
+  // {
+  //   cartId: 2,
+  //       productImgUrl: cart_3,
+  //     productName: "Organic Bananas",
+  //     productPrice: 68000,
+  //     productQuantity: 1,
+  // },
+
+  const productItem = {
+    productImgUrl: props.product.imageUrl,
+    productName: props.product.productName,
+    productId: props.product.productId,
+    productPrice: props.product.price,
+    productQuantity: 1,
+  };
   return (
-    <div className="col-lg-4 col-md-6 col-sm-6">
-      <div className="product__item">
-        <div
-          className="product__item__pic set-bg"
-          style={{
-            background: `url("${props.imageUrl}") no-repeat center`,
-            backgroundSize: "contain",
-          }}
-        >
-          <ul className="product__item__pic__hover">
-            <li>
-              <a href="/">
-                <i className="fa fa-heart"></i>
-              </a>
-            </li>
-            <li>
-              <a href="/">
-                <i className="fa fa-retweet"></i>
-              </a>
-            </li>
-            <li>
-              <a href="/">
-                <i className="fa fa-shopping-cart"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="product__item__text">
-          <h6>
-            <a href="/">{props.productName}</a>
-          </h6>
-          <h5>
-            {new Intl.NumberFormat("vi-VN", currentFormatOptions).format(
-              props.price
-            )}
-          </h5>
-        </div>
-      </div>
-    </div>
+    <>
+      {props.sortLayout === "grid" && (
+        <ProductItemGrid
+          productId={props.product.productId}
+          imageUrl={props.product.imageUrl}
+          productName={props.product.productName}
+          price={props.product.price}
+          addItem={cartCtx.addItem.bind(null, productItem)}
+        />
+      )}
+
+      {props.sortLayout === "list" && (
+        <ProductItemList
+          productId={props.product.productId}
+          imageUrl={props.product.imageUrl}
+          productName={props.product.productName}
+          price={props.product.price}
+        />
+      )}
+    </>
   );
 };
 

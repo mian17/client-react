@@ -3,13 +3,17 @@ import PriceRangeSlider from "./RangeSlider/PriceRangeSlider";
 import CategoriesSidebar from "../Categorires/CategoriesSidebar";
 
 const Sidebar = (props) => {
+  const getSliderValue = (values) => {
+    console.log(values);
+  };
+
   return (
     <div className="sidebar">
       <CategoriesSidebar />
       <div className="sidebar__item">
         <h4>Giá</h4>
         <div className="price-range-wrap">
-          <PriceRangeSlider />
+          <PriceRangeSlider getSliderValue={getSliderValue} />
         </div>
       </div>
       {/*<div className="sidebar__item sidebar__item__color--option">*/}

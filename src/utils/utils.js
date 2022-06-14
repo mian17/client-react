@@ -1,4 +1,4 @@
-export const currentFormatOptions = {
+export const currencyFormatOptions = {
   style: "currency",
   currency: "VND",
 };

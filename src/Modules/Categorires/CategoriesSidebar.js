@@ -83,7 +83,6 @@ const CategoriesSidebar = () => {
       </>
     );
   }
-  console.log(categories);
   return (
     <div className="sidebar__item">
       <h4>Danh mục</h4>

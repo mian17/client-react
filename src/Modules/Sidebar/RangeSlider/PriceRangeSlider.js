@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 
 import Slider from "@mui/material/Slider";
-import Input from "@mui/material/Input";
+// import Input from "@mui/material/Input";
 
 function valuetext(val) {
   return new Intl.NumberFormat("vi-VN", {
@@ -38,7 +38,7 @@ const marks = [
   },
 ];
 
-const PriceRangeSlider = () => {
+const PriceRangeSlider = (props) => {
   const [value, setValue] = React.useState([20, 50]);
 
   const handleSliderChange = (event, newValue, activeThumb) => {
@@ -58,47 +58,9 @@ const PriceRangeSlider = () => {
     } else {
       setValue(newValue);
     }
+
+    props.getSliderValue(newValue);
   };
-
-  // const handleInputChange0 = (event) => {
-  //   if (value[0] < value[1]) {
-  //     setValue((prevState) => {
-  //       return event.target.value === ""
-  //         ? ""
-  //         : [Number(event.target.value), prevState[1]];
-  //     });
-  //   } else {
-  //     setValue((prevState) => {
-  //       return event.target.value === ""
-  //         ? ""
-  //         : [Number(event.target.value) - 1, prevState[1]];
-  //     });
-  //   }
-  // };
-  //
-  // const handleInputChange1 = (event) => {
-  //   if (value[1] > value[0]) {
-  //     setValue((prevState) => {
-  //       return event.target.value === ""
-  //         ? ""
-  //         : [prevState[0], Number(event.target.value)];
-  //     });
-  //   } else {
-  //     setValue((prevState) => {
-  //       return event.target.value === ""
-  //         ? ""
-  //         : [prevState[0], Number(event.target.value) + 1];
-  //     });
-  //   }
-  // };
-
-  // const handleBlur = () => {
-  //   if (value < 0) {
-  //     setValue(0);
-  //   } else if (value > 100) {
-  //     setValue(100);
-  //   }
-  // };
 
   return (
     <Box>

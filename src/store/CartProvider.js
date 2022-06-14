@@ -16,72 +16,93 @@ const calculateTotalMoney = (products) => {
   }, 0);
 };
 
-const DUMMY_DATA = [
-  {
-    cartId: 0,
-    productImgUrl: cart_1,
-    productName: "Vegetable’s Package",
-    productPrice: 55000,
-    productQuantity: 1,
-    productTotalPrice: 0,
-  },
-  {
-    cartId: 1,
-    productImgUrl: cart_2,
-    productName: "Fresh Garden Vegetable",
-    productPrice: 39000,
-    productQuantity: 1,
-    productTotalPrice: 0,
-  },
-  {
-    cartId: 2,
-    productImgUrl: cart_3,
-    productName: "Organic Bananas",
-    productPrice: 68000,
-    productQuantity: 1,
-    productTotalPrice: 0,
-  },
-];
-
+// const DUMMY_DATA = [
+//   {
+//     cartId: 0,
+//     productImgUrl: cart_1,
+//     productName: "Vegetable’s Package",
+//     productPrice: 55000,
+//     productQuantity: 1,
+//   },
+//   {
+//     cartId: 1,
+//     productImgUrl: cart_2,
+//     productName: "Fresh Garden Vegetable",
+//     productPrice: 39000,
+//     productQuantity: 1,
+//   },
+//   {
+//     cartId: 2,
+//     productImgUrl: cart_3,
+//     productName: "Organic Bananas",
+//     productPrice: 68000,
+//     productQuantity: 1,
+//   },
+// ];
+const CART_DEFAULT_STATE = [];
 const defaultCartState = {
-  items: DUMMY_DATA,
-  totalMoney: calculateTotalMoney(DUMMY_DATA),
+  items: CART_DEFAULT_STATE,
+  totalMoney: calculateTotalMoney(CART_DEFAULT_STATE),
 };
 
 const CartProvider = (props) => {
   const [cartState, setCartState] = useState(defaultCartState);
 
-  const addItemToCartHandler = (item) => {};
-  const removeItemFromCartHandler = (id) => {
-    // const removeCartId = e.target.closest("tr").dataset.cartId;
-    console.log(id);
+  const addItemToCartHandler = (item) => {
     const newState = { ...cartState };
-    newState.items = newState.items.filter((product) => product.cartId !== id);
+
+    let alreadyInCart = false;
+    for (let i = 0; i < newState.items.length; i++) {
+      if (newState.items[i].productId === item.productId) {
+        newState.items[i].productQuantity += 1;
+        alreadyInCart = true;
+        break;
+      }
+    }
+
+    if (alreadyInCart === false) newState.items.push(item);
+
+    newState.items.forEach((product, index) => (product.cartId = index));
     newState.totalMoney = calculateTotalMoney(newState.items);
 
     setCartState(newState);
   };
 
+  const removeItemFromCartHandler = (id) => {
+    const newState = { ...cartState };
+    newState.items = newState.items.filter((product) => product.cartId !== id);
+
+    newState.items.forEach((product, index) => {
+      product.cartId = index;
+    });
+    newState.totalMoney = calculateTotalMoney(newState.items);
+
+    setCartState(newState);
+  };
   const editItemQuantityHandler = (e) => {
-    const checkIfInputIsNumber =
+    const checkIfInputIsPositiveNumber =
       Number.isFinite(Number(e.target.value)) &&
-      Number(e.target.value) < PRODUCT_QUANTITY_LIMIT;
+      Number(e.target.value) < PRODUCT_QUANTITY_LIMIT &&
+      Number(e.target.value) >= 0;
 
     const editingCartId = e.target.closest("tr").dataset.cartId;
 
-    for (let i = 0; i < cartState.items.length; i++) {
-      if (
-        cartState.items[i].cartId === +editingCartId &&
-        checkIfInputIsNumber
-      ) {
-        // Creating a new state to replace previous state
-        const newState = { ...cartState };
+    if (Number(e.target.value) !== 0) {
+      for (let i = 0; i < cartState.items.length; i++) {
+        if (
+          cartState.items[i].cartId === +editingCartId &&
+          checkIfInputIsPositiveNumber
+        ) {
+          // Creating a new state to replace previous state
+          const newState = { ...cartState };
 
-        newState.items[i].productQuantity = +e.target.value;
-        newState.totalMoney = calculateTotalMoney(newState.items);
+          newState.items[i].productQuantity = +e.target.value;
+          newState.totalMoney = calculateTotalMoney(newState.items);
 
-        setCartState(newState);
+          setCartState(newState);
+        }
       }
+    } else {
     }
   };
 

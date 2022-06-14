@@ -10,7 +10,7 @@ const Content = () => {
       {/*<Homepage />*/}
       <Shop />
       {/*<ShopDetails />*/}
-      {/*<ShoppingCart />*/}
+      <ShoppingCart />
     </div>
   );
 };

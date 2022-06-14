@@ -9,6 +9,7 @@ const FilterProductItems = (props) => {
 
   const handleChange = (event) => {
     setFilter(event.target.value);
+    props.getFilterStatus(event.target.value);
   };
 
   return (

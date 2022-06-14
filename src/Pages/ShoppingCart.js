@@ -1,6 +1,6 @@
 // React library imports
 import { useContext } from "react";
-
+import { ConfirmProvider } from "material-ui-confirm";
 // Component imports
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import ProductInCart from "../Modules/ProductInCart/ProductInCart";
@@ -9,20 +9,20 @@ import ProductInCart from "../Modules/ProductInCart/ProductInCart";
 import CartContext from "../store/cart-context";
 
 // Utilities import
-import { currentFormatOptions } from "../utils/utils";
+import { currencyFormatOptions } from "../utils/utils";
 
 const ShoppingCart = () => {
   const cartCtx = useContext(CartContext);
-
+  // console.log(cartCtx.items);
   const totalCartMoney = new Intl.NumberFormat(
     "vi-VN",
-    currentFormatOptions
+    currencyFormatOptions
   ).format(cartCtx.totalMoney);
 
   // TODO: ADD DISCOUNT PROCESS
   const finalTotalCartMoney = new Intl.NumberFormat(
     "vi-VN",
-    currentFormatOptions
+    currencyFormatOptions
   ).format(cartCtx.totalMoney);
 
   return (
@@ -47,30 +47,32 @@ const ShoppingCart = () => {
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {cartCtx.items.length !== 0 ? (
-                      cartCtx.items.map((product, index) => {
-                        return (
-                          <ProductInCart
-                            product={product}
-                            key={index}
-                            cartId={index}
-                            editItemQuantity={cartCtx.editItemQuantity}
-                            removeItem={cartCtx.removeItem.bind(
-                              null,
-                              product.cartId
-                            )}
-                          />
-                        );
-                      })
-                    ) : (
-                      <tr>
-                        <td colSpan={4}>
-                          Không có sản phẩm nào trong đơn hàng
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
+                  <ConfirmProvider>
+                    <tbody>
+                      {cartCtx.items.length !== 0 ? (
+                        cartCtx.items.map((product, index) => {
+                          return (
+                            <ProductInCart
+                              product={product}
+                              key={index}
+                              cartId={index}
+                              editItemQuantity={cartCtx.editItemQuantity}
+                              removeItem={cartCtx.removeItem.bind(
+                                null,
+                                product.cartId
+                              )}
+                            />
+                          );
+                        })
+                      ) : (
+                        <tr>
+                          <td colSpan={4}>
+                            Không có sản phẩm nào trong giỏ hàng
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </ConfirmProvider>
                 </table>
               </div>
             </div>

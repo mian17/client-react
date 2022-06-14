@@ -8,12 +8,19 @@ import $ from "jquery";
 
 import classes from "./Header.module.css";
 
+import { currencyFormatOptions } from "../utils/utils";
+
 const Header = () => {
   const cartCtx = useContext(CartContext);
 
   const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.productQuantity;
   }, 0);
+
+  const totalMoneyInCart = new Intl.NumberFormat(
+    "vi-VN",
+    currencyFormatOptions
+  ).format(cartCtx.totalMoney);
 
   return (
     <>
@@ -48,7 +55,7 @@ const Header = () => {
             </li>
           </ul>
           <div className="header__cart__price">
-            <span>100.000 VNĐ</span>
+            <span>{totalMoneyInCart}</span>
           </div>
         </div>
         <div className="hamburger__menu__widget">
@@ -230,7 +237,7 @@ const Header = () => {
                   </li>
                 </ul>
                 <div className="header__cart__price">
-                  <span>100.000 VNĐ</span>
+                  <span>{totalMoneyInCart}</span>
                 </div>
               </div>
             </div>
