@@ -1,6 +1,7 @@
 // React library imports
 import { useContext } from "react";
 import { ConfirmProvider } from "material-ui-confirm";
+
 // Component imports
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import ProductInCart from "../Modules/ProductInCart/ProductInCart";
@@ -36,44 +37,46 @@ const ShoppingCart = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <div className="shoping__cart__table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th className="shoping__product">Các sản phẩm</th>
-                      <th>Đơn giá</th>
-                      <th>Số lượng</th>
-                      <th>Tổng tiền</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <ConfirmProvider>
-                    <tbody>
-                      {cartCtx.items.length !== 0 ? (
-                        cartCtx.items.map((product, index) => {
-                          return (
-                            <ProductInCart
-                              product={product}
-                              key={index}
-                              cartId={index}
-                              editItemQuantity={cartCtx.editItemQuantity}
-                              removeItem={cartCtx.removeItem.bind(
-                                null,
-                                product.cartId
-                              )}
-                            />
-                          );
-                        })
-                      ) : (
-                        <tr>
-                          <td colSpan={4}>
-                            Không có sản phẩm nào trong giỏ hàng
-                          </td>
-                        </tr>
-                      )}
-                    </tbody>
-                  </ConfirmProvider>
-                </table>
+              <div className="table-responsive">
+                <div className="shoping__cart__table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="shoping__product">Các sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <ConfirmProvider>
+                      <tbody>
+                        {cartCtx.items.length !== 0 ? (
+                          cartCtx.items.map((product, index) => {
+                            return (
+                              <ProductInCart
+                                product={product}
+                                key={index}
+                                cartId={index}
+                                editItemQuantity={cartCtx.editItemQuantity}
+                                removeItem={cartCtx.removeItem.bind(
+                                  null,
+                                  product.cartId
+                                )}
+                              />
+                            );
+                          })
+                        ) : (
+                          <tr>
+                            <td colSpan={4}>
+                              Không có sản phẩm nào trong giỏ hàng
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </ConfirmProvider>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -114,9 +117,9 @@ const ShoppingCart = () => {
                     Tổng giá trị <span>{finalTotalCartMoney}</span>
                   </li>
                 </ul>
-                <a href="/" className="primary-btn">
+                <button className="primary-btn" style={{ width: "100%" }}>
                   THANH TOÁN
-                </a>
+                </button>
               </div>
             </div>
           </div>

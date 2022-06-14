@@ -28,6 +28,7 @@ const ProductItems = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [sortLayout, setSortLayout] = useState("grid");
+
   const fetchProductItems = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -45,6 +46,7 @@ const ProductItems = () => {
           imageUrl: productData.image,
           productName: productData.title,
           price: productData.price * 1000,
+          rating: productData.rating.rate,
         };
       });
 
@@ -82,6 +84,7 @@ const ProductItems = () => {
         <ProductItemLoader />
       </>
     );
+
   const getFilterStatus = (status) => {
     if (status === null) return;
     if (status === "price-goes-up") {

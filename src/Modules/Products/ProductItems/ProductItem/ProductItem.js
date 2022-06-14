@@ -30,6 +30,7 @@ const ProductItem = (props) => {
           imageUrl={props.product.imageUrl}
           productName={props.product.productName}
           price={props.product.price}
+          rating={props.product.rating}
           addItem={cartCtx.addItem.bind(null, productItem)}
         />
       )}

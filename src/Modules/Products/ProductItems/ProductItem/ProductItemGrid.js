@@ -1,14 +1,7 @@
 import { currencyFormatOptions } from "../../../../utils/utils";
-import cart_3 from "../../../../Assets/img/cart/cart-3.jpg";
+import { Rating } from "@mui/material";
 
 const ProductItemGrid = (props) => {
-  // cartId: 2,
-  //     productImgUrl: cart_3,
-  //     productName: "Organic Bananas",
-  //     productPrice: 68000,
-  //     productQuantity: 1,
-  //     productTotalPrice: 0,
-
   return (
     <div className="col-lg-4 col-md-6 col-sm-6">
       <div className="product__item">
@@ -43,6 +36,7 @@ const ProductItemGrid = (props) => {
           <h6>
             <a href="/">{props.productName}</a>
           </h6>
+          <Rating value={props.rating} readOnly />
           <h5>
             {new Intl.NumberFormat("vi-VN", currencyFormatOptions).format(
               props.price

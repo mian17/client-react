@@ -1,20 +1,11 @@
 import { useState } from "react";
-
 import CartContext from "./cart-context";
 
-import { PRODUCT_QUANTITY_LIMIT } from "../utils/utils";
+import { PRODUCT_QUANTITY_LIMIT, calculateTotalMoney } from "../utils/utils";
 
 import cart_1 from "../Assets/img/cart/cart-1.jpg";
 import cart_2 from "../Assets/img/cart/cart-2.jpg";
 import cart_3 from "../Assets/img/cart/cart-3.jpg";
-
-const calculateTotalMoney = (products) => {
-  return products.reduce((prevTotalMoney, curProduct) => {
-    return (
-      prevTotalMoney + curProduct.productPrice * curProduct.productQuantity
-    );
-  }, 0);
-};
 
 // const DUMMY_DATA = [
 //   {
@@ -48,6 +39,8 @@ const defaultCartState = {
 const CartProvider = (props) => {
   const [cartState, setCartState] = useState(defaultCartState);
 
+  /////////////////////////////////////////
+  // HANDLERS
   const addItemToCartHandler = (item) => {
     const newState = { ...cartState };
 
@@ -67,7 +60,6 @@ const CartProvider = (props) => {
 
     setCartState(newState);
   };
-
   const removeItemFromCartHandler = (id) => {
     const newState = { ...cartState };
     newState.items = newState.items.filter((product) => product.cartId !== id);
@@ -87,25 +79,24 @@ const CartProvider = (props) => {
 
     const editingCartId = e.target.closest("tr").dataset.cartId;
 
-    if (Number(e.target.value) !== 0) {
-      for (let i = 0; i < cartState.items.length; i++) {
-        if (
-          cartState.items[i].cartId === +editingCartId &&
-          checkIfInputIsPositiveNumber
-        ) {
-          // Creating a new state to replace previous state
-          const newState = { ...cartState };
+    for (let i = 0; i < cartState.items.length; i++) {
+      if (
+        cartState.items[i].cartId === +editingCartId &&
+        checkIfInputIsPositiveNumber
+      ) {
+        // Creating a new state to replace previous state
+        const newState = { ...cartState };
 
-          newState.items[i].productQuantity = +e.target.value;
-          newState.totalMoney = calculateTotalMoney(newState.items);
+        newState.items[i].productQuantity = +e.target.value;
+        newState.totalMoney = calculateTotalMoney(newState.items);
 
-          setCartState(newState);
-        }
+        setCartState(newState);
       }
-    } else {
     }
   };
 
+  /////////////////////////////////////////
+  // SETTING CONTEXT'S VALUES
   const cartContext = {
     items: cartState.items,
     totalMoney: cartState.totalMoney,

@@ -1,10 +1,9 @@
-import { useState, useContext } from "react";
-import {
-  currencyFormatOptions,
-  PRODUCT_QUANTITY_LIMIT,
-} from "../../utils/utils";
+import { useContext } from "react";
+import { currencyFormatOptions } from "../../utils/utils";
 import CartContext from "../../store/cart-context";
 import { useConfirm } from "material-ui-confirm";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 
 const ProductInCart = (props) => {
   const cartCtx = useContext(CartContext);
@@ -20,23 +19,10 @@ const ProductInCart = (props) => {
     })
       .then(props.removeItem)
       .catch(() => {
-        /* ... */
+        console.log("Người dùng đã nhấn hủy không xóa sản phẩm");
       });
   };
 
-  // const [productInCart, setProductInCart] = useState(props.product);
-
-  // const editProductInCartQuantity = (e) => {
-  //   if (
-  //     Number.isFinite(Number(e.target.value)) &&
-  //     Number(e.target.value) < PRODUCT_QUANTITY_LIMIT
-  //   ) {
-  //     setProductInCart((prevState) => ({
-  //       ...prevState,
-  //       productQuantity: +e.target.value,
-  //     }));
-  //   }
-  // };
   return (
     <tr data-cart-id={props.cartId}>
       <td className="shoping__cart__item">
@@ -60,7 +46,7 @@ const ProductInCart = (props) => {
             <input
               type="number"
               value={props.product.productQuantity}
-              onChange={cartCtx.editItemQuantity}
+              onChange={props.editItemQuantity}
             />
           </div>
         </div>
@@ -71,8 +57,10 @@ const ProductInCart = (props) => {
         )}
       </td>
       {/*onClick={props.removeItem}*/}
-      <td className="shoping__cart__item__close" onClick={handleClick}>
-        <span className="icon_close"></span>
+      <td className="shoping__cart__item__close">
+        <IconButton onClick={handleClick}>
+          <DeleteIcon />
+        </IconButton>
       </td>
     </tr>
   );
