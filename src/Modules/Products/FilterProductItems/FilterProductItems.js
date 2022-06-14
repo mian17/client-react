@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-const FilterProductItems = () => {
+const FilterProductItems = (props) => {
   const [filter, setFilter] = useState("");
 
   const handleChange = (event) => {
@@ -38,7 +38,7 @@ const FilterProductItems = () => {
         <div className="col-lg-5 col-md-4">
           <div className="filter__found">
             <h6>
-              <span>16</span> sản phẩm được tìm thấy
+              <span>{props.foundNum}</span> sản phẩm được tìm thấy
             </h6>
           </div>
         </div>

@@ -1,8 +1,6 @@
-import React from "react";
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import Sidebar from "../Modules/Sidebar/Sidebar";
 import DiscountedProducts from "../Modules/Products/DiscountedProducts/DiscountedProducts";
-import FilterProductItems from "../Modules/Products/FilterProductItems/FilterProductItems";
 import ProductItems from "../Modules/Products/ProductItems/ProductItems";
 import ProductPagination from "../Modules/Products/ProductPagination/ProductPagination";
 
@@ -24,8 +22,8 @@ const Shop = () => {
               <Sidebar />
             </div>
             <div className="col-lg-9 col-md-7">
-              <DiscountedProducts />
-              <FilterProductItems />
+              {/*<DiscountedProducts />*/}
+
               <ProductItems />
               <ProductPagination />
             </div>
