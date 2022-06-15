@@ -141,7 +141,19 @@ ol {
   display: inline-block;
   padding: 13px 30px 12px;
   background: #833030;
-  border: none;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+.site-btn:hover {
+  background: #fff;
+  border: 2px solid #833030;
+  color: #833030;
+}
+.site-btn:disabled {
+  cursor: not-allowed;
+  background: #833030;
+  color: #ffffff;
+  border: 2px solid transparent;
 }
 
 /* Preloader */
@@ -2032,21 +2044,23 @@ ol {
   margin-bottom: 25px;
 }
 
-.checkout__form p {
+.checkout__form label {
   -webkit-column-rule: #b2b2b2;
           column-rule: #b2b2b2;
 }
 
 .checkout__input {
   margin-bottom: 24px;
+  height: 100px;
+
 }
 
-.checkout__input p {
+.checkout__input label {
   color: #1c1c1c;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.checkout__input p span {
+.checkout__input label span {
   color: #dd2222;
 }
 
@@ -2056,8 +2070,9 @@ ol {
   border: 1px solid #ebebeb;
   padding-left: 20px;
   font-size: 16px;
-  color: #b2b2b2;
+  color: #585858;
   border-radius: 4px;
+
 }
 
 .checkout__input input.checkout__input__add {
@@ -2065,19 +2080,19 @@ ol {
 }
 
 .checkout__input input::-webkit-input-placeholder {
-  color: #b2b2b2;
+  color: #585858;
 }
 
 .checkout__input input:-ms-input-placeholder {
-  color: #b2b2b2;
+  color: #585858;
 }
 
 .checkout__input input::-ms-input-placeholder {
-  color: #b2b2b2;
+  color: #585858;
 }
 
 .checkout__input input::placeholder {
-  color: #b2b2b2;
+  color: #585858;
 }
 
 .checkout__input__checkbox {
