@@ -1,4 +1,6 @@
 /* Default CSS */
+@import "variables";
+
 html,
 body {
   height: 100%;
@@ -64,7 +66,7 @@ a:hover,
 a:focus {
   text-decoration: none;
   outline: none;
-  color: $white-color;
+  color: $primary-color;
 }
 
 ul,

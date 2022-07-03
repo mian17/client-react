@@ -20,3 +20,7 @@
     color: #000;
 }
 
+a.active-nav-link {
+    color: #833030 !important;
+}
+

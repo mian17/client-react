@@ -4,6 +4,8 @@ import Footer from "./Widgets/Footer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CartProvider from "./store/CartProvider";
 
+import { BrowserRouter } from "react-router-dom";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -14,11 +16,13 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CartProvider>
-        <Header />
-        <Content />
-        <Footer />
-      </CartProvider>
+      <BrowserRouter>
+        <CartProvider>
+          <Header />
+          <Content />
+          <Footer />
+        </CartProvider>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

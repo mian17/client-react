@@ -4,6 +4,8 @@ import classes from "./Checkout.module.css";
 
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+
+import CheckoutOrder from "../Modules/CheckoutOrder/CheckoutOrder";
 // lastName: "",
 //     firstName: "",
 //     address: "",
@@ -340,62 +342,7 @@ const Checkout = () => {
                     </div>
                   </div>
                   <div className="col-lg-4 col-md-6">
-                    <div className="checkout__order">
-                      <h4>Đơn hàng</h4>
-                      <div className="checkout__order__products">
-                        Sản phẩm <span>Thành tiền</span>
-                      </div>
-                      <ul>
-                        <li>
-                          Vegetable’s Package <span>$75.99</span>
-                        </li>
-                        <li>
-                          Fresh Vegetable <span>$151.99</span>
-                        </li>
-                        <li>
-                          Organic Bananas <span>$53.99</span>
-                        </li>
-                      </ul>
-                      <div className="checkout__order__subtotal">
-                        Tạm tính <span>$750.99</span>
-                      </div>
-                      <div className="checkout__order__total">
-                        Tổng cộng <span>$750.99</span>
-                      </div>
-                      <div className="checkout__input__checkbox">
-                        <label htmlFor="acc-or">
-                          Tạo tài khoản
-                          <input type="checkbox" id="acc-or" />
-                          <span className="checkmark"></span>
-                        </label>
-                      </div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adip elit, sed
-                        do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua.
-                      </p>
-                      <div className="checkout__input__checkbox">
-                        <label htmlFor="payment">
-                          Check Payment
-                          <input type="checkbox" id="payment" />
-                          <span className="checkmark"></span>
-                        </label>
-                      </div>
-                      <div className="checkout__input__checkbox">
-                        <label htmlFor="paypal">
-                          Paypal
-                          <input type="checkbox" id="paypal" />
-                          <span className="checkmark"></span>
-                        </label>
-                      </div>
-                      <button
-                        type="submit"
-                        className="btn site-btn"
-                        disabled={!isValid}
-                      >
-                        ĐẶT HÀNG
-                      </button>
-                    </div>
+                    <CheckoutOrder isValidToOrder={isValid} />
                   </div>
                 </div>
               </Form>

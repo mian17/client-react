@@ -6,6 +6,10 @@ import language from "../Assets/img/language.png";
 import CartContext from "../store/cart-context";
 import $ from "jquery";
 
+import { NavLink } from "react-router-dom";
+
+import Modal from "../Modules/Modal/Modal";
+
 import classes from "./Header.module.css";
 
 import { currencyFormatOptions } from "../utils/utils";
@@ -81,19 +85,47 @@ const Header = () => {
         <nav className="mobile-menu">
           <ul className={classes["mobile-menu-list"]}>
             <li className="active">
-              <a href="/">Trang chủ</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes["active-nav-link"] : undefined
+                }
+                to="/"
+              >
+                Trang chủ
+              </NavLink>
             </li>
             <li>
-              <a href="%PUBLIC_URL%/shop.html">Mua sắm</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes["active-nav-link"] : undefined
+                }
+                to="/shop"
+              >
+                Mua sắm
+              </NavLink>
+            </li>
+            {/*<li>*/}
+            {/*  <a href="/">Pages</a>*/}
+            {/*</li>*/}
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes["active-nav-link"] : undefined
+                }
+                to="/blog"
+              >
+                Blog
+              </NavLink>
             </li>
             <li>
-              <a href="/">Pages</a>
-            </li>
-            <li>
-              <a href="%PUBLIC_URL%/blog.html">Blog</a>
-            </li>
-            <li>
-              <a href="%PUBLIC_URL%/contact.html">Liên hệ</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? classes["active-nav-link"] : undefined
+                }
+                to="/contact"
+              >
+                Liên hệ
+              </NavLink>
             </li>
           </ul>
         </nav>
@@ -162,9 +194,10 @@ const Header = () => {
                     </ul>
                   </div>
                   <div className="header__top__right__auth">
-                    <a href="/">
-                      <i className="fa fa-user"></i> Đăng nhập
-                    </a>
+                    {/*<a href="/">*/}
+                    {/*  <i className="fa fa-user"></i> Đăng nhập*/}
+                    {/*</a>*/}
+                    <Modal />
                   </div>
                 </div>
               </div>
@@ -183,11 +216,25 @@ const Header = () => {
             <div className="col-lg-6">
               <nav className="header__menu">
                 <ul>
-                  <li className="active">
-                    <a href="/">Trang chủ</a>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? classes["active-nav-link"] : undefined
+                      }
+                      to="/"
+                    >
+                      Trang chủ
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="%PUBLIC_URL%/shop.html">Mua sắm</a>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? classes["active-nav-link"] : undefined
+                      }
+                      to="/shop"
+                    >
+                      Mua sắm
+                    </NavLink>
                   </li>
                   {/*<li>*/}
                   {/*  <a href="/">Pages</a>*/}
@@ -213,10 +260,24 @@ const Header = () => {
                   {/*  </ul>*/}
                   {/*</li>*/}
                   <li>
-                    <a href="%PUBLIC_URL%/blog.html">Blog</a>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? classes["active-nav-link"] : undefined
+                      }
+                      to="/blog"
+                    >
+                      Blog
+                    </NavLink>
                   </li>
                   <li>
-                    <a href="%PUBLIC_URL%/contact.html">Liên hệ</a>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? classes["active-nav-link"] : undefined
+                      }
+                      to="/contact"
+                    >
+                      Liên hệ
+                    </NavLink>
                   </li>
                 </ul>
               </nav>
@@ -230,10 +291,10 @@ const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="/">
+                    <NavLink to="/cart">
                       <i className="fa fa-shopping-bag"></i>{" "}
                       <span>{numberOfCartItems}</span>
-                    </a>
+                    </NavLink>
                   </li>
                 </ul>
                 <div className="header__cart__price">
