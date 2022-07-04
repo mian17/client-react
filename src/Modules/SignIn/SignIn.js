@@ -1,6 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
 
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -12,6 +13,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 
 import { Link as RouterLink } from "react-router-dom";
+import { IconButton } from "@mui/material";
 
 export default function SignIn(props) {
   const handleSubmit = (event) => {
@@ -30,8 +32,15 @@ export default function SignIn(props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        position: "relative",
       }}
     >
+      <IconButton
+        sx={{ position: "absolute", top: "-84px", right: "-18px" }}
+        onClick={props.closeModalHandler}
+      >
+        <CloseIcon />
+      </IconButton>
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>

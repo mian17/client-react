@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import { Link as RouterLink } from "react-router-dom";
+
 export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -104,13 +106,13 @@ export default function SignUp() {
           >
             Đăng ký
           </Button>
-          {/*<Grid container justifyContent="flex-end">*/}
-          {/*  <Grid item>*/}
-          {/*    <Link href="#" variant="body2">*/}
-          {/*      Bạn đã có tài khoản? Đăng nhập ngay*/}
-          {/*    </Link>*/}
-          {/*  </Grid>*/}
-          {/*</Grid>*/}
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link component={RouterLink} to="/signinmobile" variant="body2">
+                Bạn đã có tài khoản? Đăng nhập ngay
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>

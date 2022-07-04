@@ -77,9 +77,18 @@ const Header = () => {
             </ul>
           </div>
           <div className="header__top__right__auth">
-            <a href="/">
+            <NavLink
+              to="/signinmobile"
+              onClick={() => {
+                $(".hamburger__menu__wrapper").removeClass(
+                  "show__hamburger__menu__wrapper"
+                );
+                $(".hamburger__menu__overlay").removeClass("active");
+                $("body").removeClass("over_hid");
+              }}
+            >
               <i className="fa fa-user"></i> Đăng nhập
-            </a>
+            </NavLink>
           </div>
         </div>
         <nav className="mobile-menu">
