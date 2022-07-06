@@ -5,6 +5,7 @@ import List from "@mui/material/List";
 import { mainListItems } from "../DrawerListItems/listItems";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
+import AvatarBox from "../Account/AvatarBox";
 const drawerWidth = 240;
 
 const Drawer = styled(MuiDrawer, {
@@ -35,14 +36,15 @@ const Drawer = styled(MuiDrawer, {
 const UserDrawer = () => {
   const drawerContent = (
     <>
-      <Toolbar
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          px: [1],
-        }}
-      ></Toolbar>
+      {/*<Toolbar*/}
+      {/*  sx={{*/}
+      {/*    display: "flex",*/}
+      {/*    alignItems: "center",*/}
+      {/*    justifyContent: "flex-end",*/}
+      {/*    px: [1],*/}
+      {/*  }}*/}
+      {/*></Toolbar>*/}
+      <AvatarBox />
       <Divider />
       <List component="nav">
         {mainListItems}

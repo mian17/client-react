@@ -10,9 +10,10 @@ import SignUp from "../Modules/SignUp/SignUp";
 import { Routes, Route } from "react-router-dom";
 import SignInMobile from "../Modules/SignIn/SignInMobile";
 
-import Profile from "../Modules/User/Account/Profile";
-// import User from "../Modules/User/User";
-// import User from "../Modules/User/User";
+import Account from "../Modules/User/Account/Account";
+import Profile from "../Modules/User/Account/AccountContent/Profile/Profile";
+import Address from "../Modules/User/Account/AccountContent/Address/Address";
+import ChangePassword from "../Modules/User/Account/AccountContent/ChangePassword/ChangePassword";
 
 const Content = () => {
   return (
@@ -21,15 +22,18 @@ const Content = () => {
       <Route path="/shop" element={<Shop />} />
 
       {/*<Route path="/shopdetails" element={<ShopDetails />} />*/}
-      {/*<ShopDetails />*/}
+
       <Route path="/signinmobile" element={<SignInMobile />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/cart" element={<ShoppingCart />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/user/account" element={<Profile />}>
-        <Route index element={<Profile />} />
+      <Route path="/user/account" element={<Account />}>
+        {/*<Route index element={<Account />} />*/}
         <Route path="profile" element={<Profile />} />
+        <Route path="address" element={<Address />} />
+        <Route path="changepassword" element={<ChangePassword />} />
+        {/*<Route*/}
       </Route>
     </Routes>
   );

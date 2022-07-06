@@ -21,10 +21,10 @@ export const mainListItems = (
   <React.Fragment>
     <Link underline="none" component={NavLink} to="/user/account/profile">
       <ListItemButton color="secondary">
-        <ListItemIcon>
+        <ListItemIcon color="primary">
           <PersonIcon />
         </ListItemIcon>
-        <ListItemText primary="Tài khoản của tôi" />
+        <ListItemText primary="Tài khoản của tôi" color="secondary" />
       </ListItemButton>
     </Link>
     <Link underline="none" component={NavLink} to="/user/orders">

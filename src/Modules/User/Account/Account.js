@@ -2,7 +2,7 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 
-import AccountContent from "../AccountContent";
+import AccountContent from "./AccountContent/AccountContent";
 import UserDrawer from "../UserDrawer/UserDrawer";
 
 function DashboardContent() {
