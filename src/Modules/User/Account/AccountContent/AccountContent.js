@@ -20,6 +20,7 @@ import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 
 import Profile from "./Profile/Profile";
 import Address from "./Address/Address";
+import ChangePassword from "./ChangePassword/ChangePassword";
 
 const pages = ["Hồ sơ", "Địa chỉ", "Đổi mật khẩu"];
 
@@ -76,7 +77,7 @@ export default function AccountTabs() {
         setTabValue(2);
         break;
       default:
-        console.log("urlPath is not valid");
+        // console.log("urlPath is not valid");
         break;
     }
   }, [tabValue]);
@@ -120,7 +121,7 @@ export default function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        Form đổi thông tin mật khẩu
+        <ChangePassword />
       </TabPanel>
     </Box>
   );

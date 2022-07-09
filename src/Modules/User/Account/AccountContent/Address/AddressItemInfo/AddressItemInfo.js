@@ -3,14 +3,28 @@ import Typography from "@mui/material/Typography";
 import AddressItemInfoItem from "./AddressItemInfoItem";
 import AddressItemFirstInfoItem from "./AddressItemFirstInfoItem";
 import classes from "./AddressItemInfo.module.css";
-const AddressItemInfo = () => {
+const AddressItemInfo = (props) => {
   return (
     <Box sx={{ flex: 1 }}>
-      <AddressItemFirstInfoItem label="Họ và tên" value="John Smith" />
-      <AddressItemInfoItem label="Số điện thoại" value="(+84) 11111111" />
+      <AddressItemFirstInfoItem
+        label="Họ và tên"
+        value={{
+          name: props.address.name,
+          defaultAddress: props.address.defaultAddress,
+        }}
+      />
+      <AddressItemInfoItem
+        label="Số điện thoại"
+        value={props.address.phoneNumber}
+      />
       <AddressItemInfoItem
         label="Địa chỉ"
-        value="số somewhere, đường somewhere"
+        value={
+          props.address.detailAddress[0].toUpperCase() +
+          props.address.detailAddress.slice(1) +
+          ", " +
+          props.address.overallAddress
+        }
       />
     </Box>
   );

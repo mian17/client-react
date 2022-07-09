@@ -19,7 +19,7 @@ const style = {
   borderRadius: 9,
 };
 
-export default function TransitionsModal() {
+export default function SignInModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

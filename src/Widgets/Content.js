@@ -14,6 +14,7 @@ import Account from "../Modules/User/Account/Account";
 import Profile from "../Modules/User/Account/AccountContent/Profile/Profile";
 import Address from "../Modules/User/Account/AccountContent/Address/Address";
 import ChangePassword from "../Modules/User/Account/AccountContent/ChangePassword/ChangePassword";
+import Orders from "../Modules/User/Orders/Orders";
 
 const Content = () => {
   return (
@@ -28,12 +29,21 @@ const Content = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/cart" element={<ShoppingCart />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/user/account" element={<Account />}>
-        {/*<Route index element={<Account />} />*/}
-        <Route path="profile" element={<Profile />} />
-        <Route path="address" element={<Address />} />
-        <Route path="changepassword" element={<ChangePassword />} />
-        {/*<Route*/}
+      <Route path="/user">
+        <Route path="/user/account" element={<Account />}>
+          {/*<Route index element={<Account />} />*/}
+          <Route path="profile" element={<Profile />} />
+          <Route path="address" element={<Address />} />
+          <Route path="changepassword" element={<ChangePassword />} />
+          {/*<Route*/}
+        </Route>
+
+        <Route path="/user/orders" element={<Orders />} />
+        {/*/!*<Route index element={<Account />} />*!/*/}
+        {/*<Route path="profile" element={<Profile />} />*/}
+        {/*<Route path="address" element={<Address />} />*/}
+        {/*<Route path="changepassword" element={<ChangePassword />} />*/}
+        {/*/!*<Route*!/*/}
       </Route>
     </Routes>
   );

@@ -10,15 +10,60 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import Container from "@mui/material/Container";
+
 import Toolbar from "@mui/material/Toolbar";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+// 0: for male,
+// 1: for female,
+// 2: for other
+
+// DATA DUMP FROM DB
+const user = {
+  username: "jsmith",
+  name: "John Smith",
+  email: "johnsmith@gmail.com",
+  phoneNumber: "(+84) 111111111",
+  gender: 0,
+  birthDate: "2000-12-03",
+};
+
+const validationSchema = yup.object({
+  username: yup.string().required("Không để trống tên đăng nhập"),
+  name: yup.string().required("Không để trống họ và tên"),
+  email: yup.string().email().required("Không để trống email"),
+  phoneNumber: yup
+    .string()
+    .min(10, "Số điện thoại cần dài hơn 10 ký tự")
+    .required("Không để trống số điện thoại"),
+  gender: yup.number().required("Không để trống giới tính"),
+  birthDate: yup.date().required("Không để trống ngày sinh"),
+  // avatar: yup.string()
+});
+
 const Profile = () => {
-  const [dateValue, setDateValue] = React.useState(new Date());
+  const formik = useFormik({
+    initialValues: {
+      username: "jsmith",
+      name: "John Smith",
+      email: "johnsmith@gmail.com",
+      phoneNumber: "(+84) 111111111",
+      gender: 0,
+      birthDate: "2000-12-03T17:00:00.000Z",
+      // avatar: ""
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+  // const [dateValue, setDateValue] = React.useState(new Date());
+
   return (
     <Box
       component="form"
-      // onSubmit={handleSubmit}
+      onSubmit={formik.handleSubmit}
       noValidate
       sx={{ mt: 1 }}
     >
@@ -27,7 +72,7 @@ const Profile = () => {
           <Typography component="span" variant="h5">
             Hồ sơ của tôi
           </Typography>
-          <Typography component="p" variant="subtitle2">
+          <Typography mb={2} component="p" variant="subtitle2">
             Quản lý thông tin hồ sơ để bảo mật tài khoản
           </Typography>
           <Box>
@@ -35,16 +80,24 @@ const Profile = () => {
               margin="normal"
               fullWidth
               id="username"
-              label="Tên đăng nhập"
               name="username"
+              label="Tên đăng nhập"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
               autoComplete="username"
             />
             <TextField
               margin="normal"
               fullWidth
               id="name"
-              label="Tên"
               name="name"
+              label="Tên"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
               autoComplete="name"
             />
             <TextField
@@ -54,15 +107,27 @@ const Profile = () => {
               label="Email"
               type="email"
               id="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               autoComplete="email"
             />
             <TextField
               margin="normal"
               fullWidth
-              name="mobile"
+              name="phoneNumber"
               label="Số điện thoại"
               type="tel"
-              id="mobile"
+              id="phoneNumber"
+              value={formik.values.phoneNumber}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+              }
+              helperText={
+                formik.touched.phoneNumber && formik.errors.phoneNumber
+              }
               autoComplete="mobile"
             />
             <Grid container sx={{ alignItems: "center" }}>
@@ -73,21 +138,29 @@ const Profile = () => {
                   </FormLabel>
                   <RadioGroup
                     row
-                    aria-labelledby="gender-radio-group"
-                    name="row-radio-buttons-group"
+                    aria-labelledby="gender"
+                    name="gender"
+                    id="gender"
+                    onChange={formik.handleChange}
+                    value={formik.values.gender}
+                    defaultValue="0"
+                    error={
+                      formik.touched.gender && Boolean(formik.errors.gender)
+                    }
+                    helperText={formik.touched.gender && formik.errors.gender}
                   >
                     <FormControlLabel
-                      value="female"
+                      value="1"
                       control={<Radio />}
                       label="Nữ"
                     />
                     <FormControlLabel
-                      value="male"
+                      value="0"
                       control={<Radio />}
                       label="Nam"
                     />
                     <FormControlLabel
-                      value="other"
+                      value="2"
                       control={<Radio />}
                       label="Khác"
                     />
@@ -98,10 +171,19 @@ const Profile = () => {
                 <FormControl fullWidth margin="normal">
                   <MobileDatePicker
                     label="Ngày sinh"
-                    value={dateValue}
-                    onChange={(newValue) => {
-                      setDateValue(newValue);
+                    id="birthDate"
+                    name="birthDate"
+                    value={formik.values.birthDate}
+                    onChange={(val) => {
+                      formik.setFieldValue("birthDate", val, true);
                     }}
+                    error={
+                      formik.touched.birthDate &&
+                      Boolean(formik.errors.birthDate)
+                    }
+                    helperText={
+                      formik.touched.birthDate && formik.errors.birthDate
+                    }
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </FormControl>

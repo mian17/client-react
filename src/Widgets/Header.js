@@ -8,7 +8,7 @@ import $ from "jquery";
 
 import { NavLink } from "react-router-dom";
 
-import Modal from "../Modules/Modal/Modal";
+import Modal from "../Modules/Modal/SignInModal";
 
 import classes from "./Header.module.css";
 

@@ -7,10 +7,9 @@ import Paper from "@mui/material/Paper";
 
 import EditIcon from "@mui/icons-material/Edit";
 import Grid from "@mui/material/Grid";
+import AddressItemFunctions from "./AddressItemFunctions/AddressItemFunctions";
 
-const AddressItem = () => {
-  const handleOpenModal = () => {};
-
+const AddressItem = (props) => {
   return (
     <Paper
       sx={{
@@ -28,21 +27,10 @@ const AddressItem = () => {
         container
       >
         <Grid item lg={9} md={9}>
-          <AddressItemInfo />
+          <AddressItemInfo address={props.address} />
         </Grid>
         <Grid item>
-          <Box>
-            <Box
-              mb={1}
-              sx={{ display: "flex", justifyContent: "space-evenly" }}
-            >
-              <Button variant="text" onClick={handleOpenModal}>
-                Sửa
-              </Button>
-              <Button variant="text">Xóa</Button>
-            </Box>
-            <Button variant="outlined">Thiết Lập Mặc Định</Button>
-          </Box>
+          <AddressItemFunctions addressData={props.address} />
         </Grid>
       </Grid>
     </Paper>

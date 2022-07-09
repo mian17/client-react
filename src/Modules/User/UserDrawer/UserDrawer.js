@@ -36,14 +36,6 @@ const Drawer = styled(MuiDrawer, {
 const UserDrawer = () => {
   const drawerContent = (
     <>
-      {/*<Toolbar*/}
-      {/*  sx={{*/}
-      {/*    display: "flex",*/}
-      {/*    alignItems: "center",*/}
-      {/*    justifyContent: "flex-end",*/}
-      {/*    px: [1],*/}
-      {/*  }}*/}
-      {/*></Toolbar>*/}
       <AvatarBox />
       <Divider />
       <List component="nav">
