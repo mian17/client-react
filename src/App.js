@@ -12,8 +12,14 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
+const utc = require("dayjs/plugin/utc");
+const timezone = require("dayjs/plugin/timezone");
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 dayjs.locale("vi");
+dayjs.tz.setDefault("Asia/Ho_Chi_Minh");
 
 const theme = createTheme({
   palette: {

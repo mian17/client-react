@@ -20,14 +20,14 @@ import * as yup from "yup";
 // 2: for other
 
 // DATA DUMP FROM DB
-const user = {
-  username: "jsmith",
-  name: "John Smith",
-  email: "johnsmith@gmail.com",
-  phoneNumber: "(+84) 111111111",
-  gender: 0,
-  birthDate: "2000-12-03",
-};
+// const user = {
+//   username: "jsmith",
+//   name: "John Smith",
+//   email: "johnsmith@gmail.com",
+//   phoneNumber: "(+84) 111111111",
+//   gender: 0,
+//   birthDate: "2000-12-03",
+// };
 
 const validationSchema = yup.object({
   username: yup.string().required("Không để trống tên đăng nhập"),
@@ -50,7 +50,7 @@ const Profile = () => {
       email: "johnsmith@gmail.com",
       phoneNumber: "(+84) 111111111",
       gender: 0,
-      birthDate: "2000-12-03T17:00:00.000Z",
+      birthDate: "2000-12-04T00:00:00.000Z",
       // avatar: ""
     },
     validationSchema: validationSchema,

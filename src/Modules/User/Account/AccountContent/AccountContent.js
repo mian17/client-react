@@ -2,27 +2,20 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { FormLabel, IconButton, Radio, RadioGroup } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+
 import { NavLink } from "react-router-dom";
-import FormControl from "@mui/material/FormControl";
-import { DatePicker, MobileDatePicker } from "@mui/x-date-pickers";
 
 import Profile from "./Profile/Profile";
-import Address from "./Address/Address";
-import ChangePassword from "./ChangePassword/ChangePassword";
+// import Address from "./Address/Address";
+// import ChangePassword from "./ChangePassword/ChangePassword";
+import { CircularProgress } from "@mui/material";
+import AddressLoading from "./Address/AddressLoading";
 
-const pages = ["Hồ sơ", "Địa chỉ", "Đổi mật khẩu"];
+const Address = React.lazy(() => import("./Address/Address"));
+const ChangePassword = React.lazy(() =>
+  import("./ChangePassword/ChangePassword")
+);
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,12 +51,13 @@ function a11yProps(index) {
   };
 }
 
-export default function AccountTabs() {
+export default function AccountContent() {
   const [tabValue, setTabValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
   React.useEffect(() => {
     let checkUrlPath = window.location.href.split("account/")[1];
     switch (checkUrlPath) {
@@ -77,7 +71,7 @@ export default function AccountTabs() {
         setTabValue(2);
         break;
       default:
-        // console.log("urlPath is not valid");
+        console.log("urlPath is not valid");
         break;
     }
   }, [tabValue]);
@@ -89,7 +83,7 @@ export default function AccountTabs() {
           value={tabValue}
           onChange={handleChange}
           aria-label="các tab cho thông tin tài khoản"
-          centered
+          // centered
         >
           <Tab
             component={NavLink}
@@ -117,11 +111,15 @@ export default function AccountTabs() {
       </TabPanel>
 
       <TabPanel value={tabValue} index={1}>
-        <Address />
+        <React.Suspense fallback={<AddressLoading />}>
+          <Address />
+        </React.Suspense>
       </TabPanel>
 
       <TabPanel value={tabValue} index={2}>
-        <ChangePassword />
+        <React.Suspense fallback={<CircularProgress />}>
+          <ChangePassword />
+        </React.Suspense>
       </TabPanel>
     </Box>
   );

@@ -52,9 +52,9 @@ export default function SignIn(props) {
           margin="normal"
           required
           fullWidth
-          id="email"
+          id="modal-email"
           label="Địa chỉ Email"
-          name="email"
+          name="modal-email"
           autoComplete="email"
           autoFocus
         />
