@@ -80,14 +80,14 @@ const UserDrawer = () => {
             <ListItemText primary="Thông báo" />
           </ListItemButton>
         </Link>
-        <Link underline="none" component={NavLink} to="/user/vouchers">
-          <ListItemButton>
-            <ListItemIcon>
-              <ConfirmationNumberIcon />
-            </ListItemIcon>
-            <ListItemText primary="Kho mã giảm giá" />
-          </ListItemButton>
-        </Link>
+        {/*<Link underline="none" component={NavLink} to="/user/vouchers">*/}
+        {/*  <ListItemButton>*/}
+        {/*    <ListItemIcon>*/}
+        {/*      <ConfirmationNumberIcon />*/}
+        {/*    </ListItemIcon>*/}
+        {/*    <ListItemText primary="Kho mã giảm giá" />*/}
+        {/*  </ListItemButton>*/}
+        {/*</Link>*/}
 
         <Divider sx={{ my: 1 }} />
       </List>

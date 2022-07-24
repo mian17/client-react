@@ -39,7 +39,7 @@ const ProductItems = () => {
       }
 
       const data = await response.json();
-
+      // console.log(data);
       const transformedProductData = data.map((productData) => {
         return {
           productId: productData.id,
