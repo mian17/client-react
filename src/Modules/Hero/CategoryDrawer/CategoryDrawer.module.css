@@ -1,0 +1,21 @@
+.category-background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    opacity: 0;
+
+    transition: all 0.5s linear;
+    backface-visibility: hidden;
+    /*will-change: opacity;*/
+}
+
+.active {
+
+    opacity: 1;
+}

@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
+
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
 
@@ -22,9 +23,41 @@ dayjs.locale("vi");
 dayjs.tz.setDefault("Asia/Ho_Chi_Minh");
 
 const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+      '"Inter"',
+      '"Libre Bodoni"',
+    ].join(","),
+  },
   palette: {
     primary: {
-      main: "#dd2222",
+      main: "#321e1e", // old color:
+    },
+    customTransparent: {
+      main: "rgba(255,255,255, 0)",
+      contrastText: "#f4f1e0",
+    },
+    customShowNavbar: {
+      main: "#f4f1e0",
+      contrastText: "#321e1e",
+    },
+    siteButton: {
+      main: "#321e1e",
+      contrastText: "#f4f1e0",
+    },
+    customBadge: {
+      main: "#e9ecef",
+      contrastText: "#dd2222",
     },
   },
 });

@@ -1,3 +1,49 @@
-.hero__background {
-    background-image: url('../../Assets/img/hero/banner.jpg');
+.show-nav-bar {
+    background-color: #f4f1e0;
+    color: #321e1e;
+    transition: all 0.3s;
 }
+
+.transparent-nav-bar {
+    background-color: transparent;
+    color: #f4f1e0;
+    transition: all 0.3s;
+}
+
+
+
+.background-slide {
+
+    /*backgroundImage: linear-gradient(rgba(85, 85, 85, 0.4), rgba(85, 85, 85, 0.4)), url(${hero}`;*/
+    height: 80vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: auto;
+}
+
+.pagination-active {
+    background-color: #fff !important;
+}
+
+.pagination-normal {
+    /*opacity: 0.6 !important;*/
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 8px !important;
+}
+@keyframes toggle {
+    from {
+        visibility: hidden;
+    }
+    50% {
+        visibility: hidden;
+    }
+    to {
+        visibility: visible;
+    }
+}
+
+
+
+
