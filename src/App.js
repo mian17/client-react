@@ -70,7 +70,7 @@ function App() {
           <CartProvider>
             <Header />
             <Content />
-            <Footer />
+            {/*<Footer />*/}
           </CartProvider>
         </BrowserRouter>
       </LocalizationProvider>

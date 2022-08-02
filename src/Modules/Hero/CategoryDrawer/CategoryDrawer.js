@@ -15,6 +15,7 @@ import Link from "@mui/material/Link";
 import { NavLink } from "react-router-dom";
 import ListItemText from "@mui/material/ListItemText";
 import Box from "@mui/material/Box";
+import { useState } from "react";
 
 const CategoryDrawer = (props) => {
   const theme = useTheme();
@@ -30,7 +31,7 @@ const CategoryDrawer = (props) => {
       imgUrl: category.imgUrl,
     };
   });
-
+  // const [linkAnimationUnderline, setLinkAnimationUnderline] = useState(0);
   return (
     <Fade timeout={300} in={!props.hideCategories}>
       <Paper
@@ -100,6 +101,11 @@ const CategoryDrawer = (props) => {
                     ":hover": {
                       color: removeBackgroundMatch ? "#f4f1e0" : "inherit",
                       textDecoration: "none",
+                      // borderBottom: `2px solid ${
+                      //   removeBackgroundMatch ? "#f4f1e0" : "#321e1e"
+                      // }`,
+                    },
+                    ":active": {
                       borderBottom: `2px solid ${
                         removeBackgroundMatch ? "#f4f1e0" : "#321e1e"
                       }`,
@@ -109,13 +115,14 @@ const CategoryDrawer = (props) => {
                     letterSpacing: -0.2,
                     color:
                       props.changeLinkColorCondition && removeBackgroundMatch
-                        ? "#f4f1e0"
+                        ? "rgba(244,241,224,0.6)"
                         : "#321e1e",
-                    borderBottom: `2px solid ${
-                      props.changeLinkColorCondition ? "#f4f1e0" : "#321e1e"
-                    }`,
+                    // borderBottom: `2px solid ${
+                    //   props.changeLinkColorCondition ? "#f4f1e0" : "#321e1e"
+                    // }`,
+                    borderBottom: `2px solid transparent`,
                     m: 1,
-                    transition: "all 0.3s linear",
+                    transition: "all 0.15s linear",
                   }}
                   data-category={category.id}
                   onMouseEnter={props.getCategoryId}

@@ -71,30 +71,55 @@ const CartProvider = (props) => {
 
     setCartState(newState);
   };
-  const editItemQuantityHandler = (e) => {
-    const checkIfInputIsPositiveNumber =
-      Number.isFinite(Number(e.target.value)) &&
-      Number(e.target.value) < PRODUCT_QUANTITY_LIMIT &&
-      Number(e.target.value) >= 0;
+  // const editItemQuantityHandler = (e) => {
+  //   const checkIfInputIsPositiveNumber =
+  //     Number.isFinite(Number(e.target.value)) &&
+  //     Number(e.target.value) < PRODUCT_QUANTITY_LIMIT &&
+  //     Number(e.target.value) >= 0;
+  //
+  //   const editingCartId = e.target.closest("tr").dataset.cartId;
+  //
+  //   for (let i = 0; i < cartState.items.length; i++) {
+  //     if (
+  //       cartState.items[i].cartId === +editingCartId &&
+  //       checkIfInputIsPositiveNumber
+  //     ) {
+  //       // Creating a new state to replace previous state
+  //       const newState = { ...cartState };
+  //
+  //       newState.items[i].productQuantity = +e.target.value;
+  //       newState.totalMoney = calculateTotalMoney(newState.items);
+  //
+  //       setCartState(newState);
+  //     }
+  //   }
+  // };
 
-    const editingCartId = e.target.closest("tr").dataset.cartId;
+  const increaseItemQuantityFromCartHandler = (id) => {
+    const newState = { ...cartState };
 
-    for (let i = 0; i < cartState.items.length; i++) {
-      if (
-        cartState.items[i].cartId === +editingCartId &&
-        checkIfInputIsPositiveNumber
-      ) {
-        // Creating a new state to replace previous state
-        const newState = { ...cartState };
-
-        newState.items[i].productQuantity = +e.target.value;
-        newState.totalMoney = calculateTotalMoney(newState.items);
-
-        setCartState(newState);
+    for (let i = 0; i < newState.items.length; i++) {
+      if (newState.items[i].cartId === id) {
+        newState.items[i].productQuantity += 1;
+        break;
       }
     }
+    newState.totalMoney = calculateTotalMoney(newState.items);
+    setCartState(newState);
   };
 
+  const decreaseItemQuantityFromCartHandler = (id) => {
+    const newState = { ...cartState };
+
+    for (let i = 0; i < newState.items.length; i++) {
+      if (newState.items[i].cartId === id) {
+        newState.items[i].productQuantity -= 1;
+        break;
+      }
+    }
+    newState.totalMoney = calculateTotalMoney(newState.items);
+    setCartState(newState);
+  };
   /////////////////////////////////////////
   // SETTING CONTEXT'S VALUES
   const cartContext = {
@@ -102,7 +127,9 @@ const CartProvider = (props) => {
     totalMoney: cartState.totalMoney,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
-    editItemQuantity: editItemQuantityHandler,
+    // editItemQuantity: editItemQuantityHandler,
+    increaseItemQuantityFromCart: increaseItemQuantityFromCartHandler,
+    decreaseItemQuantityFromCart: decreaseItemQuantityFromCartHandler,
   };
 
   return (

@@ -1,0 +1,10 @@
+.image {
+    opacity: 1;
+    position: absolute;
+    transition: opacity 0.3s linear;
+    backface-visibility: hidden;
+}
+
+.hidden {
+    opacity: 0;
+}

@@ -8,6 +8,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import classes from "./Hero.module.css";
 import CartContext from "../../store/cart-context";
 import CategoryDrawer from "./CategoryDrawer/CategoryDrawer";
+import EmptyCart from "./EmptyCart/EmptyCart";
 import { currencyFormatOptions } from "../../utils/utils";
 
 // Jquery imports: Ready for deletion
@@ -39,6 +40,8 @@ import "swiper/css/pagination";
 
 import ProductSlide from "../Products/ProductSlide/ProductSlide";
 import { useTheme } from "@mui/material/styles";
+import Cart from "./Cart/Cart";
+import Shop from "../../Pages/Shop";
 
 const banners = [
   {
@@ -167,7 +170,7 @@ const Hero = () => {
   const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.productQuantity;
   }, 0);
-
+  // console.log(numberOfCartItems);
   // const totalMoneyInCart = new Intl.NumberFormat(
   //   "vi-VN",
   //   currencyFormatOptions
@@ -207,6 +210,7 @@ const Hero = () => {
   const smallScreenMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const extraSmallScreenMatch = useMediaQuery(theme.breakpoints.up("xs"));
 
+  // Conditions to trigger
   const notTriggeredCase =
     (hideCategories && !trigger) ||
     ((headerBackgroundIndex || headerBackgroundIndex === 0) &&
@@ -374,14 +378,11 @@ const Hero = () => {
                   onClose={toggleRightDrawerHandler}
                   PaperProps={{
                     sx: {
-                      width: changeCartToFullWidth
-                        ? "40%"
-                        : smallScreenMatch
-                        ? "60%"
-                        : "100%",
+                      width: changeCartToFullWidth ? "54%" : "100%",
                       backgroundColor: "#f4f1e0",
                       alignItems: "center",
                       justifyContent: "center",
+                      height: "100vh",
                     },
                   }}
                   SlideProps={{ direction: "left" }}
@@ -390,7 +391,10 @@ const Hero = () => {
                     keepMounted: true,
                   }}
                 >
-                  <Box p={2} sx={{ height: "60%" }}>
+                  <Box
+                    p={!numberOfCartItems ? 2 : 0}
+                    sx={{ height: "100%", width: "100%", py: 1 }}
+                  >
                     <IconButton
                       onClick={toggleRightDrawerHandler}
                       size="large"
@@ -401,58 +405,17 @@ const Hero = () => {
                     </IconButton>
 
                     {!numberOfCartItems ? (
-                      <Box sx={{ textAlign: "center" }}>
-                        <Typography
-                          fontFamily="Libre Bodoni"
-                          component="h3"
-                          variant="h4"
-                          mb={2}
-                        >
-                          Giỏ hàng trống
-                        </Typography>
-                        <Typography fontFamily="Inter" component="h5" mb={4}>
-                          Bạn hãy tiếp tục mua thêm sản phẩm nhé!
-                        </Typography>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: 2,
-                            alignItems: "center",
-                          }}
-                        >
-                          <Button
-                            size="large"
-                            sx={{ width: "fit-content" }}
-                            variant="outlined"
-                          >
-                            Xem tất cả sản phẩm
-                          </Button>
-                          {mostPopularCategories.map((category, index) => {
-                            return (
-                              <Button
-                                key={index}
-                                size="large"
-                                sx={{ width: "fit-content" }}
-                                variant="outlined"
-                              >
-                                {category.name}
-                              </Button>
-                            );
-                          })}
-                        </Box>
-                      </Box>
+                      <EmptyCart
+                        mostPopularCategories={mostPopularCategories}
+                      />
                     ) : (
-                      ""
+                      <Cart />
                     )}
                   </Box>
                 </Drawer>
               </div>
             </Box>
-
           </Box>
-
-
         </AppBar>
 
         <Swiper
@@ -482,6 +445,7 @@ const Hero = () => {
           })}
         </Swiper>
       </Box>
+      {/*<Shop />*/}
     </section>
   );
 };
