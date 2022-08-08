@@ -3,10 +3,13 @@ import Hero from "../Modules/Hero/Hero";
 import Categories from "../Modules/Categorires/Categories";
 import Featured from "../Modules/Featured/Featured";
 import Banner from "../Modules/Banner/Banner";
-import Products from "../Modules/Products/Products";
+import Products from "../Modules/Product/Products";
 import Blog from "../Modules/Blog/Blog";
-import SpotlightProduct from "../Modules/Products/SpotlightProduct/SpotlightProduct";
-import FavoriteProducts from "../Modules/Products/FavoriteProducts/FavoriteProducts";
+import SpotlightProduct from "../Modules/Product/SpotlightProduct/SpotlightProduct";
+import FavoriteProducts from "../Modules/Product/FavoriteProducts/FavoriteProducts";
+import Promotion from "../Modules/Promotion/Promotion";
+import ProductListing from "../Modules/Product/ProductListing/ProductListing";
+import MessageBanner from "../Modules/Banner/MessageBanner";
 
 const Homepage = () => {
   return (
@@ -14,10 +17,13 @@ const Homepage = () => {
       <Hero />
       <SpotlightProduct />
       <FavoriteProducts />
-      {/*<Categories />*/}
+      <Promotion />
+      <ProductListing />
+      <Categories />
+      <MessageBanner />
       {/*<Featured />*/}
       {/*<Banner />*/}
-      {/*<Products />*/}
+      {/*<Product />*/}
       {/*<Blog />*/}
     </div>
   );

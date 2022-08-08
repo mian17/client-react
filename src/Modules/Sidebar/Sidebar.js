@@ -84,7 +84,7 @@ const Sidebar = (props) => {
       {/*</div>*/}
       {/*<div className="sidebar__item">*/}
       {/*  <div className="latest-product__text">*/}
-      {/*    <h4>Latest Products</h4>*/}
+      {/*    <h4>Latest Product</h4>*/}
       {/*    <div className="latest-product__slider owl-carousel">*/}
       {/*      <div className="latest-product__slider__item">*/}
       {/*        <a href="/" className="latest-product__item">*/}

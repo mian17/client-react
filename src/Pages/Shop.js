@@ -1,8 +1,8 @@
 import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import Sidebar from "../Modules/Sidebar/Sidebar";
-import DiscountedProducts from "../Modules/Products/DiscountedProducts/DiscountedProducts";
-import ProductItems from "../Modules/Products/ProductItems/ProductItems";
-import ProductPagination from "../Modules/Products/ProductPagination/ProductPagination";
+import DiscountedProducts from "../Modules/Product/DiscountedProducts/DiscountedProducts";
+import ProductItems from "../Modules/Product/ProductItems/ProductItems";
+import ProductPagination from "../Modules/Product/ProductPagination/ProductPagination";
 
 // TODO: FIX SMALL FLICKERING WHEN OPENING MUI'S SELECT WHILE ON FIREFOX
 //       CHROME HAS NO ISSUE WITH THIS BUG

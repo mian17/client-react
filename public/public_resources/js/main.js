@@ -6,7 +6,7 @@
     $(".loader").fadeOut();
     $("#preloader").delay(200).fadeOut("slow");
 
-    /* Featured Products */
+    /* Featured Product */
     $(".featured__controls li").on("click", function () {
       $(".featured__controls li").removeClass("active");
       $(this).addClass("active");
@@ -81,7 +81,7 @@
     $(".hero__categories ul").slideToggle(400);
   });
 
-  /* Latest Products Slider */
+  /* Latest Product Slider */
   $(".latest-product__slider").owlCarousel({
     loop: true,
     margin: 0,

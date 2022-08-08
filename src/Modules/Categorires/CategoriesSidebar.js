@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import CategoryItem from "./CategoryItem";
 import React, { useEffect } from "react";
-import classes from "../Products/ProductItems/ProductItems.module.css";
+import classes from "../Product/ProductItems/ProductItems.module.css";
 import { Skeleton } from "@mui/material";
 
 const CategoriesSidebar = () => {

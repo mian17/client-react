@@ -38,7 +38,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css/pagination";
 
-import ProductSlide from "../Products/ProductSlide/ProductSlide";
+import ProductSlide from "../Product/ProductSlide/ProductSlide";
 import { useTheme } from "@mui/material/styles";
 import Cart from "./Cart/Cart";
 import Shop from "../../Pages/Shop";
@@ -170,11 +170,6 @@ const Hero = () => {
   const numberOfCartItems = cartCtx.items.reduce((currentNumber, item) => {
     return currentNumber + item.productQuantity;
   }, 0);
-  // console.log(numberOfCartItems);
-  // const totalMoneyInCart = new Intl.NumberFormat(
-  //   "vi-VN",
-  //   currencyFormatOptions
-  // ).format(cartCtx.totalMoney);
 
   // Categories
   const [hideCategories, setHideCategories] = useState(true);
@@ -210,7 +205,7 @@ const Hero = () => {
   const smallScreenMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const extraSmallScreenMatch = useMediaQuery(theme.breakpoints.up("xs"));
 
-  // Conditions to trigger
+  // Conditions to trigger on scroll
   const notTriggeredCase =
     (hideCategories && !trigger) ||
     ((headerBackgroundIndex || headerBackgroundIndex === 0) &&
