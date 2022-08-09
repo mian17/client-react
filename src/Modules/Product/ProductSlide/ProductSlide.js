@@ -1,34 +1,37 @@
+// Source imports
+import classes from "./ProductSlide.module.css";
+
+// Mui imports
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
-import classes from "./ProductSlide.module.css";
-import { NavLink, Link } from "react-router-dom";
-import { ButtonBase } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-// Từ những sản phẩm hoàn toàn đến từ
-// <em style={{ color: "#b2f2bb" }}>thiên nhiên</em>.
+// React router dom imports
+import { NavLink } from "react-router-dom";
+
 const ProductSlide = (props) => {
   const theme = useTheme();
   const smallScreenMatch = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const innerBoxSx = {
+    position: "absolute",
+    top: "55%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  };
   return (
     <Box
+      component="section"
       sx={{
         backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.4), rgba(85, 85, 85, 0.4)), url(${props.imgUrl})`,
         height: smallScreenMatch ? "88vh" : "96vh",
       }}
       className={classes["background-slide"]}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: "55%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
+      <Box sx={innerBoxSx}>
         <Typography
           fontFamily={"Libre Bodoni"}
           component="h2"
@@ -48,7 +51,17 @@ const ProductSlide = (props) => {
           {props.subtitle}
         </Typography>
         <Box sx={{ textAlign: "center" }}>
-          <Button variant="contained" size="large">
+          <Button
+            component={NavLink}
+            to={props.link}
+            variant="contained"
+            size="large"
+            sx={{
+              ":hover": {
+                color: "#f4f1e0",
+              },
+            }}
+          >
             {props.btnCTAContent}
           </Button>
         </Box>

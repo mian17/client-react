@@ -9,8 +9,7 @@ export default class Product {
     price,
     description,
     statusCode,
-    isSelectable,
-    colorCode
+    isSelectable
   ) {
     this.productId = productId;
     this.imageUrl = imageUrl;
@@ -22,6 +21,5 @@ export default class Product {
     this.description = description;
     this.statusCode = statusCode;
     this.isSelectable = isSelectable;
-    this.colorCode = colorCode;
   }
 }

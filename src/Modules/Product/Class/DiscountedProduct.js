@@ -1,6 +1,6 @@
 import Product from "./Product";
 
-export default class CategoricalProduct extends Product {
+export default class DiscountedProduct extends Product {
   constructor(
     productId,
     imageUrl,
@@ -12,8 +12,7 @@ export default class CategoricalProduct extends Product {
     description,
     statusCode,
     isSelectable,
-    colorCode,
-    categoryImages
+    discountedPrice
   ) {
     super(
       productId,
@@ -27,7 +26,6 @@ export default class CategoricalProduct extends Product {
       statusCode,
       isSelectable
     );
-    this.colorCode = colorCode;
-    this.categoryImages = categoryImages;
+    this.discountedPrice = discountedPrice;
   }
 }

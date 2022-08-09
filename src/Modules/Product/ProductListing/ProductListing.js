@@ -20,6 +20,33 @@ const ProductListing = () => {
   //   // const productsReponse = await getProductsFromServer()
   //   setProducts(products);
   // }, [products]);
+  // Ready for API connection
+  // const [error, setError] = useState(null);
+  // const fetchCategories = useCallback(async () => {
+  //   setError(null);
+  //   try {
+  //     // Get from api
+  //     const response = await fetch("https://example.com");
+  //     if (!response.ok) {
+  //       throw new Error("Không lấy được dữ liệu");
+  //     }
+  //
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     const transformedCategory = data.map((categoryData) => {
+  //       return new Category()
+  //     });
+  //
+  //     setCategories(transformedCategory);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //
+  // }, []);
+  // Request categories
+  // useEffect(() => {
+  //     fetchCategories();
+  // }, [fetchCategories]);
 
   // Count num to specify row position for this special grid layout
   let count = 1;

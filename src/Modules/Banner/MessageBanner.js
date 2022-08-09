@@ -1,15 +1,41 @@
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
 const MessageBanner = () => {
   const theme = useTheme();
   const hideSocialMediaLinks = useMediaQuery(theme.breakpoints.down("lg"));
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
-  const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // Ready for API connection
+  // const [error, setError] = useState(null);
+  // const fetchCategories = useCallback(async () => {
+  //   setError(null);
+  //   try {
+  //     // Get from api
+  //     const response = await fetch("https://example.com");
+  //     if (!response.ok) {
+  //       throw new Error("Không lấy được dữ liệu");
+  //     }
+  //
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     const transformedCategory = data.map((categoryData) => {
+  //       return new Category()
+  //     });
+  //
+  //     setCategories(transformedCategory);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //
+  // }, []);
+  // Request categories
+  // useEffect(() => {
+  //     fetchCategories();
+  // }, [fetchCategories]);
+
   return (
     <Box
       component="section"

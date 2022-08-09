@@ -3,7 +3,7 @@ import * as React from "react";
 import { useContext, useState } from "react";
 
 // Source imports
-import CartContext from "../../../store/cart-context";
+import CartContext from "../../../../store/cart-context";
 
 // React Router Dom imports
 import { NavLink } from "react-router-dom";
@@ -16,21 +16,11 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
-// import List from "@mui/material/List";
-// import ListItem from "@mui/icons-material/ListItem";
-// import Link from "@mui/material/Link";
-// import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-
-import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import RemoveIcon from "@mui/icons-material/Remove";
-import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
-import { currencyFormatOptions } from "../../../utils/utils";
+import { currencyFormatOptions } from "../../../../utils/utils";
 import CartItem from "./CartItem/CartItem";
 import CartMoneyInfo from "./CartMoneyInfo/CartMoneyInfo";
-import Paper from "@mui/material/Paper";
+
 const Cart = (props) => {
   const theme = useTheme();
 

@@ -22,13 +22,6 @@ const HoverableProductItemImage = (props) => {
     props.product.hasOwnProperty("categoryImages") &&
     props.product.categoryImages.length > 0;
 
-  // console.log(props.selectedPosition);
-  if (isSelectable)
-    console.log(
-      "Property for object with productId " + props.product.productId,
-      props.product.categoryImages
-    );
-
   return (
     <Box
       onMouseEnter={hoverOnImageHandler}

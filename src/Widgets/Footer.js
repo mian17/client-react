@@ -21,7 +21,7 @@ const Footer = () => {
   );
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
-  const heightForPrivacyOptions = "149.5666px";
+  const heightForPrivacyOptions = "78,7833px";
 
   return (
     <Box component="footer">
@@ -256,105 +256,111 @@ const Footer = () => {
               </Box>
             )}
             <Box component="ul" sx={{ height: heightForPrivacyOptions }}>
-              <Box
-                py={0.75}
-                px={2}
-                component="li"
-                sx={{
-                  listStyleType: "none",
-                  borderBottom: "1px solid #321e1e",
-                  textAlign: "right",
-                }}
-              >
-                <Typography
-                  component={NavLink}
-                  to="/user/account/profile"
-                  variant="subtitle2"
+              <Box sx={{ height: heightForPrivacyOptions }}>
+                <Box
+                  py={0.72}
+                  px={2}
+                  component="li"
                   sx={{
-                    color: "inherit",
-                    ":hover": {
-                      color: "inherit",
-                      textDecoration: "none",
-                    },
+                    listStyleType: "none",
+                    borderBottom: "1px solid #321e1e",
+                    textAlign: "right",
                   }}
                 >
-                  Chính sách vận chuyển
-                </Typography>
+                  <Typography
+                    component={NavLink}
+                    to="/user/account/profile"
+                    variant="subtitle2"
+                    sx={{
+                      color: "inherit",
+                      ":hover": {
+                        color: "inherit",
+                        textDecoration: "none",
+                      },
+                    }}
+                  >
+                    Chính sách vận chuyển
+                  </Typography>
+                </Box>
+                <Box
+                  py={0.72}
+                  px={2}
+                  component="li"
+                  sx={{
+                    listStyleType: "none",
+                    borderBottom: "1px solid #321e1e",
+                    textAlign: "right",
+                  }}
+                >
+                  <Typography
+                    component={NavLink}
+                    to="/contact"
+                    variant="subtitle2"
+                    sx={{
+                      color: "inherit",
+                      ":hover": {
+                        color: "inherit",
+                        textDecoration: "none",
+                      },
+                    }}
+                  >
+                    Tùy chọn dữ liệu cá nhân
+                  </Typography>
+                </Box>
               </Box>
-              <Box
-                py={0.74}
-                px={2}
-                component="li"
-                sx={{
-                  listStyleType: "none",
-                  borderBottom: "1px solid #321e1e",
-                  textAlign: "right",
-                }}
-              >
-                <Typography
-                  component={NavLink}
-                  to="/contact"
-                  variant="subtitle2"
+              <Box sx={{ height: heightForPrivacyOptions }}>
+                <Box
+                  pt="6.17px"
+                  pb={0.76}
+                  // py={0.76}
+                  px={2}
+                  component="li"
                   sx={{
-                    color: "inherit",
-                    ":hover": {
-                      color: "inherit",
-                      textDecoration: "none",
-                    },
+                    listStyleType: "none",
+                    borderBottom: "1px solid #321e1e",
+                    textAlign: "right",
                   }}
                 >
-                  Tùy chọn dữ liệu cá nhân
-                </Typography>
-              </Box>
-              <Box
-                py={0.75}
-                px={2}
-                component="li"
-                sx={{
-                  listStyleType: "none",
-                  borderBottom: "1px solid #321e1e",
-                  textAlign: "right",
-                }}
-              >
-                <Typography
-                  component={NavLink}
-                  to="/faq"
-                  variant="subtitle2"
-                  sx={{
-                    color: "inherit",
-                    ":hover": {
+                  <Typography
+                    component={NavLink}
+                    to="/faq"
+                    variant="subtitle2"
+                    sx={{
                       color: "inherit",
-                      textDecoration: "none",
-                    },
+                      ":hover": {
+                        color: "inherit",
+                        textDecoration: "none",
+                      },
+                    }}
+                  >
+                    Yêu cầu không bán thông tin của tôi
+                  </Typography>
+                </Box>
+                <Box
+                  py={0.75}
+                  px={2}
+                  component="li"
+                  sx={{
+                    listStyleType: "none",
+                    borderBottom: "1px solid #321e1e",
+                    textAlign: "right",
                   }}
                 >
-                  Yêu cầu không bán thông tin của tôi
-                </Typography>
-              </Box>
-              <Box
-                py={0.75}
-                px={2}
-                component="li"
-                sx={{
-                  listStyleType: "none",
-                  borderBottom: "1px solid #321e1e",
-                  textAlign: "right",
-                }}
-              >
-                <Typography
-                  component={NavLink}
-                  to="/faq"
-                  variant="subtitle2"
-                  sx={{
-                    color: "inherit",
-                    ":hover": {
+                  <Typography
+                    component={NavLink}
+                    to="/faq"
+                    variant="subtitle2"
+                    sx={{
                       color: "inherit",
-                      textDecoration: "none",
-                    },
-                  }}
-                >
-                  Tùy chọn thông tin quảng cáo
-                </Typography>
+                      ":hover": {
+                        color: "inherit",
+                        textDecoration: "none",
+                      },
+                    }}
+                  >
+                    Tùy chọn thông tin quảng cáo
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           </Box>

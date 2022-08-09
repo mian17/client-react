@@ -7,11 +7,14 @@
 import Product from "../../Class/Product";
 import CategoricalProduct from "../../Class/CategoricalProduct";
 import CategoryImage from "../../Class/CategoryImage";
+import DiscountedProduct from "../../Class/DiscountedProduct";
 
-const NORMAL_STATUS_CODE = 0;
-const NEW_STATUS_CODE = 1;
-const ON_SALE_STATUS_CODE = 2;
-const BACK_IN_STOCK_STATUS_CODE = 3;
+import {
+  NORMAL_STATUS_CODE,
+  NEW_STATUS_CODE,
+  ON_SALE_STATUS_CODE,
+  BACK_IN_STOCK_STATUS_CODE,
+} from "../../common/utils/statusCode";
 
 export const products = [
   new Product(
@@ -53,7 +56,7 @@ export const products = [
       ),
     ]
   ),
-  new Product(
+  new DiscountedProduct(
     3,
     "/img/product-listing/product-listing.png",
     "something",
@@ -63,7 +66,8 @@ export const products = [
     30000,
     "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
     ON_SALE_STATUS_CODE,
-    false
+    false,
+    8000
   ),
   new Product(
     4,
@@ -101,7 +105,7 @@ export const products = [
     NEW_STATUS_CODE,
     false
   ),
-  new Product(
+  new DiscountedProduct(
     7,
     "/img/product-listing/product-listing.png",
     "something",
@@ -111,7 +115,8 @@ export const products = [
     70000,
     "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
     ON_SALE_STATUS_CODE,
-    false
+    false,
+    50000
   ),
   new Product(
     8,
@@ -149,7 +154,7 @@ export const products = [
     NEW_STATUS_CODE,
     false
   ),
-  new Product(
+  new DiscountedProduct(
     11,
     "/img/product-listing/product-listing.png",
     "something",
@@ -159,6 +164,7 @@ export const products = [
     110000,
     "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
     ON_SALE_STATUS_CODE,
-    false
+    false,
+    90000
   ),
 ];

@@ -21,7 +21,7 @@ const Content = () => {
   return (
     <Routes>
       <Route index path="/" element={<Homepage />} />
-      <Route path="/shop" element={<Shop />} />
+      <Route path="/product/all" element={<Shop />} />
 
       {/*<Route path="/shopdetails" element={<ShopDetails />} />*/}
 

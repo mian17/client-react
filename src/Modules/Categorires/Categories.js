@@ -14,6 +14,8 @@ import { useTheme } from "@mui/material/styles";
 
 import EastIcon from "@mui/icons-material/East";
 import { IconButton } from "@mui/material";
+import { mostPopularCategoriesWithImage } from "../common/utils/mostPopularCategories-test-data/mostPopularCategoriesWithImage";
+import { NavLink } from "react-router-dom";
 
 const categoriesBreakpointsOption = {
   900: {
@@ -25,6 +27,34 @@ const Categories = () => {
   const theme = useTheme();
   const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Ready for API connection
+  // const [error, setError] = useState(null);
+  // const fetchCategories = useCallback(async () => {
+  //   setError(null);
+  //   try {
+  //     // Get from api
+  //     const response = await fetch("https://example.com");
+  //     if (!response.ok) {
+  //       throw new Error("Không lấy được dữ liệu");
+  //     }
+  //
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     const transformedCategory = data.map((categoryData) => {
+  //       return new Category()
+  //     });
+  //
+  //     setCategories(transformedCategory);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //
+  // }, []);
+  // Request categories
+  // useEffect(() => {
+  //     fetchCategories();
+  // }, [fetchCategories]);
 
   const backgroundProps = {
     backgroundSize: "cover",
@@ -43,147 +73,61 @@ const Categories = () => {
         sx={{ height: "80vh" }}
         watchOverflow={false}
       >
-        <SwiperSlide>
-          <Box
-            sx={{
-              ...backgroundProps,
-              backgroundImage:
-                "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/categories/category-banners/rice.jpg')",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 100,
-              }}
-            >
-              <Typography
-                fontFamily={"Libre Bodoni"}
-                color="#f4f1e0"
-                component="h3"
-                variant={smallScreenMatch ? "h5" : "h4"}
-                lineHeight={1.4}
-                sx={{ textTransform: "uppercase" }}
-                mb={2}
+        {mostPopularCategoriesWithImage.map((category, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <Box
+                sx={{
+                  ...backgroundProps,
+                  backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url(${category.imageUrl})`,
+                }}
               >
-                Sắm gạo
-              </Typography>
-            </Box>
-            <IconButton
-              variant="outlined"
-              size={smallScreenMatch ? "small" : "medium"}
-              sx={{
-                color: "#f4f1e0",
-                border: "2px solid #f4f1e0",
-                position: "absolute",
-                bottom: 24,
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-              disableRipple
-            >
-              <EastIcon />
-            </IconButton>
-          </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            sx={{
-              ...backgroundProps,
-              backgroundImage:
-                "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/categories/category-banners/fruits.jpg')",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 100,
-              }}
-            >
-              <Typography
-                fontFamily={"Libre Bodoni"}
-                color="#f4f1e0"
-                component="h3"
-                variant={smallScreenMatch ? "h5" : "h4"}
-                lineHeight={1.4}
-                sx={{ textTransform: "uppercase" }}
-                mb={2}
-              >
-                Sắm trái cây
-              </Typography>
-            </Box>
-            <IconButton
-              variant="outlined"
-              size={smallScreenMatch ? "small" : "medium"}
-              sx={{
-                color: "#f4f1e0",
-                border: "2px solid #f4f1e0",
-                position: "absolute",
-                bottom: 24,
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-              disableRipple
-            >
-              <EastIcon />
-            </IconButton>
-          </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            sx={{
-              ...backgroundProps,
-              backgroundImage:
-                "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/categories/category-banners/meat.jpg')",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                textAlign: "center",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 100,
-              }}
-            >
-              <Typography
-                fontFamily={"Libre Bodoni"}
-                color="#f4f1e0"
-                component="h3"
-                variant={smallScreenMatch ? "h5" : "h4"}
-                lineHeight={1.4}
-                sx={{ textTransform: "uppercase" }}
-                mb={2}
-              >
-                Sắm thịt
-              </Typography>
-            </Box>
-            <IconButton
-              size={smallScreenMatch ? "small" : "medium"}
-              variant="outlined"
-              sx={{
-                color: "#f4f1e0",
-                border: "2px solid #f4f1e0",
-                position: "absolute",
-                bottom: 24,
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-              disableRipple
-            >
-              <EastIcon />
-            </IconButton>
-          </Box>
-        </SwiperSlide>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    textAlign: "center",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 100,
+                  }}
+                >
+                  <Typography
+                    fontFamily={"Libre Bodoni"}
+                    color="#f4f1e0"
+                    component="h3"
+                    variant={smallScreenMatch ? "h5" : "h4"}
+                    lineHeight={1.4}
+                    sx={{ textTransform: "uppercase" }}
+                    mb={2}
+                  >
+                    {category.title}
+                  </Typography>
+                </Box>
+                <IconButton
+                  component={NavLink}
+                  to={`/category/${category.categoryId}`}
+                  variant="outlined"
+                  size={smallScreenMatch ? "small" : "medium"}
+                  sx={{
+                    color: "#f4f1e0",
+                    border: "2px solid #f4f1e0",
+                    position: "absolute",
+                    bottom: 24,
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    ":hover": {
+                      color: "#f4f1e0",
+                    },
+                  }}
+                  disableRipple
+                >
+                  <EastIcon />
+                </IconButton>
+              </Box>
+            </SwiperSlide>
+          );
+        })}
       </Box>
     </Box>
   );

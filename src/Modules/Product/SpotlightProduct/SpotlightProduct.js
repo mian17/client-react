@@ -15,28 +15,44 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import HoverableProductItemImage from "../HoverableProductItemImage/HoverableProductItemImage";
 
-const product = {
-  productId: 1,
-  imageUrl: "/img/spotlight-product/spotlight-product-1.png",
-  altImageUrl: "something",
-  imageUrlOnHover: "/img/spotlight-product/spotlight-product-1-hover.jpg",
-  altImageUrlOnHover: "other something",
-  productName: "Táo Braeburn",
-  price: "159000",
-  description:
-    "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
-  statusCode: 1,
-};
+import { spotlightProduct } from "./spotlightProduct-test-data/spotlightProduct";
+import { NavLink } from "react-router-dom";
 
 const SpotlightProduct = () => {
   const theme = useTheme();
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
-  const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   const formattedProductPrice = new Intl.NumberFormat(
     "vi-VN",
     currencyFormatOptions
-  ).format(product.price);
+  ).format(spotlightProduct.price);
+  // Ready for API connection
+  // const [error, setError] = useState(null);
+  // const fetchCategories = useCallback(async () => {
+  //   setError(null);
+  //   try {
+  //     // Get from api
+  //     const response = await fetch("https://example.com");
+  //     if (!response.ok) {
+  //       throw new Error("Không lấy được dữ liệu");
+  //     }
+  //
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     const transformedCategory = data.map((categoryData) => {
+  //       return new Category()
+  //     });
+  //
+  //     setCategories(transformedCategory);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //
+  // }, []);
+  // Request categories
+  // useEffect(() => {
+  //     fetchCategories();
+  // }, [fetchCategories]);
 
   return (
     <Grid sx={{ borderBottom: "1px solid #bdb498" }} container>
@@ -57,8 +73,6 @@ const SpotlightProduct = () => {
           backgroundSize: tabletScreenMatch ? "cover" : null,
         }}
       >
-        {/*Tên sản phẩm và description*/}
-
         <Typography
           component="h4"
           variant={tabletScreenMatch ? "h5" : "h4"}
@@ -66,7 +80,7 @@ const SpotlightProduct = () => {
           sx={{ fontWeight: 700, m: 4 }}
           textAlign={tabletScreenMatch ? "left" : "center"}
         >
-          {product.productName}
+          {spotlightProduct.productName}
         </Typography>
         {!tabletScreenMatch && (
           <Box
@@ -96,13 +110,11 @@ const SpotlightProduct = () => {
             right: 0,
           }}
         >
-          {product.description}
+          {spotlightProduct.description}
         </Typography>
       </Grid>
       <Grid md={8} sx={{ position: "relative" }} item>
-        {/*Hình sản phẩm, nút mua hàng, giá tiền*/}
-
-        <HoverableProductItemImage product={product} />
+        <HoverableProductItemImage product={spotlightProduct} />
 
         <Box
           m={4}
@@ -119,7 +131,7 @@ const SpotlightProduct = () => {
             sx={{ fontWeight: 700 }}
             fontFamily="Libre Bodoni"
           >
-            {product.productName}
+            {spotlightProduct.productName}
           </Typography>
           <Button
             variant="contained"

@@ -4,50 +4,38 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import ProductItem from "../ProductItem/ProductItem";
 
-const products = [
-  {
-    productId: 1,
-    imageUrl: "/img/favorite-products/favorite-product-1.png",
-    altImageUrl: "something",
-    imageUrlOnHover: "/img/favorite-products/favorite-product-1-hover.jpg",
-    altImageUrlOnHover: "other something",
-    productName: "Táo Braeburn",
-    price: 159000,
-    description:
-      "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
-    statusCode: 0,
-  },
-  {
-    productId: 2,
-    imageUrl: "/img/favorite-products/favorite-product-1.png",
-    altImageUrl: "something",
-    imageUrlOnHover: "/img/favorite-products/favorite-product-1-hover.jpg",
-    altImageUrlOnHover: "other something",
-    productName: "Táo Braeburn",
-    price: 159000,
-    description:
-      "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
-    statusCode: 1,
-  },
-  {
-    productId: 3,
-    imageUrl: "/img/favorite-products/organic-products/th-true-milk.png",
-    altImageUrl: "something",
-    imageUrlOnHover:
-      "/img/favorite-products/organic-products/th-true-milk-hover.jpg",
-    altImageUrlOnHover: "other something",
-    productName: "TH True Milk Organic - 500ml",
-    price: 159000,
-    description:
-      "Hương vị đậm đà của trái táo Braeburn không thể nào cưỡng lại được. Loại táo giòn này mang tới vị chua ngọt với hương vị đậm ngọt ngào.",
-    statusCode: 2,
-    discountedPrice: 12000,
-  },
-];
+import { favoriteProducts } from "./favoriteProducts-test-data/favoriteProducts";
 
 const FavoriteProducts = () => {
   const theme = useTheme();
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+  // Ready for API connection
+  // const [error, setError] = useState(null);
+  // const fetchCategories = useCallback(async () => {
+  //   setError(null);
+  //   try {
+  //     // Get from api
+  //     const response = await fetch("https://example.com");
+  //     if (!response.ok) {
+  //       throw new Error("Không lấy được dữ liệu");
+  //     }
+  //
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     const transformedCategory = data.map((categoryData) => {
+  //       return new Category()
+  //     });
+  //
+  //     setCategories(transformedCategory);
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  //
+  // }, []);
+  // Request categories
+  // useEffect(() => {
+  //     fetchCategories();
+  // }, [fetchCategories]);
 
   return (
     <Grid container>
@@ -88,7 +76,7 @@ const FavoriteProducts = () => {
           recusandae tempore velit vitae!
         </Typography>
       </Grid>
-      {products.map((product, index) => {
+      {favoriteProducts.map((product, index) => {
         return (
           <Grid
             key={index}

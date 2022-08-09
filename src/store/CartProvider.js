@@ -1,11 +1,11 @@
+// React imports
 import { useState } from "react";
+
+// Source imports
+import ProductInCart from "./utils/ProductInCart";
+
 import CartContext from "./cart-context";
-
 import { PRODUCT_QUANTITY_LIMIT, calculateTotalMoney } from "../utils/utils";
-
-import cart_1 from "../Assets/img/cart/cart-1.jpg";
-import cart_2 from "../Assets/img/cart/cart-2.jpg";
-import cart_3 from "../Assets/img/cart/cart-3.jpg";
 
 // const DUMMY_DATA = [
 //   {

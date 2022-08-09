@@ -1,7 +1,7 @@
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { currencyFormatOptions } from "../../../../utils/utils";
+import { currencyFormatOptions } from "../../../../../utils/utils";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from "@mui/icons-material/Remove";
 import InputBase from "@mui/material/InputBase";
@@ -11,7 +11,7 @@ import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { useState, useEffect, useContext } from "react";
-import CartContext from "../../../../store/cart-context";
+import CartContext from "../../../../../store/cart-context";
 const CartItem = (props) => {
   // props.product.productImgAlt = "t-shirt";
 
