@@ -7,18 +7,21 @@ import Button from "@mui/material/Button";
 
 const MessageBanner = () => {
   const theme = useTheme();
-  const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
+  const hideSocialMediaLinks = useMediaQuery(theme.breakpoints.down("lg"));
+  const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       component="section"
       sx={{
         position: "relative",
-        borderBottom: "1px solid #bdb498",
-        backgroundImage:
-          "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/message-banner/message-banner.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        borderBottom: `1px solid ${
+          hideSocialMediaLinks ? "transparent" : "#321e1e"
+        }`,
+        // backgroundImage:
+        //   "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/message-banner/message-banner.jpg')",
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
         height: "90vh",
       }}
     >
@@ -34,9 +37,9 @@ const MessageBanner = () => {
       >
         <Typography
           fontFamily={"Libre Bodoni"}
-          color="#f4f1e0"
+          color="#321e1e"
           component="h3"
-          variant={smallScreenMatch ? "h4" : "h3"}
+          variant={tabletScreenMatch ? "h4" : "h3"}
           lineHeight={1.4}
           mb={2}
           sx={{ textTransform: "uppercase" }}
@@ -44,7 +47,8 @@ const MessageBanner = () => {
           Niềm vui của bạn chính là niềm vui của chúng tôi
           <br />
         </Typography>
-        <Typography component="h4" variant="body1" color="#f4f1e0" mb={2}>
+        {/*"#f4f1e0"*/}
+        <Typography component="h4" variant="body1" color="#321e1e" mb={2}>
           loremLorem ipsum dolor sit amet, consectetur adipisicing elit.
           Accusantium autem consequatur dolore exercitationem fugiat fugit illum
           iure laudantium natus neque officiis pariatur, perspiciatis quaerat

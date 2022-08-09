@@ -15,150 +15,28 @@ import { useTheme } from "@mui/material/styles";
 
 const Footer = () => {
   const theme = useTheme();
-  const smallerMainFooterNavlink = useMediaQuery("(max-width:1064px)");
+  const hideSocialMediaLinks = useMediaQuery(theme.breakpoints.down("lg"));
+  const footerLayoutChangeCondition = useMediaQuery(
+    theme.breakpoints.down("md")
+  );
+  const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
   const heightForPrivacyOptions = "149.5666px";
 
   return (
     <Box component="footer">
       <Grid container>
-        <Grid
-          lg={9}
-          md={9}
-          sm={12}
-          xs={12}
-          sx={{ borderRight: "1px solid #321e1e" }}
-          item
-        >
-          <Box component="ul">
-            <Box
-              p={2}
-              component="li"
-              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
-            >
-              <Typography
-                component={NavLink}
-                to="/user/account/profile"
-                variant="h4"
-                fontFamily={"Libre Bodoni"}
-                sx={{
-                  textTransform: "uppercase",
-                  color: "inherit",
-                  ":hover": {
-                    color: "inherit",
-                    textDecoration: "none",
-                  },
-                }}
-              >
-                Tài khoản của tôi
-              </Typography>
-            </Box>
-            <Box
-              p={2}
-              component="li"
-              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
-            >
-              <Typography
-                component={NavLink}
-                to="/contact"
-                variant="h4"
-                fontFamily={"Libre Bodoni"}
-                sx={{
-                  textTransform: "uppercase",
-                  color: "inherit",
-                  ":hover": {
-                    color: "inherit",
-                    textDecoration: "none",
-                  },
-                }}
-              >
-                Liên Hệ
-              </Typography>
-            </Box>
-            <Box
-              p={2}
-              component="li"
-              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
-            >
-              <Typography
-                component={NavLink}
-                to="/faq"
-                variant="h4"
-                fontFamily={"Libre Bodoni"}
-                sx={{
-                  textTransform: "uppercase",
-                  color: "inherit",
-                  ":hover": {
-                    color: "inherit",
-                    textDecoration: "none",
-                  },
-                }}
-              >
-                Các câu hỏi thường gặp
-              </Typography>
-            </Box>
-            <Box
-              p={2}
-              component="li"
-              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
-            >
-              <Typography
-                component={NavLink}
-                to="/privacy-terms"
-                variant="h4"
-                fontFamily={"Libre Bodoni"}
-                sx={{
-                  textTransform: "uppercase",
-                  color: "inherit",
-                  ":hover": {
-                    color: "inherit",
-                    textDecoration: "none",
-                  },
-                }}
-              >
-                Chính sách bảo mật thông tin cá nhân
-              </Typography>
-            </Box>
-            <Box
-              p={2}
-              component="li"
-              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
-            >
-              <Typography
-                component={NavLink}
-                to="/terms-of-service"
-                variant="h4"
-                fontFamily={"Libre Bodoni"}
-                sx={{
-                  textTransform: "uppercase",
-                  color: "inherit",
-                  ":hover": {
-                    color: "inherit",
-                    textDecoration: "none",
-                  },
-                }}
-              >
-                Điều khoản sử dụng
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid lg={3} md={3} sm={12} xs={12} item>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: "100%",
-            }}
-          >
+        {hideSocialMediaLinks && (
+          <Grid item lg={12} md={12} sm={12} xs={12}>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-evenly",
                 alignItems: "center",
-                py: 8,
+                paddingBottom: 8,
+                px: 24,
                 borderBottom: "1px solid #321e1e",
-                height: "225px",
+                // height: "225px",
               }}
             >
               <Box
@@ -195,10 +73,191 @@ const Footer = () => {
                 <TwitterIcon sx={{ fontSize: 32 }} />
               </Box>
             </Box>
-
+          </Grid>
+        )}
+        <Grid
+          lg={9}
+          md={12}
+          sm={12}
+          xs={12}
+          sx={{
+            borderRight: `1px solid ${
+              laptopScreenMatch ? "transparent" : "#321e1e"
+            }`,
+          }}
+          item
+        >
+          <Box component="ul">
+            <Box
+              p={2}
+              component="li"
+              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
+            >
+              <Typography
+                component={NavLink}
+                to="/user/account/profile"
+                variant={tabletScreenMatch ? "h5" : "h4"}
+                fontFamily={"Libre Bodoni"}
+                sx={{
+                  textTransform: "uppercase",
+                  color: "inherit",
+                  ":hover": {
+                    color: "inherit",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                Tài khoản của tôi
+              </Typography>
+            </Box>
+            <Box
+              p={2}
+              component="li"
+              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
+            >
+              <Typography
+                component={NavLink}
+                to="/contact"
+                variant={tabletScreenMatch ? "h5" : "h4"}
+                fontFamily={"Libre Bodoni"}
+                sx={{
+                  textTransform: "uppercase",
+                  color: "inherit",
+                  ":hover": {
+                    color: "inherit",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                Liên Hệ
+              </Typography>
+            </Box>
+            <Box
+              p={2}
+              component="li"
+              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
+            >
+              <Typography
+                component={NavLink}
+                to="/faq"
+                variant={tabletScreenMatch ? "h5" : "h4"}
+                fontFamily={"Libre Bodoni"}
+                sx={{
+                  textTransform: "uppercase",
+                  color: "inherit",
+                  ":hover": {
+                    color: "inherit",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                Các câu hỏi thường gặp
+              </Typography>
+            </Box>
+            <Box
+              p={2}
+              component="li"
+              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
+            >
+              <Typography
+                component={NavLink}
+                to="/privacy-terms"
+                variant={tabletScreenMatch ? "h5" : "h4"}
+                fontFamily={"Libre Bodoni"}
+                sx={{
+                  textTransform: "uppercase",
+                  color: "inherit",
+                  ":hover": {
+                    color: "inherit",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                Chính sách bảo mật thông tin cá nhân
+              </Typography>
+            </Box>
+            <Box
+              p={2}
+              component="li"
+              sx={{ listStyleType: "none", borderBottom: "1px solid #321e1e" }}
+            >
+              <Typography
+                component={NavLink}
+                to="/terms-of-service"
+                variant={tabletScreenMatch ? "h5" : "h4"}
+                fontFamily={"Libre Bodoni"}
+                sx={{
+                  textTransform: "uppercase",
+                  color: "inherit",
+                  ":hover": {
+                    color: "inherit",
+                    textDecoration: "none",
+                  },
+                }}
+              >
+                Điều khoản sử dụng
+              </Typography>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid lg={3} md={12} sm={12} xs={12} item>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "100%",
+            }}
+          >
+            {!hideSocialMediaLinks && (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  py: 8,
+                  borderBottom: "1px solid #321e1e",
+                  height: "225px",
+                }}
+              >
+                <Box
+                  component={Link}
+                  href="https://www.facebook.com/vinh.lethe.16"
+                  sx={{
+                    ":hover": {
+                      color: "inherit",
+                    },
+                  }}
+                >
+                  <FacebookIcon sx={{ fontSize: 32 }} />
+                </Box>
+                <Box
+                  component={Link}
+                  href="/"
+                  sx={{
+                    ":hover": {
+                      color: "inherit",
+                    },
+                  }}
+                >
+                  <InstagramIcon sx={{ fontSize: 32 }} />
+                </Box>
+                <Box
+                  component={Link}
+                  href="/"
+                  sx={{
+                    ":hover": {
+                      color: "inherit",
+                    },
+                  }}
+                >
+                  <TwitterIcon sx={{ fontSize: 32 }} />
+                </Box>
+              </Box>
+            )}
             <Box component="ul" sx={{ height: heightForPrivacyOptions }}>
               <Box
-                py={0.74}
+                py={0.75}
                 px={2}
                 component="li"
                 sx={{
@@ -248,7 +307,7 @@ const Footer = () => {
                 </Typography>
               </Box>
               <Box
-                py={0.74}
+                py={0.75}
                 px={2}
                 component="li"
                 sx={{
@@ -273,7 +332,7 @@ const Footer = () => {
                 </Typography>
               </Box>
               <Box
-                py={0.74}
+                py={0.75}
                 px={2}
                 component="li"
                 sx={{
@@ -299,6 +358,13 @@ const Footer = () => {
               </Box>
             </Box>
           </Box>
+        </Grid>
+        <Grid lg={12} md={12} sm={12} xs={12} item>
+          <Box
+            component="img"
+            src="/img/footer-shop-banner/footer-shop-banner.png"
+            alt="Wieder_ Markt's logo"
+          />
         </Grid>
       </Grid>
     </Box>
