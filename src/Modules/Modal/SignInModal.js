@@ -40,7 +40,7 @@ export default function SignInModal() {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
+        open={true}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}

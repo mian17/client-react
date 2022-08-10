@@ -38,7 +38,7 @@ const FavoriteProducts = () => {
   // }, [fetchCategories]);
 
   return (
-    <Grid container>
+    <Grid component="section" container>
       <Grid
         lg={3}
         md={6}

@@ -10,10 +10,12 @@ import FavoriteProducts from "../Modules/Product/FavoriteProducts/FavoriteProduc
 import Promotion from "../Modules/Promotion/Promotion";
 import ProductListing from "../Modules/Product/ProductListing/ProductListing";
 import MessageBanner from "../Modules/Banner/MessageBanner";
+import Header from "../Widgets/Header";
 
 const Homepage = () => {
   return (
-    <div>
+    <>
+      <Header />
       <Hero />
       <SpotlightProduct />
       <FavoriteProducts />
@@ -21,11 +23,7 @@ const Homepage = () => {
       <ProductListing />
       <Categories />
       <MessageBanner />
-      {/*<Featured />*/}
-      {/*<Banner />*/}
-      {/*<Product />*/}
-      {/*<Blog />*/}
-    </div>
+    </>
   );
 };
 

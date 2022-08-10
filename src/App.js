@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
+import SignInModal from "./Modules/Modal/SignInModal";
 
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
@@ -68,7 +69,8 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
           <CartProvider>
-            <Header />
+            {/*<Header />*/}
+
             <Content />
             <Footer />
           </CartProvider>

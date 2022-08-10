@@ -33,18 +33,16 @@ const HeaderTop = () => {
   // }, [fetchBanners]);
 
   return (
-    <Box sx={{ padding: 0 }} className="header__top">
-      <div>
-        <Typography
-          sx={{
-            textAlign: "center",
-            margin: "8px 0",
-            color: "#f4f1e0",
-          }}
-        >
-          Miễn phí vận chuyển cho đơn hàng từ 200.000 VNĐ
-        </Typography>
-      </div>
+    <Box sx={{ padding: 0, backgroundColor: "#ff6429" }}>
+      <Typography
+        sx={{
+          textAlign: "center",
+          margin: "8px 0",
+          color: "#f4f1e0",
+        }}
+      >
+        Miễn phí vận chuyển cho đơn hàng từ 200.000 VNĐ
+      </Typography>
     </Box>
   );
 };

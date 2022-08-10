@@ -71,7 +71,7 @@ const HoverableProductItemImage = (props) => {
         component="img"
         src={props.product.imageUrlOnHover}
         alt={props.product.altImageUrlOnHover}
-        sx={{ width: "100%", height: "100%", zIndex: 30 }}
+        sx={{ width: "100%", height: "100%", zIndex: 20 }}
         className={`${classes.image} ${isHovered ? "" : classes.hidden}`}
       />
       <Box

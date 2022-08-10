@@ -23,10 +23,10 @@ import { NavLink } from "react-router-dom";
 
 export default function HeaderMenu(props) {
   return (
-    <Box className="container-fluid">
+    <Box component="nav" className="container-fluid">
       <Box className="row align-items-center">
         <div className="col-lg-3 col-2">
-          <nav className="header__menu">
+          <div>
             {props.changeMenuButton ? (
               <Button
                 variant="contained"
@@ -66,14 +66,20 @@ export default function HeaderMenu(props) {
                 <MenuIcon />
               </IconButton>
             )}
-          </nav>
+          </div>
         </div>
         <div className="col-lg-6 col-8">
-          <div className="header__logo">
+          <Box
+            sx={{
+              padding: "30px 0",
+              textAlign: "center",
+            }}
+          >
             <NavLink to="/" style={{ textDecoration: "none" }}>
               <Typography
                 component="h1"
                 sx={{
+                  display: "inline-block",
                   borderBottom: `2px solid ${
                     props.notTriggeredCase || props.triggeredCase
                       ? "#f4f1e0"
@@ -95,35 +101,31 @@ export default function HeaderMenu(props) {
                 Wieder_ Markt
               </Typography>
             </NavLink>
-          </div>
+          </Box>
         </div>
-        <div className="col-lg-3 col-2">
-          <div className="header__cart">
-            <ul>
-              <li>
-                <IconButton
-                  color="customTransparent"
-                  size={props.smallScreenMatch ? "large" : "medium"}
-                  sx={{
-                    color:
-                      props.notTriggeredCase || props.triggeredCase
-                        ? "#f4f1e0"
-                        : "#321e1e",
-                    transition: "all 0.3s",
-                  }}
-                  onClick={props.onClick1}
-                >
-                  <Badge
-                    badgeContent={props.badgeContent}
-                    color="customBadge"
-                    showZero
-                  >
-                    <ShoppingCartIcon />
-                  </Badge>
-                </IconButton>
-              </li>
-            </ul>
-          </div>
+        <Box className="col-lg-3 col-2">
+          <Box sx={{ textAlign: "right" }}>
+            <IconButton
+              color="customTransparent"
+              size={props.smallScreenMatch ? "large" : "medium"}
+              sx={{
+                color:
+                  props.notTriggeredCase || props.triggeredCase
+                    ? "#f4f1e0"
+                    : "#321e1e",
+                transition: "all 0.3s",
+              }}
+              onClick={props.onClick1}
+            >
+              <Badge
+                badgeContent={props.badgeContent}
+                color="customBadge"
+                showZero
+              >
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
+          </Box>
           <Drawer
             anchor="right"
             open={!props.hideCart}
@@ -159,7 +161,7 @@ export default function HeaderMenu(props) {
               {!props.badgeContent ? <EmptyCart /> : <Cart />}
             </Box>
           </Drawer>
-        </div>
+        </Box>
       </Box>
     </Box>
   );

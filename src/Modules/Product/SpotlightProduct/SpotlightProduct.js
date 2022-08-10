@@ -55,7 +55,11 @@ const SpotlightProduct = () => {
   // }, [fetchCategories]);
 
   return (
-    <Grid sx={{ borderBottom: "1px solid #bdb498" }} container>
+    <Grid
+      component="section"
+      sx={{ borderBottom: "1px solid #bdb498" }}
+      container
+    >
       <Grid
         md={4}
         item

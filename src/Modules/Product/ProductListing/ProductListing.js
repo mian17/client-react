@@ -53,6 +53,7 @@ const ProductListing = () => {
 
   return (
     <Box
+      component="section"
       display="grid"
       gridTemplateColumns={`${
         tabletScreenMatch ? "1fr 1fr" : "repeat(3, 1fr)"

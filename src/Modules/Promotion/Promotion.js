@@ -11,6 +11,7 @@ const Promotion = () => {
   const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Grid
+      component="section"
       sx={{
         position: "relative",
         borderBottom: "1px solid #bdb498",

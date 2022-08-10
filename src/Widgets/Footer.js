@@ -369,6 +369,7 @@ const Footer = () => {
           <Box
             component="img"
             src="/img/footer-shop-banner/footer-shop-banner.png"
+            sx={{ width: "100%", height: "100%" }}
             alt="Wieder_ Markt's logo"
           />
         </Grid>
