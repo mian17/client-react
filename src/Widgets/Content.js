@@ -23,7 +23,7 @@ const Content = () => {
       <Route index path="/" element={<Homepage />} />
       <Route path="/product/all" element={<Shop />} />
 
-      {/*<Route path="/shopdetails" element={<ShopDetails />} />*/}
+      <Route path="/product/1" element={<ShopDetails />} />
 
       <Route path="/signinmobile" element={<SignInMobile />} />
       <Route path="/signup" element={<SignUp />} />

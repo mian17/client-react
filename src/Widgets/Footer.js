@@ -36,6 +36,7 @@ const Footer = () => {
                 py: 8,
                 px: 24,
                 borderBottom: "1px solid #321e1e",
+                gap: 4,
                 // height: "225px",
               }}
             >
