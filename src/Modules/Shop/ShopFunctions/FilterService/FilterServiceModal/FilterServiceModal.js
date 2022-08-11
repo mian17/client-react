@@ -106,9 +106,8 @@ export default function FilterServiceModal(props) {
                 {["TP.HCM", "Hà Nội", "Cần Thơ", "Đà Nẵng", "Khánh Hòa"].map(
                   (city, index) => {
                     return (
-                      <Grid item>
+                      <Grid key={index} item>
                         <Button
-                          key={index}
                           sx={{
                             textTransform: "capitalize",
                             flexBasis: 120,

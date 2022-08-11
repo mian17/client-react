@@ -44,6 +44,9 @@ const theme = createTheme({
     primary: {
       main: "#321e1e", // old color:
     },
+    secondary: {
+      main: "#f4f1e0",
+    },
     customTransparent: {
       main: "rgba(255,255,255, 0)",
       contrastText: "#f4f1e0",
@@ -59,6 +62,9 @@ const theme = createTheme({
     customBadge: {
       main: "#e9ecef",
       contrastText: "#dd2222",
+    },
+    transparentText: {
+      main: "#f4f1e0",
     },
   },
 });

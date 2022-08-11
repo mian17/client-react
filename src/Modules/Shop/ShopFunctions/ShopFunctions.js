@@ -38,7 +38,7 @@ const ShoppingFunctions = (props) => {
     height: "8vh",
     pl: 4,
     pr: laptopScreenMatch ? 4 : 7,
-    borderBottom: "1px solid #321e1e",
+    borderBottom: "1px solid #bdb498",
   };
 
   let translationLayer = "";

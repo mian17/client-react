@@ -33,7 +33,7 @@ const Footer = () => {
                 display: "flex",
                 justifyContent: "space-evenly",
                 alignItems: "center",
-                paddingBottom: 8,
+                py: 8,
                 px: 24,
                 borderBottom: "1px solid #321e1e",
                 // height: "225px",

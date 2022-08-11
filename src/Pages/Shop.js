@@ -12,6 +12,9 @@ import ShopProductListing from "../Modules/Shop/ShopProductListing/ShopProductLi
 
 import FilterServiceBox from "../Modules/Shop/ShopFunctions/FilterService/FilterServiceBox/FilterServiceBox";
 import SortServiceBox from "../Modules/Shop/ShopFunctions/FilterService/SortServiceBox/SortServiceBox";
+import ShopBanner from "../Modules/Shop/ShopBanner/ShopBanner";
+import ShopHeader from "../Modules/Shop/ShopHeader/ShopHeader";
+import MessageBanner from "../Modules/Banner/MessageBanner";
 
 const Shop = () => {
   const theme = useTheme();
@@ -40,14 +43,18 @@ const Shop = () => {
     if (filterIsClicked) setFilterIsClicked(!filterIsClicked);
   };
   const [filteredValue, setFilteredValue] = useState(null);
-  const radioButtonChangeHandler = (event) => {
-    setFilteredValue(event.target.value);
-  };
+  // const radioButtonChangeHandler = (event) => {
+  //   setFilteredValue(event.target.value);
+  // };
 
   return (
     <>
+      <ShopHeader />
       {/*<ShopFunctions getShopFunctionStates={getShopFunctionStates} />*/}
-
+      <ShopBanner
+        backgroundUrl={"/img/categories/category-all.jpg"}
+        title={"Tất cả"}
+      />
       <ShoppingFunctions
         onClick={filterOnClickHandler}
         filterIsClicked={filterIsClicked}
@@ -62,27 +69,10 @@ const Shop = () => {
         <ShopProductListing
           filterIsClicked={filterIsClicked}
           sortIsClicked={sortIsClicked}
-          callbackfn={(product, index) => {
-            return (
-              <Grid
-                key={index}
-                lg={4}
-                md={6}
-                sm={6}
-                xs={6}
-                sx={{
-                  borderBottom: "1px solid #bdb498",
-                  borderRight: "1px solid #bdb498",
-                }}
-                item
-              >
-                <ProductItem product={product} />
-              </Grid>
-            );
-          }}
         />
         {!laptopScreenMatch && sortIsClicked && <SortServiceBox />}
       </Grid>
+      <MessageBanner />
     </>
   );
 };
