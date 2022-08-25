@@ -1,9 +1,6 @@
 // React imports
-import { useState } from "react";
-
 // Source imports
 import { currencyFormatOptions } from "../../../utils/utils";
-import classes from "./SpotlightProduct.module.css";
 
 // Mui imports
 import Grid from "@mui/material/Grid";
@@ -16,7 +13,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import HoverableProductItemImage from "../HoverableProductItemImage/HoverableProductItemImage";
 
 import { spotlightProduct } from "./spotlightProduct-test-data/spotlightProduct";
-import { NavLink } from "react-router-dom";
 
 const SpotlightProduct = () => {
   const theme = useTheme();
@@ -26,7 +22,10 @@ const SpotlightProduct = () => {
     "vi-VN",
     currencyFormatOptions
   ).format(spotlightProduct.price);
-  // Ready for API connection
+
+  // const [spotlightProduct, setSpotlightProduct] = useState({});
+  //
+  // // Ready for API connection
   // const [error, setError] = useState(null);
   // const fetchCategories = useCallback(async () => {
   //   setError(null);
@@ -40,18 +39,17 @@ const SpotlightProduct = () => {
   //     const data = await response.json();
   //     // console.log(data);
   //     const transformedCategory = data.map((categoryData) => {
-  //       return new Category()
+  //       return new Category();
   //     });
   //
   //     setCategories(transformedCategory);
   //   } catch (error) {
   //     setError(error.message);
   //   }
-  //
   // }, []);
   // Request categories
   // useEffect(() => {
-  //     fetchCategories();
+  //   fetchCategories();
   // }, [fetchCategories]);
 
   return (

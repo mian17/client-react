@@ -1,11 +1,10 @@
 // React Imports
 import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useState } from "react";
 // Source imports
 import classes from "./CategoryDrawer.module.css";
-import { categories as categoriesDumpData } from "./categories-test-data/categories";
-
+// import { categories as categoriesDumpData } from "./categories-test-data/categories";
 // Mui imports
 import { useTheme } from "@mui/material/styles";
 
@@ -21,9 +20,11 @@ import Fade from "@mui/material/Fade";
 // React router dom
 import { NavLink } from "react-router-dom";
 import Background from "./categoryDrawerUtils/Background";
+import { backendServerPath } from "../../common/utils/backendServerPath";
+import Category from "./categoryDrawerUtils/Category";
 
 const CategoryDrawer = (props) => {
-  const [categories, setCategories] = useState(categoriesDumpData);
+  const [categories, setCategories] = useState([]);
   const theme = useTheme();
 
   // Remove background changing effect on small devices
@@ -35,32 +36,38 @@ const CategoryDrawer = (props) => {
   });
 
   // Ready for API connection
-  // const [error, setError] = useState(null);
-  // const fetchCategories = useCallback(async () => {
-  //   setError(null);
-  //   try {
-  //     // Get from api
-  //     const response = await fetch("https://example.com");
-  //     if (!response.ok) {
-  //       throw new Error("Không lấy được dữ liệu");
-  //     }
-  //
-  //     const data = await response.json();
-  //     // console.log(data);
-  //     const transformedCategory = data.map((categoryData) => {
-  //       return new Category()
-  //     });
-  //
-  //     setCategories(transformedCategory);
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  //
-  // }, []);
+  const [error, setError] = useState(null);
+  const fetchCategories = useCallback(async () => {
+    setError(null);
+    try {
+      // Get from api
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/parent-categories"
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+
+      const data = await response.json();
+      // console.log(data);
+      const transformedCategory = data.map((categoryData) => {
+        return new Category(
+          categoryData.id,
+          categoryData.name,
+          "/category/" + categoryData.id + "/product/",
+          backendServerPath + categoryData["img_url"]
+        );
+      });
+
+      setCategories(transformedCategory);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
   // Request categories
-  // useEffect(() => {
-  //     fetchCategories();
-  // }, [fetchCategories]);
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   // Props for styling
   const paperSx = {

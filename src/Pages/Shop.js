@@ -1,7 +1,6 @@
 // Source imports
 
 import Grid from "@mui/material/Grid";
-import ProductItem from "../Modules/Product/ProductItem/ProductItem";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
@@ -15,8 +14,6 @@ import SortServiceBox from "../Modules/Shop/ShopFunctions/FilterService/SortServ
 import ShopBanner from "../Modules/Shop/ShopBanner/ShopBanner";
 import ShopHeader from "../Modules/Shop/ShopHeader/ShopHeader";
 import MessageBanner from "../Modules/Banner/MessageBanner";
-import Pagination from "@mui/material/Pagination";
-import Box from "@mui/material/Box";
 
 const Shop = () => {
   const theme = useTheme();
@@ -52,11 +49,7 @@ const Shop = () => {
   return (
     <>
       <ShopHeader />
-
-      <ShopBanner
-        backgroundUrl={"/img/categories/category-all.jpg"}
-        title={"Tất cả"}
-      />
+      <ShopBanner />
       <ShoppingFunctions
         onClick={filterOnClickHandler}
         filterIsClicked={filterIsClicked}
@@ -74,13 +67,7 @@ const Shop = () => {
         />
         {!laptopScreenMatch && sortIsClicked && <SortServiceBox />}
       </Grid>
-      <Box
-        width="100%"
-        sx={{ display: "flex", justifyContent: "center" }}
-        p={4}
-      >
-        <Pagination size="large" count={10} />
-      </Box>
+
       <MessageBanner />
     </>
   );

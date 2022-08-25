@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import classes from "../SpotlightProduct/SpotlightProduct.module.css";
 import { useState } from "react";
 import ProductItemStatus from "../ProductItem/ProductItemStatus/ProductItemStatus";
-import Typography from "@mui/material/Typography";
+import { NavLink } from "react-router-dom";
 
 const HoverableProductItemImage = (props) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -28,6 +28,8 @@ const HoverableProductItemImage = (props) => {
       onMouseLeave={hoverOutImageHandler}
       onTouchStart={hoverOnImageHandler}
       sx={{ position: "relative", width: "100%", height: "auto" }}
+      component={NavLink}
+      to={"/product/" + props.product.productId}
     >
       <ProductItemStatus
         statusCode={props.product.statusCode}

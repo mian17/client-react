@@ -1,22 +1,18 @@
 import Subcategory from "../subcategoryUtils/Subcategory";
 
 export const subcategories = [
-  new Subcategory(
-    0,
-    "Tất cả",
-    "/product/all",
-    new Subcategory(1, "Trái Cây", "/category/1"),
+  new Subcategory(1, "Trái Cây", "/category/1"),
 
-    new Subcategory(2, "Thịt, Trứng", "/category/2"),
+  new Subcategory(2, "Thịt, Trứng", "/category/2"),
 
-    new Subcategory(3, "Cá, Thủy hải sản", "/category/3"),
+  new Subcategory(3, "Cá, Thủy hải sản", "/category/3"),
 
-    new Subcategory(4, "Rau củ quả", "/category/4"),
-    new Subcategory(5, "Thực phẩm Việt", "/category/5"),
-    new Subcategory(6, "Sữa, Bơ, Phô mai", "/category/6"),
+  new Subcategory(4, "Rau củ quả", "/category/4"),
+  new Subcategory(5, "Thực phẩm Việt", "/category/5"),
+  new Subcategory(6, "Sữa, Bơ, Phô mai", "/category/6"),
 
-    new Subcategory(7, "Đông lạnh, mát", "/category/7")
-  ),
+  new Subcategory(7, "Đông lạnh, mát", "/category/7"),
+
   new Subcategory(8, "Dầu ăn, Gia vị", "/category/8"),
   new Subcategory(9, "Gạo, Mì, Nông sản", "/category/9"),
   new Subcategory(10, "Đồ hộp, Đóng gói", "/category/10"),

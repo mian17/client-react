@@ -127,15 +127,6 @@ const ProductItemInfo = (props) => {
             </Typography>
           </>
         )}
-        {/*<Typography*/}
-        {/*  component="p"*/}
-        {/*  variant="body"*/}
-        {/*  textAlign="right"*/}
-        {/*  sx={{ color: "inherit", fontSize: smallScreenMatch ? 10 : null }}*/}
-        {/*>*/}
-        {/*  {formattedProductPrice}*/}
-        {/*</Typography>*/}
-
         <ButtonBase
           variant="text"
           size="small"

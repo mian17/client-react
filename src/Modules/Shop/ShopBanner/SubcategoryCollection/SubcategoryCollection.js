@@ -1,16 +1,48 @@
 import Tabs from "@mui/material/Tabs";
 import { categories } from "../../../Hero/CategoryDrawer/categories-test-data/categories";
-import * as PropTypes from "prop-types";
 import * as React from "react";
+import { useCallback, useEffect, useState } from "react";
 import Tab from "@mui/material/Tab";
-import { NavLink } from "react-router-dom";
-import { subcategories as subcategoriesDumpData } from "./subcategory-test-data/subcategories";
-import { useState } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import Subcategory from "./subcategoryUtils/Subcategory";
 
 export default function SubcategoryCollection(props) {
-  const [subcategoryCollection, setSubcategoryCollection] = useState(
-    subcategoriesDumpData
-  );
+  const [subcategoryCollection, setSubcategoryCollection] = useState([]);
+  const { id: categoryId } = useParams();
+  const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
+
+  // Ready for API connection
+  const [error, setError] = useState(null);
+
+  const fetchSubcategories = useCallback(async () => {
+    setError(null);
+    try {
+      //Get Id from url
+      setCurrentCategoryId(categoryId);
+
+      // Get from api
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/category/" + currentCategoryId
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+
+      const data = await response.json();
+      const transformedSubcategories = data.subcategory.map((data) => {
+        return new Subcategory(data.id, data.name);
+      });
+
+      setSubcategoryCollection(transformedSubcategories);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, [categoryId, currentCategoryId]);
+  // Request categories
+
+  useEffect(() => {
+    fetchSubcategories();
+  }, [fetchSubcategories]);
 
   return (
     <Tabs
@@ -38,7 +70,7 @@ export default function SubcategoryCollection(props) {
           <Tab
             key={index}
             component={NavLink}
-            to={category.url}
+            to={"/category/" + category.id + "/product"}
             label={category.name}
             sx={{
               color: props.onScrollTrigger ? "#321e1e" : "#e7e0ba",
@@ -60,10 +92,10 @@ export default function SubcategoryCollection(props) {
   );
 }
 
-SubcategoryCollection.propTypes = {
-  value: PropTypes.number,
-  onChange: PropTypes.func,
-  laptopScreenMatch: PropTypes.bool,
-  trigger: PropTypes.bool,
-  callbackfn: PropTypes.func,
-};
+// SubcategoryCollection.propTypes = {
+//   value: PropTypes.number,
+//   onChange: PropTypes.func,
+//   laptopScreenMatch: PropTypes.bool,
+//   trigger: PropTypes.bool,
+//   callbackfn: PropTypes.func,
+// };

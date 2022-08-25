@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -16,19 +16,11 @@ import CartContext from "../../../store/cart-context";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import AppBar from "@mui/material/AppBar";
 import CategoryDrawer from "../../Hero/CategoryDrawer/CategoryDrawer";
-import HeaderTop from "../../Hero/HeaderTop/HeaderTop";
-import HeaderMenu from "../../Hero/HeaderMenu/HeaderMenu";
 
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Divider from "@mui/material/Divider";
-import { categories } from "../../Hero/CategoryDrawer/categories-test-data/categories";
-import * as PropTypes from "prop-types";
 import SubcategoryCollection from "../ShopBanner/SubcategoryCollection/SubcategoryCollection";
 
-const ShopHeader = (props) => {
+const ShopHeader = () => {
   const cartCtx = useContext(CartContext);
 
   // cartCtx operations
@@ -51,8 +43,6 @@ const ShopHeader = (props) => {
     setHideCart(!hideCart);
   };
 
-  // const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 0 });
-
   const [headerBackgroundIndex, setHeaderBackgroundIndex] = useState(undefined);
 
   const changeHeaderBackgroundHandler = (e) => {
@@ -60,7 +50,6 @@ const ShopHeader = (props) => {
   };
 
   // Media Query for Close Menu Button
-
   const theme = useTheme();
   const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -104,14 +93,6 @@ const ShopHeader = (props) => {
     ) ||
     !smallScreenMatch;
 
-  // const normalHeaderCondition =
-  //   hideCategories ||
-  //   ((headerBackgroundIndex === undefined || headerBackgroundIndex === null) &&
-  //     !hideCategories) ||
-  //   !(
-  //     (headerBackgroundIndex || headerBackgroundIndex === 0) &&
-  //     !hideCategories
-  //   );
   const [tabValue, setTabValue] = React.useState(0);
 
   const tabChangeHandler = (event, newValue) => {
@@ -122,6 +103,29 @@ const ShopHeader = (props) => {
     disableHysteresis: true,
     threshold: 38,
   });
+
+  const [subcategoryCount, setSubcategoryCount] = useState(null);
+  const { id: categoryId } = useParams();
+  const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
+  useEffect(() => {
+    async function fetchCategoryLength() {
+      //Get Id from url
+      setCurrentCategoryId(categoryId);
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/category/" + currentCategoryId
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+
+      const data = await response.json();
+      // console.log(data.subcategory.length);
+      setSubcategoryCount(data.subcategory.length);
+    }
+
+    fetchCategoryLength();
+  }, [categoryId, currentCategoryId, subcategoryCount]);
+
   return (
     <>
       <Box sx={{ height: appBarBoxHeight }}></Box>
@@ -286,24 +290,27 @@ const ShopHeader = (props) => {
               </Box>
             </Box>
           </Box>
-          <Box
-            sx={{
-              width: "100%",
-              backgroundColor: onScrollTrigger ? "#f4f1e0" : "transparent",
-              transition: "all 0.3s",
-              pb: 0.6,
-            }}
-          >
-            {/*SubCategory selection*/}
-            {hideCategories && (
-              <SubcategoryCollection
-                value={tabValue}
-                onChange={tabChangeHandler}
-                laptopScreenMatch={laptopScreenMatch}
-                onScrollTrigger={onScrollTrigger}
-              />
-            )}
-          </Box>
+          {subcategoryCount !== 0 && subcategoryCount > 0 && hideCategories && (
+            <Box
+              sx={{
+                width: "100%",
+
+                backgroundColor: onScrollTrigger ? "#f4f1e0" : "transparent",
+                transition: "all 0.3s",
+                pb: 0.6,
+              }}
+            >
+              {/*SubCategory selection*/}
+              {hideCategories && (
+                <SubcategoryCollection
+                  value={tabValue}
+                  onChange={tabChangeHandler}
+                  laptopScreenMatch={laptopScreenMatch}
+                  onScrollTrigger={onScrollTrigger}
+                />
+              )}
+            </Box>
+          )}
         </Box>
       </Box>
     </>
