@@ -8,6 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
@@ -15,6 +16,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import apiClient from "../../../../../api";
 // 0: for male,
 // 1: for female,
 // 2: for other
@@ -43,20 +45,55 @@ const validationSchema = yup.object({
 });
 
 const Profile = () => {
+  useEffect(() => {
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      const userToken = JSON.parse(
+        sessionStorage.getItem("personalAccessToken")
+      );
+      apiClient
+        .get("api/user/account/profile", {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          const {
+            username,
+            name,
+            email,
+            phone_number: phoneNumber,
+            gender,
+            birth_date: birthDate,
+          } = response.data.user;
+
+          setUserState({
+            username,
+            name,
+            email,
+            phoneNumber,
+            gender,
+            birthDate,
+          });
+        });
+    });
+  }, []);
+
+  const [userState, setUserState] = useState({
+    username: "",
+    name: "",
+    email: "",
+    phoneNumber: "",
+    gender: "",
+    birthDate: "0000-00-00",
+  });
+
   const formik = useFormik({
-    initialValues: {
-      username: "jsmith",
-      name: "John Smith",
-      email: "johnsmith@gmail.com",
-      phoneNumber: "(+84) 111111111",
-      gender: 0,
-      birthDate: "2000-12-04T00:00:00.000Z",
-      // avatar: ""
-    },
+    initialValues: userState,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
+    enableReinitialize: true,
   });
   // const [dateValue, setDateValue] = React.useState(new Date());
 

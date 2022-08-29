@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import Shop from "../Pages/Shop";
 import Homepage from "../Pages/Homepage";
 import ShopDetails from "../Pages/ShopDetails";
@@ -7,7 +7,7 @@ import ShoppingCart from "../Pages/ShoppingCart";
 import Checkout from "../Pages/Checkout";
 import SignUp from "../Modules/SignUp/SignUp";
 
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import SignInMobile from "../Modules/SignIn/SignInMobile";
 
 import Account from "../Modules/User/Account/Account";
@@ -16,6 +16,8 @@ import Address from "../Modules/User/Account/AccountContent/Address/Address";
 import ChangePassword from "../Modules/User/Account/AccountContent/ChangePassword/ChangePassword";
 import Orders from "../Modules/User/Orders/Orders";
 import Notifications from "../Modules/User/Notification/Notifications";
+import ShopDetailsHeader from "../Modules/ShopDetails/ShopDetailsHeader/ShopDetailsHeader";
+import AuthContext from "../store/auth-context";
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
@@ -26,6 +28,8 @@ const Wrapper = ({ children }) => {
 };
 
 const Content = () => {
+  const { loggedIn } = useContext(AuthContext);
+
   return (
     <Wrapper>
       <Routes>
@@ -34,28 +38,40 @@ const Content = () => {
 
         <Route path="/product/:id" element={<ShopDetails />} />
 
-        <Route path="/signinmobile" element={<SignInMobile />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/signin"
+          element={
+            <>
+              <ShopDetailsHeader />
+              <SignInMobile />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <ShopDetailsHeader />
+              <SignUp />
+            </>
+          }
+        />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/user">
+
+        <Route
+          path="/user"
+          element={loggedIn ? <Outlet /> : <Navigate to="/signin" />}
+        >
           <Route path="/user/account" element={<Account />}>
-            {/*<Route index element={<Account />} />*/}
             <Route path="profile" element={<Profile />} />
             <Route path="address" element={<Address />} />
             <Route path="changepassword" element={<ChangePassword />} />
-            {/*<Route*/}
           </Route>
 
           <Route path="/user/orders" element={<Orders />} />
           <Route path="/user/notifications" element={<Notifications />} />
-
-          {/*/!*<Route index element={<Account />} />*!/*/}
-          {/*<Route path="profile" element={<Profile />} />*/}
-          {/*<Route path="address" element={<Address />} />*/}
-          {/*<Route path="changepassword" element={<ChangePassword />} />*/}
-          {/*/!*<Route*!/*/}
         </Route>
       </Routes>
     </Wrapper>

@@ -1,6 +1,7 @@
 // React imports
 import * as PropTypes from "prop-types";
 import * as React from "react";
+import { useContext } from "react";
 
 // Source imports
 import EmptyCart from "./EmptyCart/EmptyCart";
@@ -17,11 +18,26 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
+import PersonIcon from "@mui/icons-material/Person";
 
 // React router dom imports
 import { NavLink } from "react-router-dom";
+import { Menu } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import AuthContext from "../../../store/auth-context";
+import apiClient from "../../../api";
 
 export default function HeaderMenu(props) {
+  const { loggedIn, setLoggedOut } = useContext(AuthContext);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box component="nav" className="container-fluid">
       <Box className="row align-items-center">
@@ -105,6 +121,78 @@ export default function HeaderMenu(props) {
         </div>
         <Box className="col-lg-3 col-2">
           <Box sx={{ textAlign: "right" }}>
+            {loggedIn && (
+              <>
+                <IconButton
+                  color="customTransparent"
+                  size={props.smallScreenMatch ? "large" : "medium"}
+                  sx={{
+                    color:
+                      props.notTriggeredCase || props.triggeredCase
+                        ? "#f4f1e0"
+                        : "#321e1e",
+                    transition: "all 0.3s",
+                  }}
+                  onClick={handleClick}
+                >
+                  <PersonIcon />
+                </IconButton>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                  disableScrollLock
+                >
+                  <MenuItem
+                    component={NavLink}
+                    to="/user/account/profile"
+                    onClick={handleClose}
+                  >
+                    Hồ sơ tài khoản
+                  </MenuItem>
+                  <MenuItem
+                    component={NavLink}
+                    to="/user/orders"
+                    onClick={handleClose}
+                  >
+                    Đơn hàng của tôi
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      const userToken = JSON.parse(
+                        localStorage.getItem("personalAccessToken")
+                      );
+                      apiClient.get("/sanctum/csrf-cookie").then(() => {
+                        apiClient
+                          .post(
+                            "/logout",
+                            {},
+                            {
+                              headers: {
+                                Authorization: `Bearer ${userToken}`,
+                              },
+                            }
+                          )
+                          .then((response) => {
+                            console.log(response);
+                            setLoggedOut();
+                          })
+                          .catch((err) => {
+                            console.log(err);
+                          });
+                      });
+                    }}
+                  >
+                    Đăng xuất
+                  </MenuItem>
+                </Menu>
+              </>
+            )}
+
             <IconButton
               color="customTransparent"
               size={props.smallScreenMatch ? "large" : "medium"}

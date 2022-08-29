@@ -1,8 +1,7 @@
-import Header from "./Widgets/Header";
 import Content from "./Widgets/Content";
 import Footer from "./Widgets/Footer";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CartProvider from "./store/CartProvider";
 
 import { BrowserRouter } from "react-router-dom";
@@ -12,7 +11,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
-import SignInModal from "./Modules/Modal/SignInModal";
+import AuthProvider from "./store/AuthProvider";
 
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
@@ -74,12 +73,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <BrowserRouter>
-          <CartProvider>
-            {/*<Header />*/}
+          <AuthProvider>
+            <CartProvider>
+              {/*<Header />*/}
 
-            <Content />
-            <Footer />
-          </CartProvider>
+              <Content />
+              <Footer />
+            </CartProvider>
+          </AuthProvider>
         </BrowserRouter>
       </LocalizationProvider>
     </ThemeProvider>
