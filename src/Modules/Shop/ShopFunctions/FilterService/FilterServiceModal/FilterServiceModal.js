@@ -13,7 +13,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import * as PropTypes from "prop-types";
 import * as React from "react";
 import { useState } from "react";
-import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 
@@ -51,6 +50,7 @@ export default function FilterServiceModal(props) {
       keepMounted
       aria-labelledby="Lọc và sắp xếp"
       aria-describedby="Lọc và sắp xếp các sản phẩm theo ý muốn của người dùng"
+      disableScrollLock
     >
       <Fade in={props.open}>
         <Paper sx={style}>

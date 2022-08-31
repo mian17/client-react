@@ -3,6 +3,8 @@ import Product from "./Product";
 export default class CategoricalProduct extends Product {
   constructor(
     productId,
+    productKinds,
+    modelId,
     imageUrl,
     altImageUrl,
     imageUrlOnHover,
@@ -17,6 +19,7 @@ export default class CategoricalProduct extends Product {
   ) {
     super(
       productId,
+      modelId,
       imageUrl,
       altImageUrl,
       imageUrlOnHover,
@@ -27,6 +30,7 @@ export default class CategoricalProduct extends Product {
       statusCode,
       isSelectable
     );
+    this.productKinds = productKinds;
     this.colorCode = colorCode;
     this.categoryImages = categoryImages;
   }

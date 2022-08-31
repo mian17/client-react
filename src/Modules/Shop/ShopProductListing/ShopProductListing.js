@@ -19,6 +19,7 @@ const ShopProductListing = (props) => {
 
   const [categoryId, setCategoryId] = useState(id);
   let currentPageNum;
+
   if (pageInitialValue) {
     currentPageNum = pageInitialValue.match(/\d+/)[0];
   } else {

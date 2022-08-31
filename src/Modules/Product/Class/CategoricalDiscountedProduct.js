@@ -3,6 +3,8 @@ import CategoricalProduct from "./CategoricalProduct";
 export default class CategoricalDiscountedProduct extends CategoricalProduct {
   constructor(
     productId,
+    productKinds,
+    modelId,
     imageUrl,
     altImageUrl,
     imageUrlOnHover,
@@ -18,6 +20,8 @@ export default class CategoricalDiscountedProduct extends CategoricalProduct {
   ) {
     super(
       productId,
+      productKinds,
+      modelId,
       imageUrl,
       altImageUrl,
       imageUrlOnHover,

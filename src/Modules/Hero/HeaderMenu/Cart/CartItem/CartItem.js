@@ -10,15 +10,11 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { useState, useEffect, useContext } from "react";
-import CartContext from "../../../../../store/cart-context";
+
 const CartItem = (props) => {
   // props.product.productImgAlt = "t-shirt";
 
-  const cartCtx = useContext(CartContext);
-
   const theme = useTheme();
-  const mediumScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
@@ -34,7 +30,7 @@ const CartItem = (props) => {
         }}
         data-cart-id={props.cartId}
       >
-        <Box sx={{ width: 142, height: 142 }}>
+        <Box sx={{ minWidth: 142, height: 142 }}>
           <Box
             component="img"
             src={props.product.productImgUrl}

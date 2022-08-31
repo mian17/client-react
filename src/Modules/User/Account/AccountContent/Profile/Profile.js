@@ -17,19 +17,6 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import apiClient from "../../../../../api";
-// 0: for male,
-// 1: for female,
-// 2: for other
-
-// DATA DUMP FROM DB
-// const user = {
-//   username: "jsmith",
-//   name: "John Smith",
-//   email: "johnsmith@gmail.com",
-//   phoneNumber: "(+84) 111111111",
-//   gender: 0,
-//   birthDate: "2000-12-03",
-// };
 
 const validationSchema = yup.object({
   username: yup.string().required("Không để trống tên đăng nhập"),
@@ -47,9 +34,7 @@ const validationSchema = yup.object({
 const Profile = () => {
   useEffect(() => {
     apiClient.get("/sanctum/csrf-cookie").then(() => {
-      const userToken = JSON.parse(
-        sessionStorage.getItem("personalAccessToken")
-      );
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
       apiClient
         .get("api/user/account/profile", {
           headers: {

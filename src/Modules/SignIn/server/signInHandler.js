@@ -12,14 +12,14 @@ export default function signInHandler(
       .then((response) => {
         if (response.status === 201) {
           setErrors(null);
-          sessionStorage.setItem(
+          localStorage.setItem(
             "personalAccessToken",
             JSON.stringify(response.data.token)
           );
           setLoggedIn({
             loggedIn: true,
             personalAccessToken: JSON.parse(
-              sessionStorage.getItem("personalAccessToken")
+              localStorage.getItem("personalAccessToken")
             ),
           });
           navigate("/");

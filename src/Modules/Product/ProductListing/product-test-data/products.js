@@ -10,14 +10,15 @@ import CategoryImage from "../../Class/CategoryImage";
 import DiscountedProduct from "../../Class/DiscountedProduct";
 
 import {
-  NORMAL_STATUS_CODE,
-  NEW_STATUS_CODE,
-  ON_SALE_STATUS_CODE,
   BACK_IN_STOCK_STATUS_CODE,
+  NEW_STATUS_CODE,
+  NORMAL_STATUS_CODE,
+  ON_SALE_STATUS_CODE,
 } from "../../common/utils/statusCode";
 
 export const products = [
   new Product(
+    1,
     1,
     "/img/product-listing/product-listing.png",
     "something",
@@ -31,6 +32,7 @@ export const products = [
   ),
   new CategoricalProduct(
     2,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -58,6 +60,7 @@ export const products = [
   ),
   new DiscountedProduct(
     3,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -71,6 +74,7 @@ export const products = [
   ),
   new Product(
     4,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -83,6 +87,7 @@ export const products = [
   ),
   new Product(
     5,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -95,6 +100,7 @@ export const products = [
   ),
   new Product(
     6,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -107,6 +113,7 @@ export const products = [
   ),
   new DiscountedProduct(
     7,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -120,6 +127,7 @@ export const products = [
   ),
   new Product(
     8,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -132,6 +140,7 @@ export const products = [
   ),
   new Product(
     9,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -144,6 +153,7 @@ export const products = [
   ),
   new Product(
     10,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",
@@ -156,6 +166,7 @@ export const products = [
   ),
   new DiscountedProduct(
     11,
+    1,
     "/img/product-listing/product-listing.png",
     "something",
     "/img/product-listing/product-listing-hover.jpg",

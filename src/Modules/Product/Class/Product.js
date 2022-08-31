@@ -1,6 +1,7 @@
 export default class Product {
   constructor(
     productId,
+    modelId,
     imageUrl,
     altImageUrl,
     imageUrlOnHover,
@@ -12,6 +13,7 @@ export default class Product {
     isSelectable
   ) {
     this.productId = productId;
+    this.modelId = modelId;
     this.imageUrl = imageUrl;
     this.altImageUrl = altImageUrl;
     this.imageUrlOnHover = imageUrlOnHover;

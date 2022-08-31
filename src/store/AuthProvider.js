@@ -22,11 +22,11 @@ const AuthProvider = (props) => {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("personalAccessToken") !== null) {
+    if (localStorage.getItem("personalAccessToken") !== null) {
       setAuthState({
         loggedIn: true,
         personalAccessToken: JSON.parse(
-          sessionStorage.getItem("personalAccessToken")
+          localStorage.getItem("personalAccessToken")
         ),
       });
     }

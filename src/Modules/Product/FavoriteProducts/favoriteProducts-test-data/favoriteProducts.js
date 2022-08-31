@@ -1,14 +1,14 @@
 import Product from "../../Class/Product";
 import {
-  NORMAL_STATUS_CODE,
   NEW_STATUS_CODE,
+  NORMAL_STATUS_CODE,
   ON_SALE_STATUS_CODE,
-  BACK_IN_STOCK_STATUS_CODE,
 } from "../../common/utils/statusCode";
 import DiscountedProduct from "../../Class/DiscountedProduct";
 
 export const favoriteProducts = [
   new Product(
+    1,
     1,
     "/img/favorite-products/favorite-product-1.png",
     "something",
@@ -22,6 +22,7 @@ export const favoriteProducts = [
   ),
   new Product(
     2,
+    1,
     "/img/favorite-products/favorite-product-1.png",
     "something",
     "/img/favorite-products/favorite-product-1-hover.jpg",
@@ -35,6 +36,7 @@ export const favoriteProducts = [
 
   new DiscountedProduct(
     3,
+    1,
     "/img/favorite-products/organic-products/th-true-milk.png",
     "something",
     "/img/favorite-products/organic-products/th-true-milk-hover.jpg",

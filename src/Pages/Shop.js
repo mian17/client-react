@@ -8,8 +8,6 @@ import React, { useEffect, useState } from "react";
 import ShoppingFunctions from "../Modules/Shop/ShopFunctions/ShopFunctions";
 
 import ShopProductListing from "../Modules/Shop/ShopProductListing/ShopProductListing";
-
-import FilterServiceBox from "../Modules/Shop/ShopFunctions/FilterService/FilterServiceBox/FilterServiceBox";
 import SortServiceBox from "../Modules/Shop/ShopFunctions/FilterService/SortServiceBox/SortServiceBox";
 import ShopBanner from "../Modules/Shop/ShopBanner/ShopBanner";
 import ShopHeader from "../Modules/Shop/ShopHeader/ShopHeader";
@@ -59,13 +57,14 @@ const Shop = () => {
         filteredValueLabel={filteredValue}
       />
       <Grid container>
-        {!laptopScreenMatch && filterIsClicked && <FilterServiceBox />}
+        {!laptopScreenMatch && sortIsClicked && <SortServiceBox />}
+        {/*{!laptopScreenMatch && filterIsClicked && <FilterServiceBox />}*/}
 
         <ShopProductListing
           filterIsClicked={filterIsClicked}
           sortIsClicked={sortIsClicked}
         />
-        {!laptopScreenMatch && sortIsClicked && <SortServiceBox />}
+        {/*{!laptopScreenMatch && sortIsClicked && <SortServiceBox />}*/}
       </Grid>
 
       <MessageBanner />

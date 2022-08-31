@@ -10,6 +10,7 @@ export const productListingPartition = (productData) => {
     ? productData.cost_price > productData.price
       ? new DiscountedProduct(
           productData.id,
+          productData.kinds[0].id,
           backendServerPath + productData.kinds[0].image_1,
           "something",
           backendServerPath + productData.kinds[0].image_2,
@@ -23,6 +24,7 @@ export const productListingPartition = (productData) => {
         )
       : new Product(
           productData.id,
+          productData.kinds[0].id,
           backendServerPath + productData.kinds[0].image_1,
           "something",
           backendServerPath + productData.kinds[0].image_2,
@@ -36,6 +38,8 @@ export const productListingPartition = (productData) => {
     : productData.cost_price > productData.price
     ? new CategoricalDiscountedProduct(
         productData.id,
+        productData.kinds,
+        productData.kinds[0].id,
         backendServerPath + productData.kinds[0].image_1,
         "something",
         backendServerPath + productData.kinds[0].image_2,
@@ -58,6 +62,8 @@ export const productListingPartition = (productData) => {
       )
     : new CategoricalProduct(
         productData.id,
+        productData.kinds,
+        productData.kinds[0].id,
         backendServerPath + productData.kinds[0].image_1,
         "something",
         backendServerPath + productData.kinds[0].image_2,
@@ -78,17 +84,3 @@ export const productListingPartition = (productData) => {
         })
       );
 };
-// export const productListingPartition = (productData) => {
-//   return new Product(
-//     productData.id,
-//     "",
-//     "something",
-//     "",
-//     "other something",
-//     productData.name,
-//     productData.price,
-//     "",
-//     productData.cost_price > productData.price ? 2 : 0,
-//     false
-//   );
-// };

@@ -1,11 +1,17 @@
 // React imports
-import { useState } from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 
 // Source imports
-import ProductInCart from "./utils/ProductInCart";
-
 import CartContext from "./cart-context";
-import { PRODUCT_QUANTITY_LIMIT, calculateTotalMoney } from "../utils/utils";
+import {calculateTotalMoney} from "../utils/utils";
+import AuthContext from "./auth-context";
+import {reAssignCartId, removeItemFromCart, setNewStateSessionAndCalculateTotalMoneyForCart,} from "./utils/helpers";
+import apiClient from "../api";
+import ProductStateToAddToCart from "../Modules/Product/ProductItemInfo/utils/productStateToAddToCart";
+import {backendServerPath} from "../Modules/common/utils/backendServerPath";
+import updateCartItemQuantity from "./server/updateCartItemQuantity";
+import addNewProduct from "./server/addNewProduct";
+import deleteCartItemFromServer from "./server/deleteCartItemFromServer";
 
 // const DUMMY_DATA = [
 //   {
@@ -38,38 +44,110 @@ const defaultCartState = {
 
 const CartProvider = (props) => {
   const [cartState, setCartState] = useState(defaultCartState);
+  const { loggedIn } = useContext(AuthContext);
 
+  /////////////////////////////////////////
+  // GET CART ITEMS FROM SESSION IF USER IS NOT LOGGED IN
+  // OR USER HAS NOT REGISTERED
+  const getCartFromServer = useCallback(() => {
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+      apiClient
+        .get("api/user-cart", {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          const userCartItems = response.data.itemsInCart.map((item) => {
+            // console.log(response);
+            const {
+              id: cartIdFromServer,
+              product_id: productId,
+              model_id: modelId,
+              image_1: productImgUrl,
+              name: productName,
+              price: productPrice,
+              quantity: productQuantity,
+            } = item;
+
+            return new ProductStateToAddToCart(
+              productId,
+              modelId,
+              backendServerPath + productImgUrl,
+              productName,
+              productPrice,
+              productQuantity,
+              cartIdFromServer
+            );
+          });
+          userCartItems.forEach(reAssignCartId());
+          // console.log(userCartItems);
+
+          const newState = { ...cartState };
+          newState.items = userCartItems;
+          newState.totalMoney = calculateTotalMoney(newState.items);
+          setCartState(newState);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }, [cartState]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      getCartFromServer();
+    }
+  }, [loggedIn]);
+  console.log(cartState);
   /////////////////////////////////////////
   // HANDLERS
   const addItemToCartHandler = (item) => {
     const newState = { ...cartState };
 
     let alreadyInCart = false;
+
     for (let i = 0; i < newState.items.length; i++) {
-      if (newState.items[i].productId === item.productId) {
+      if (
+        newState.items[i].productId === item.productId &&
+        newState.items[i].modelId === item.modelId
+      ) {
         newState.items[i].productQuantity += 1;
+        updateCartItemQuantity(newState, i);
         alreadyInCart = true;
         break;
       }
     }
 
-    if (alreadyInCart === false) newState.items.push(item);
+    if (alreadyInCart === false) {
+      item.productQuantity = 1; // DO NOT REMOVE THIS, BECAUSE
+      // AFTER DELETING A CART ITEM AND ADDING IT BA
+      // THE PRODUCT QUANTITY PROPERTY WOULD DEFAULT TO 0
+      // DESPITE SETTING IT AS DEFAULT STATE IN CART.JS
 
-    newState.items.forEach((product, index) => (product.cartId = index));
-    newState.totalMoney = calculateTotalMoney(newState.items);
+      newState.items.push(item);
+      addNewProduct(item);
+    }
 
-    setCartState(newState);
+    newState.items.forEach(reAssignCartId());
+
+    setNewStateSessionAndCalculateTotalMoneyForCart(newState, setCartState);
   };
+
   const removeItemFromCartHandler = (id) => {
     const newState = { ...cartState };
-    newState.items = newState.items.filter((product) => product.cartId !== id);
 
-    newState.items.forEach((product, index) => {
-      product.cartId = index;
-    });
-    newState.totalMoney = calculateTotalMoney(newState.items);
+    const cartItemIdToDelete = newState.items.find(
+      (item) => item.cartId === id
+    ).cartIdFromServer;
 
-    setCartState(newState);
+    newState.items = newState.items.filter(removeItemFromCart(id));
+
+    deleteCartItemFromServer(cartItemIdToDelete);
+    newState.items.forEach(reAssignCartId());
+
+    setNewStateSessionAndCalculateTotalMoneyForCart(newState, setCartState);
   };
   // const editItemQuantityHandler = (e) => {
   //   const checkIfInputIsPositiveNumber =
@@ -101,11 +179,13 @@ const CartProvider = (props) => {
     for (let i = 0; i < newState.items.length; i++) {
       if (newState.items[i].cartId === id) {
         newState.items[i].productQuantity += 1;
+        updateCartItemQuantity(newState, i);
+
         break;
       }
     }
-    newState.totalMoney = calculateTotalMoney(newState.items);
-    setCartState(newState);
+
+    setNewStateSessionAndCalculateTotalMoneyForCart(newState, setCartState);
   };
 
   const decreaseItemQuantityFromCartHandler = (id) => {
@@ -113,12 +193,23 @@ const CartProvider = (props) => {
 
     for (let i = 0; i < newState.items.length; i++) {
       if (newState.items[i].cartId === id) {
-        newState.items[i].productQuantity -= 1;
-        break;
+        if (newState.items[i].productQuantity > 0) {
+          newState.items[i].productQuantity -= 1;
+          updateCartItemQuantity(newState, i);
+          if (newState.items[i].productQuantity <= 0) {
+            const cartItemIdToDelete = newState.items[i].cartIdFromServer;
+            newState.items = newState.items.filter(removeItemFromCart(id));
+
+            deleteCartItemFromServer(cartItemIdToDelete);
+            newState.items.forEach(reAssignCartId());
+            break;
+          }
+
+          break;
+        }
       }
     }
-    newState.totalMoney = calculateTotalMoney(newState.items);
-    setCartState(newState);
+    setNewStateSessionAndCalculateTotalMoneyForCart(newState, setCartState);
   };
   /////////////////////////////////////////
   // SETTING CONTEXT'S VALUES
@@ -137,5 +228,5 @@ const CartProvider = (props) => {
       {props.children}
     </CartContext.Provider>
   );
-};
+};;
 export default CartProvider;

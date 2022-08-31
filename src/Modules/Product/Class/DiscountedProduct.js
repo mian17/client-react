@@ -3,6 +3,7 @@ import Product from "./Product";
 export default class DiscountedProduct extends Product {
   constructor(
     productId,
+    modelId,
     imageUrl,
     altImageUrl,
     imageUrlOnHover,
@@ -16,6 +17,7 @@ export default class DiscountedProduct extends Product {
   ) {
     super(
       productId,
+      modelId,
       imageUrl,
       altImageUrl,
       imageUrlOnHover,

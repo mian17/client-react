@@ -5,6 +5,10 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { currencyFormatOptions } from "../../../utils/utils";
 import ProductItemCategoricalList from "./ProductItemCategoricalList/ProductItemCategoricalList";
+import { useContext, useState } from "react";
+import CartContext from "../../../store/cart-context";
+import { backendServerPath } from "../../common/utils/backendServerPath";
+import ProductStateToAddToCart from "./utils/productStateToAddToCart";
 
 const ProductItemInfo = (props) => {
   const theme = useTheme();
@@ -39,9 +43,45 @@ const ProductItemInfo = (props) => {
     props.product.hasOwnProperty("categoryImages") &&
     props.product.categoryImages.length > 0;
 
+  const [selectedProduct, setSelectedProduct] = useState(
+    new ProductStateToAddToCart(
+      props.product.productId,
+      props.product.modelId,
+      props.product.productKinds
+        ? backendServerPath + props.product.productKinds[0].image_1
+        : props.product.imageUrl,
+      props.product.productKinds
+        ? props.product.productKinds[0].name
+        : props.product.productName,
+      props.product.discountedPrice
+        ? props.product.discountedPrice
+        : props.product.price,
+      1
+    )
+  );
+
+  // console.log(selectedProduct);
   const getSelectedCategoryPosition = (position) => {
     props.getSelectedCategoryPositionForImageChange(position);
+    setSelectedProduct(
+      new ProductStateToAddToCart(
+        props.product.productId,
+        props.product.productKinds[position].id,
+        props.product.productKinds
+          ? backendServerPath + props.product.productKinds[position].image_1
+          : "",
+        props.product.productKinds
+          ? props.product.productKinds[position].name
+          : props.product.productName,
+        props.product.discountedPrice
+          ? props.product.discountedPrice
+          : props.product.price,
+        1
+      )
+    );
   };
+
+  const cartCtx = useContext(CartContext);
 
   return (
     <Box
@@ -137,6 +177,9 @@ const ProductItemInfo = (props) => {
           }}
           disableRipple
           disableTouchRipple
+          onClick={() => {
+            cartCtx.addItem(selectedProduct);
+          }}
         >
           <Typography
             sx={{ color: "inherit", fontSize: smallScreenMatch ? 10 : null }}

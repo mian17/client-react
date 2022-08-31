@@ -29,7 +29,7 @@ const SignInMobile = (props) => {
 
   const [errors, setErrors] = useState(null);
 
-  const {setLoggedIn} = useContext(AuthContext);
+  const { setLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();

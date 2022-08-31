@@ -50,25 +50,6 @@ const HoverableProductItemImage = (props) => {
             ></Box>
           );
         })}
-      {/*<Box*/}
-      {/*    component="img"*/}
-      {/*    src={*/}
-      {/*      // If the first selected position is 0, since the data does not have negative indexes,*/}
-      {/*      // the condition must be default to 0 in such a case like that*/}
-      {/*      props.product.categoryImages[*/}
-      {/*          props.selectedPosition - 1 < 0 ? 0 : props.selectedPosition - 1*/}
-      {/*          ].url*/}
-      {/*    }*/}
-      {/*    alt={*/}
-      {/*      props.product.categoryImages[*/}
-      {/*          props.selectedPosition - 1 < 0 ? 0 : props.selectedPosition - 1*/}
-      {/*          ].alt*/}
-      {/*    }*/}
-      {/*    sx={{ width: "100%", height: "100%" }}*/}
-      {/*    className={`${classes.image}  ${*/}
-      {/*        props.selectedPosition !== 0 ? "" : classes.hidden*/}
-      {/*    } `}*/}
-      {/*/>*/}
       <Box
         component="img"
         src={props.product.imageUrlOnHover}

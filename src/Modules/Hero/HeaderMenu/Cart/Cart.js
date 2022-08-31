@@ -1,13 +1,11 @@
 // React imports
 import * as React from "react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 // Source imports
 import CartContext from "../../../../store/cart-context";
 
 // React Router Dom imports
-import { NavLink } from "react-router-dom";
-
 // Mui Imports
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -21,14 +19,14 @@ import { currencyFormatOptions } from "../../../../utils/utils";
 import CartItem from "./CartItem/CartItem";
 import CartMoneyInfo from "./CartMoneyInfo/CartMoneyInfo";
 
-const Cart = (props) => {
+const Cart = () => {
   const theme = useTheme();
 
   const extraSmallScreenMatch = useMediaQuery(theme.breakpoints.up("xs"));
 
   const cartCtx = useContext(CartContext);
   const products = cartCtx.items;
-  console.log(products);
+  // console.log(products);
 
   const totalCartMoney = new Intl.NumberFormat(
     "vi-VN",

@@ -22,8 +22,11 @@ const ProductItemCategoricalList = (props) => {
   if (isSelectable) {
     // Getting first main color;
     const objToPush = {};
-    objToPush.colorCode = props.product.colorCode;
-    objToPush.toolTipName = props.product.productName;
+    // objToPush.colorCode = props.product.colorCode;
+    // objToPush.toolTipName = props.product.productName;
+
+    objToPush.colorCode = props.product.productKinds[0].hex_color;
+    objToPush.toolTipName = props.product.productKinds[0].name;
 
     colorList.push(objToPush);
 
