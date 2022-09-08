@@ -1,6 +1,6 @@
 // React imports
 import * as React from "react";
-import { useContext } from "react";
+import {useContext} from "react";
 
 // Source imports
 import CartContext from "../../../../store/cart-context";
@@ -8,16 +8,17 @@ import CartContext from "../../../../store/cart-context";
 // React Router Dom imports
 // Mui Imports
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 
 // Mui Components Imports
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import Button from "@mui/material/Button";
-import { currencyFormatOptions } from "../../../../utils/utils";
+import {currencyFormatOptions} from "../../../../utils/utils";
 import CartItem from "./CartItem/CartItem";
 import CartMoneyInfo from "./CartMoneyInfo/CartMoneyInfo";
+import {NavLink} from "react-router-dom";
 
 const Cart = () => {
   const theme = useTheme();
@@ -88,19 +89,30 @@ const Cart = () => {
       </Box>
       <Box
         sx={{
-          pl: 2,
-          pr: 2,
-          pb: 1,
-          justifySelf: "flex-end",
-          my: 2,
-          backgroundColor: "transparent",
-          flexGrow: 1,
+            pl: 2,
+            pr: 2,
+            pb: 1,
+            justifySelf: "flex-end",
+            my: 2,
+            backgroundColor: "transparent",
+            flexGrow: 1,
         }}
       >
-        <CartMoneyInfo totalCartMoney={totalCartMoney} />
-        <Button color="primary" variant="contained" fullWidth>
-          Thanh toán
-        </Button>
+          <CartMoneyInfo totalCartMoney={totalCartMoney}/>
+          <Button
+              component={NavLink}
+              to="/checkout"
+              sx={{
+                  "&:hover": {
+                      color: "#f4f1e0",
+                  },
+              }}
+              color="primary"
+              variant="contained"
+              fullWidth
+          >
+              Thanh toán
+          </Button>
       </Box>
     </Box>
   );

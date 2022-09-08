@@ -1,13 +1,12 @@
 import Content from "./Widgets/Content";
-import Footer from "./Widgets/Footer";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 import CartProvider from "./store/CartProvider";
 
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {LocalizationProvider} from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
@@ -78,7 +77,7 @@ function App() {
               {/*<Header />*/}
 
               <Content />
-              <Footer />
+              {/*<Footer />*/}
             </CartProvider>
           </AuthProvider>
         </BrowserRouter>

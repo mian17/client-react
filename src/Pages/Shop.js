@@ -1,9 +1,9 @@
 // Source imports
 
 import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import ShoppingFunctions from "../Modules/Shop/ShopFunctions/ShopFunctions";
 
@@ -12,6 +12,7 @@ import SortServiceBox from "../Modules/Shop/ShopFunctions/FilterService/SortServ
 import ShopBanner from "../Modules/Shop/ShopBanner/ShopBanner";
 import ShopHeader from "../Modules/Shop/ShopHeader/ShopHeader";
 import MessageBanner from "../Modules/Banner/MessageBanner";
+import Footer from "../Widgets/Footer";
 
 const Shop = () => {
   const theme = useTheme();
@@ -67,7 +68,8 @@ const Shop = () => {
         {/*{!laptopScreenMatch && sortIsClicked && <SortServiceBox />}*/}
       </Grid>
 
-      <MessageBanner />
+        <MessageBanner/>
+        <Footer/>
     </>
   );
 };

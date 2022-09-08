@@ -4,16 +4,20 @@ import Box from "@mui/material/Box";
 
 import UserDrawer from "../UserDrawer/UserDrawer";
 import NotificationCenter from "./NotificationCenter/NotificationCenter";
+import Footer from "../../../Widgets/Footer";
 
 function NotificationContent() {
   return (
-    <div className="container">
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <UserDrawer />
-        <NotificationCenter />
-      </Box>
-    </div>
+      <>
+          <div className="container">
+              <Box sx={{display: "flex"}}>
+                  <CssBaseline/>
+                  <UserDrawer/>
+                  <NotificationCenter/>
+              </Box>
+          </div>
+          <Footer/>
+      </>
   );
 }
 

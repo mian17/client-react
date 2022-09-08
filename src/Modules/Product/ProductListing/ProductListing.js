@@ -3,66 +3,61 @@ import ProductItem from "../ProductItem/ProductItem";
 import ProductItemTitle from "../ProductItemTitle/ProductItemTitle";
 
 // Mui Imports
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 
 // Test data
-import { products } from "./product-test-data/products";
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
+import {productListingPartition} from "../../common/utils/productListingPartition";
 
 const ProductListing = () => {
   const theme = useTheme();
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
-  // const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   // const productsReponse = await getProductsFromServer()
-  //   setProducts(products);
-  // }, [products]);
   // Ready for API connection
-  // const [error, setError] = useState(null);
-  // const fetchCategories = useCallback(async () => {
-  //   setError(null);
-  //   try {
-  //     // Get from api
-  //     const response = await fetch("https://example.com");
-  //     if (!response.ok) {
-  //       throw new Error("Không lấy được dữ liệu");
-  //     }
-  //
-  //     const data = await response.json();
-  //     // console.log(data);
-  //     const transformedCategory = data.map((categoryData) => {
-  //       return new Category()
-  //     });
-  //
-  //     setCategories(transformedCategory);
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  //
-  // }, []);
+  const [error, setError] = useState(null);
+  const fetchProducts = useCallback(async () => {
+    setError(null);
+    try {
+      // Get from api
+      const response = await fetch(
+          "http://127.0.0.1:8000/api/product/show-products-front-page"
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      const transformedProducts = data.products.map(productListingPartition);
+
+      setProducts(transformedProducts);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
   // Request categories
-  // useEffect(() => {
-  //     fetchCategories();
-  // }, [fetchCategories]);
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   // Count num to specify row position for this special grid layout
   let count = 1;
 
   return (
-    <Box
-      component="section"
-      display="grid"
-      gridTemplateColumns={`${
-        tabletScreenMatch ? "1fr 1fr" : "repeat(3, 1fr)"
+      <Box
+          component="section"
+          display="grid"
+          gridTemplateColumns={`${
+              tabletScreenMatch ? "1fr 1fr" : "repeat(3, 1fr)"
       }`}
       gridTemplateRows={`${tabletScreenMatch ? "" : "repeat(4, 1fr)"}`}
     >
       <ProductItemTitle
-        title="Top các sản phẩm bán chạy nhất"
-        description="A id laborum minus necessitatibus unde. Dolores laboriosam porro quo recusandae tempore velit vitae!"
+          title="Các sản phẩm bạn có thể thích"
+          description="A id laborum minus necessitatibus unde. Dolores laboriosam porro quo recusandae tempore velit vitae!"
       />
       {products.map((product, i) => {
         // console.log(typeof product);

@@ -1,16 +1,15 @@
 // React library imports
-import { useContext } from "react";
-import { ConfirmProvider } from "material-ui-confirm";
+import {useContext} from "react";
+import {ConfirmProvider} from "material-ui-confirm";
 
 // Component imports
-import Breadcrumb from "../Modules/Breadcrumb/Breadcrumb";
 import ProductInCart from "../Modules/ProductInCart/ProductInCart";
 
 // Context import
 import CartContext from "../store/cart-context";
 
 // Utilities import
-import { currencyFormatOptions } from "../utils/utils";
+import {currencyFormatOptions} from "../utils/utils";
 
 const ShoppingCart = () => {
   const cartCtx = useContext(CartContext);
@@ -28,11 +27,6 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <Breadcrumb
-        pageName="Giỏ hàng"
-        prevPages={["Trang chủ"]}
-        curPage="Giỏ hàng"
-      />
       <section className="shoping-cart spad">
         <div className="container">
           <div className="row">

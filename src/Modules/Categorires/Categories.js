@@ -1,32 +1,33 @@
 // Imports from React
 // Imports from Swiper API (documentation link:https://swiperjs.com/react#installation=)
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation} from "swiper";
 
 import "swiper/css/bundle";
 import Box from "@mui/material/Box";
 
 import React from "react";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 
 import EastIcon from "@mui/icons-material/East";
-import { IconButton } from "@mui/material";
-import { mostPopularCategoriesWithImage } from "../common/utils/mostPopularCategories-test-data/mostPopularCategoriesWithImage";
-import { NavLink } from "react-router-dom";
+import {IconButton} from "@mui/material";
+import {
+    mostPopularCategoriesWithImage
+} from "../common/utils/mostPopularCategories-test-data/mostPopularCategoriesWithImage";
+import {NavLink} from "react-router-dom";
 
 const categoriesBreakpointsOption = {
-  900: {
-    slidesPerView: 3,
-  },
+    900: {
+        slidesPerView: 3,
+    },
 };
 
 const Categories = () => {
-  const theme = useTheme();
-  const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+    const theme = useTheme();
+    const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
+    // const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   // Ready for API connection
   // const [error, setError] = useState(null);
@@ -105,11 +106,11 @@ const Categories = () => {
                   </Typography>
                 </Box>
                 <IconButton
-                  component={NavLink}
-                  to={`/category/${category.categoryId}`}
-                  variant="outlined"
-                  size={smallScreenMatch ? "small" : "medium"}
-                  sx={{
+                    component={NavLink}
+                    to={`${category.url}`}
+                    variant="outlined"
+                    size={smallScreenMatch ? "small" : "medium"}
+                    sx={{
                     color: "#f4f1e0",
                     border: "2px solid #f4f1e0",
                     position: "absolute",
@@ -120,7 +121,7 @@ const Categories = () => {
                       color: "#f4f1e0",
                     },
                   }}
-                  disableRipple
+                    disableRipple
                 >
                   <EastIcon />
                 </IconButton>
