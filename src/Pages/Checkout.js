@@ -161,7 +161,8 @@ const Checkout = () => {
         setPaymentMethods,
         discountCode,
         discountPercent,
-        navigate
+        navigate,
+        cartCtx.resetCart
     ),
     enableReinitialize: true,
   });

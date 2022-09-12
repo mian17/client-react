@@ -10,9 +10,9 @@ import Profile from "./Profile/Profile";
 // import Address from "./Address/Address";
 // import ChangePassword from "./ChangePassword/ChangePassword";
 import { CircularProgress } from "@mui/material";
-import AddressLoading from "./Address/AddressLoading";
+// import AddressLoading from "./Address/AddressLoading";
 
-const Address = React.lazy(() => import("./Address/Address"));
+// const Address = React.lazy(() => import("./Address/Address"));
 const ChangePassword = React.lazy(() =>
   import("./ChangePassword/ChangePassword")
 );
@@ -91,12 +91,12 @@ export default function AccountContent() {
             label="Hồ sơ"
             {...a11yProps(0)}
           />
-          <Tab
-            component={NavLink}
-            to="/user/account/address"
-            label="Địa chỉ"
-            {...a11yProps(1)}
-          />
+          {/*<Tab*/}
+          {/*  component={NavLink}*/}
+          {/*  to="/user/account/address"*/}
+          {/*  label="Địa chỉ"*/}
+          {/*  {...a11yProps(1)}*/}
+          {/*/>*/}
           <Tab
             component={NavLink}
             to="/user/account/changepassword"
@@ -110,11 +110,11 @@ export default function AccountContent() {
         <Profile />
       </TabPanel>
 
-      <TabPanel value={tabValue} index={1}>
-        <React.Suspense fallback={<AddressLoading />}>
-          <Address />
-        </React.Suspense>
-      </TabPanel>
+      {/*<TabPanel value={tabValue} index={1}>*/}
+      {/*  <React.Suspense fallback={<AddressLoading />}>*/}
+      {/*    <Address />*/}
+      {/*  </React.Suspense>*/}
+      {/*</TabPanel>*/}
 
       <TabPanel value={tabValue} index={2}>
         <React.Suspense fallback={<CircularProgress />}>

@@ -35,7 +35,7 @@ export default function SignUp() {
       birth_date: data.get("birthDate"),
       gender: data.get("gender"),
       address: data.get("address"),
-      role_id: 2,
+      role_id: 3, // Customer role id
     };
     apiClient.get("/sanctum/csrf-cookie").then((response) => {
       console.log(response);

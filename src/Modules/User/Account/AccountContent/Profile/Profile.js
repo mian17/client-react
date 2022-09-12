@@ -10,57 +10,20 @@ import Button from "@mui/material/Button";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
 import Toolbar from "@mui/material/Toolbar";
 import { useFormik } from "formik";
-import * as yup from "yup";
 
 import apiClient from "../../../../../api";
-
-const validationSchema = yup.object({
-  username: yup.string().required("Không để trống tên đăng nhập"),
-  name: yup.string().required("Không để trống họ và tên"),
-  email: yup.string().email().required("Không để trống email"),
-  phoneNumber: yup
-    .string()
-    .min(10, "Số điện thoại cần dài hơn 10 ký tự")
-    .required("Không để trống số điện thoại"),
-  gender: yup.number().required("Không để trống giới tính"),
-  birthDate: yup.date().required("Không để trống ngày sinh"),
-  // avatar: yup.string()
-});
+import { profileSchema } from "../../../../common/validationSchema/schema";
+import fetchUserInfo from "./server/fetchUserInfo";
+import ProfileToServer from "./profileUtils/ProfileToServer";
 
 const Profile = () => {
-  useEffect(() => {
-    apiClient.get("/sanctum/csrf-cookie").then(() => {
-      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
-      apiClient
-        .get("api/user/account/profile", {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        })
-        .then((response) => {
-          const {
-            username,
-            name,
-            email,
-            phone_number: phoneNumber,
-            gender,
-            birth_date: birthDate,
-          } = response.data.user;
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-          setUserState({
-            username,
-            name,
-            email,
-            phoneNumber,
-            gender,
-            birthDate,
-          });
-        });
-    });
+  useEffect(() => {
+    fetchUserInfo(setUserState, setAvatarUrl);
   }, []);
 
   const [userState, setUserState] = useState({
@@ -70,18 +33,44 @@ const Profile = () => {
     phoneNumber: "",
     gender: "",
     birthDate: "0000-00-00",
+    address: "",
   });
 
   const formik = useFormik({
     initialValues: userState,
-    validationSchema: validationSchema,
+    validationSchema: profileSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      const { username, name, email, phoneNumber, gender, birthDate, address } =
+        values;
+      apiClient.get("/sanctum/csrf-cookie").then(() => {
+        const userToken = JSON.parse(
+          localStorage.getItem("personalAccessToken")
+        );
+        apiClient
+          .patch(
+            "api/user-update-info",
+            new ProfileToServer(
+              username,
+              name,
+              email,
+              phoneNumber,
+              gender,
+              birthDate,
+              address
+            ),
+            {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            }
+          )
+          .then((response) => console.log(response));
+      });
     },
     enableReinitialize: true,
   });
   // const [dateValue, setDateValue] = React.useState(new Date());
-
   return (
     <Box
       component="form"
@@ -132,7 +121,11 @@ const Profile = () => {
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
+              helperText={
+                formik.touched.email && formik.errors.email
+                  ? formik.touched.email && formik.errors.email
+                  : "Lưu ý: Khi thay đổi email, bạn cần phải xác nhận lại email"
+              }
               autoComplete="email"
             />
             <TextField
@@ -151,6 +144,18 @@ const Profile = () => {
                 formik.touched.phoneNumber && formik.errors.phoneNumber
               }
               autoComplete="mobile"
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              name="address"
+              label="Địa chỉ"
+              type="text"
+              id="address"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              error={formik.touched.address && Boolean(formik.errors.address)}
+              helperText={formik.touched.address && formik.errors.address}
             />
             <Grid container sx={{ alignItems: "center" }}>
               <Grid item md={6}>
@@ -225,9 +230,8 @@ const Profile = () => {
             }}
           >
             <Toolbar />
-            <Avatar sx={{ width: 128, height: 128 }}>
-              <PersonOutlinedIcon sx={{ width: 96, height: 96 }} />
-            </Avatar>
+            <Avatar src={avatarUrl} sx={{ width: 128, height: 128 }} />
+
             <label htmlFor="contained-button-file">
               <Input
                 accept="image/*"

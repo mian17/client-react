@@ -279,6 +279,14 @@ const CartProvider = (props) => {
     }
     setNewStateSessionAndCalculateTotalMoneyForCart(newState, setCartState);
   };
+
+  const resetCartHandler = () => {
+    setCartState({
+      items: [],
+      totalMoney: 0,
+    });
+  }
+
   /////////////////////////////////////////
   // SETTING CONTEXT'S VALUES
   const cartContext = {
@@ -289,6 +297,7 @@ const CartProvider = (props) => {
     // editItemQuantity: editItemQuantityHandler,
     increaseItemQuantityFromCart: increaseItemQuantityFromCartHandler,
     decreaseItemQuantityFromCart: decreaseItemQuantityFromCartHandler,
+    resetCart: resetCartHandler,
   };
 
   return (

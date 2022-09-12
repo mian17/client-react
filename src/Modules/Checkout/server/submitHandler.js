@@ -6,7 +6,8 @@ export default function submitHandler(
     setPaymentMethods,
     discountCode,
     discountPercent,
-    navigate
+    navigate,
+    resetCart,
 ) {
   return (values) => {
     const {
@@ -78,6 +79,7 @@ export default function submitHandler(
     }
 
     navigate("/thank-you", {replace: true});
+    resetCart();
     // alert(JSON.stringify(values, null, 2));
   };
 }
