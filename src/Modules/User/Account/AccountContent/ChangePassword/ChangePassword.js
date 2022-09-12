@@ -1,4 +1,3 @@
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -15,8 +14,11 @@ import * as React from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputLabel from "@mui/material/InputLabel";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
+import { useState } from "react";
+import apiClient from "../../../../../api";
+import { backendServerPath } from "../../../../common/utils/backendServerPath";
 
 const validationSchema = yup.object({
   oldPassword: yup.string().required("Bạn cần nhập mật khẩu cũ của bạn"),
@@ -47,11 +49,22 @@ const ChangePassword = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      // apiClient.get("/sanctum/csrf-cookie").then(() => {
+      //   const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+      //   apiClient
+      //       .get("api/user/account/profile", {
+      //         headers: {
+      //           Authorization: `Bearer ${userToken}`,
+      //         },
+      //       })
+      //       .then((response) =>
+      //       );
+      // });
     },
   });
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     showOldPassword: false,
     showNewPassword: false,
     showReEnterNewPassword: false,

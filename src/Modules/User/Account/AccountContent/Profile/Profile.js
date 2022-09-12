@@ -19,6 +19,10 @@ import { profileSchema } from "../../../../common/validationSchema/schema";
 import fetchUserInfo from "./server/fetchUserInfo";
 import ProfileToServer from "./profileUtils/ProfileToServer";
 
+import dayjs from "dayjs";
+import submitFormHandler from "./server/submitFormHandler";
+import uploadAvatarHandler from "./server/uploadAvatarHandler";
+
 const Profile = () => {
   const [avatarUrl, setAvatarUrl] = useState("");
 
@@ -39,38 +43,10 @@ const Profile = () => {
   const formik = useFormik({
     initialValues: userState,
     validationSchema: profileSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      const { username, name, email, phoneNumber, gender, birthDate, address } =
-        values;
-      apiClient.get("/sanctum/csrf-cookie").then(() => {
-        const userToken = JSON.parse(
-          localStorage.getItem("personalAccessToken")
-        );
-        apiClient
-          .patch(
-            "api/user-update-info",
-            new ProfileToServer(
-              username,
-              name,
-              email,
-              phoneNumber,
-              gender,
-              birthDate,
-              address
-            ),
-            {
-              headers: {
-                Authorization: `Bearer ${userToken}`,
-              },
-            }
-          )
-          .then((response) => console.log(response));
-      });
-    },
+    onSubmit: submitFormHandler(),
     enableReinitialize: true,
   });
-  // const [dateValue, setDateValue] = React.useState(new Date());
+
   return (
     <Box
       component="form"
@@ -238,6 +214,7 @@ const Profile = () => {
                 id="contained-button-file"
                 type="file"
                 sx={{ display: "none" }}
+                onChange={uploadAvatarHandler}
               />
               <Button component="span" variant="outlined" sx={{ flexGrow: 0 }}>
                 Chọn ảnh
