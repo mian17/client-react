@@ -7,6 +7,7 @@ import {
   IconButton,
   InputAdornment,
   OutlinedInput,
+  Skeleton,
 } from "@mui/material";
 
 import Button from "@mui/material/Button";
@@ -15,53 +16,33 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputLabel from "@mui/material/InputLabel";
 import { useFormik } from "formik";
-import * as yup from "yup";
 import { useState } from "react";
-import apiClient from "../../../../../api";
-import { backendServerPath } from "../../../../common/utils/backendServerPath";
+import { changePasswordSchema } from "../../../../common/validationSchema/schema";
+import changePasswordSubmitHandler from "./server/changePasswordSubmitHandler";
 
-const validationSchema = yup.object({
-  oldPassword: yup.string().required("Bạn cần nhập mật khẩu cũ của bạn"),
-  newPassword: yup
-    .string()
-    .min(8, "Mật khẩu mới của bạn cần dài hơn 8 ký tự.")
-    .required("Bạn cần nhập mật khẩu mới")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-      "Mật khẩu của bạn cần dài hơn 8 ký tự, trong đó: có 1 chữ in hoa, 1 chữ thường, một số và một ký tự đặc biệt"
-    ),
-  reEnterNewPassword: yup
-    .string()
-    .min(8, "Mật khẩu mới của bạn cần dài hơn 8 ký tự.")
-    .required("Bạn cần nhập lại mật khẩu mới")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])(?=.{8,})/,
-      "Mật khẩu của bạn cần dài hơn 8 ký tự, trong đó: có 1 chữ in hoa, 1 chữ thường, một số và một ký tự đặc biệt"
-    ),
-});
+const Alert = React.lazy(() => import("@mui/material/Alert"));
+const Collapse = React.lazy(() => import("@mui/material/Collapse"));
 
 const ChangePassword = () => {
+  const [alertState, setAlertState] = useState(false);
+  const [alertContent, setAlertContent] = useState({
+    title: "",
+    content: "",
+  });
+  const [hasError, setHasError] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
       newPassword: "",
       reEnterNewPassword: "",
     },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
-      // apiClient.get("/sanctum/csrf-cookie").then(() => {
-      //   const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
-      //   apiClient
-      //       .get("api/user/account/profile", {
-      //         headers: {
-      //           Authorization: `Bearer ${userToken}`,
-      //         },
-      //       })
-      //       .then((response) =>
-      //       );
-      // });
-    },
+    validationSchema: changePasswordSchema,
+    onSubmit: changePasswordSubmitHandler(
+      setAlertContent,
+      setHasError,
+      setAlertState
+    ),
   });
 
   const [values, setValues] = useState({
@@ -113,6 +94,18 @@ const ChangePassword = () => {
       </Typography>
       <Box m={1}>
         <Box sx={{ width: "100%" }}>
+          <React.Suspense fallback={<Skeleton animation="wave" />}>
+            <Collapse in={alertState}>
+              <Alert
+                severity={hasError ? "error" : "success"}
+                onClose={() => {
+                  setAlertState(false);
+                }}
+              >
+                {alertContent.message}
+              </Alert>
+            </Collapse>
+          </React.Suspense>
           <FormControl
             margin="normal"
             sx={{ minWidth: "50%" }}

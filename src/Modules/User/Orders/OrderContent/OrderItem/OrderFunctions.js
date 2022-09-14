@@ -66,6 +66,7 @@ const OrderFunctions = (props) => {
 
   return (
     <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
+      {props.order.createdAt}
       {/*<Button variant={"contained"}>Đã nhận hàng</Button>*/}
       {/*<Button variant="outlined">Hủy đơn hàng</Button>*/}
       {/*<Button variant={"outlined"}>Mua lại</Button>*/}

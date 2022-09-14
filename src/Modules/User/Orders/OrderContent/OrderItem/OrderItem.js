@@ -30,12 +30,7 @@ const OrderItem = (props) => {
   const totalAmount = new Intl.NumberFormat(
     "vi-VN",
     currencyFormatOptions
-  ).format(
-    props.order.products.reduce(
-      (curPrice, product) => +curPrice + product.price * product.quantity,
-      0
-    )
-  );
+  ).format(props.order.totalAmount);
   return (
     <Paper
       sx={{
@@ -51,7 +46,7 @@ const OrderItem = (props) => {
         return <OrderProductInfo key={index} product={product} />;
       })}
       <OrderTotalAmount totalAmount={totalAmount} />
-      <OrderFunctions status={props.order.status} />
+      <OrderFunctions status={props.order.status} order={props.order} />
     </Paper>
   );
 };

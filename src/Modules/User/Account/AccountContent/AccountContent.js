@@ -64,11 +64,11 @@ export default function AccountContent() {
       case "profile":
         setTabValue(0);
         break;
-      case "address":
-        setTabValue(1);
-        break;
+      // case "address":
+      //   setTabValue(1);
+      //   break;
       case "changepassword":
-        setTabValue(2);
+        setTabValue(1);
         break;
       default:
         console.log("urlPath is not valid");
@@ -101,7 +101,7 @@ export default function AccountContent() {
             component={NavLink}
             to="/user/account/changepassword"
             label="Đổi mật khẩu"
-            {...a11yProps(2)}
+            {...a11yProps(1)}
           />
         </Tabs>
       </Box>
@@ -116,7 +116,7 @@ export default function AccountContent() {
       {/*  </React.Suspense>*/}
       {/*</TabPanel>*/}
 
-      <TabPanel value={tabValue} index={2}>
+      <TabPanel value={tabValue} index={1}>
         <React.Suspense fallback={<CircularProgress />}>
           <ChangePassword />
         </React.Suspense>

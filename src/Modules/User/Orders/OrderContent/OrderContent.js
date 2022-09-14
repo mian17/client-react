@@ -1,11 +1,15 @@
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import PropTypes from "prop-types";
 import OrderItem from "./OrderItem/OrderItem";
-import productImg from "./OrderItem/Dummy Data/img/blue-cherry-switch.jpeg";
+import apiClient from "../../../../api";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Order from "./orderContentUtils/Order";
+import ProductInOrder from "./orderContentUtils/ProductInOrder";
+import { backendServerPath } from "../../../common/utils/backendServerPath";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,182 +52,265 @@ function a11yProps(index) {
 // 4: successed order
 // 5: canceled
 
-const DUMMY_ORDERS = [
-  // Order with one merchant
-  {
-    id: 0,
-    status: 0,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng chờ xác nhận",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 5,
-        price: 10000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 5,
-        price: 10000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-  // Order with different merchants
-  {
-    id: 1,
-    status: 1,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng chờ lấy hàng",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 10,
-        price: 15000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 5,
-        price: 10000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-  {
-    id: 2,
-    status: 2,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng đang giao hàng",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 60,
-        price: 2000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 15,
-        price: 30000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-  {
-    id: 3,
-    status: 3,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng đã giao",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 2,
-        price: 18000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 50,
-        price: 4000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-  {
-    id: 4,
-    status: 4,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng đã giao",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 90,
-        price: 10000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 20,
-        price: 10000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-  {
-    id: 5,
-    status: 5,
-    // merchants: [{ id: 9000, name: "", products: [] }],
-    merchantId: 9000,
-    merchantName: "Shop có đơn hàng đã hủy",
-    merchantUrl: "/merchant9000",
-    products: [
-      {
-        id: 60,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 99,
-        price: 100000,
-        classification: "5 pins Optical switch",
-      },
-      {
-        id: 70,
-        name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
-        imgUrl: productImg,
-        quantity: 80,
-        price: 20000000,
-        classification: "5 pins Optical switch",
-      },
-    ],
-  },
-];
+// const DUMMY_ORDERS = [
+//   // Order with one merchant
+//   {
+//     id: 0,
+//     status: 1,
+//     orderId: "Shop có đơn hàng chờ xác nhận",
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 5,
+//         price: 10000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 5,
+//         price: 10000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+//   // Order with different merchants
+//   {
+//     id: 1,
+//     status: 2,
+//     orderId: "Shop có đơn hàng chờ lấy hàng",
+//
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 10,
+//         price: 15000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 5,
+//         price: 10000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     status: 3,
+//     orderId: "Shop có đơn hàng đang giao hàng",
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 60,
+//         price: 2000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 15,
+//         price: 30000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+//   {
+//     id: 3,
+//     status: 4,
+//     orderId: "Shop có đơn hàng đã giao",
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 2,
+//         price: 18000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 50,
+//         price: 4000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+//   {
+//     id: 4,
+//     status: 5,
+//     orderId: "Shop có đơn hàng đã giao",
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 90,
+//         price: 10000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 20,
+//         price: 10000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+//   {
+//     id: 5,
+//     status: 6,
+//     orderId: "Shop có đơn hàng đã hủy",
+//     products: [
+//       {
+//         id: 60,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 99,
+//         price: 100000,
+//         classification: "5 pins Optical switch",
+//       },
+//       {
+//         id: 70,
+//         name: "Blue cherry switch for Custom Mechanical Keyboard, hot-swappable, Clicky switch for Typists ",
+//         imgUrl: productImg,
+//         quantity: 80,
+//         price: 20000000,
+//         classification: "5 pins Optical switch",
+//       },
+//     ],
+//   },
+// ];
+
 const OrderContent = () => {
   const [tabValue, setTabValue] = useState(0);
-  const [orders, setOrders] = useState(DUMMY_ORDERS);
+  const [orders, setOrders] = useState([]);
+  // const [dataLength, setDataLength] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(2);
+  const [hasMore, setHasMore] = useState(true);
+  console.log(orders.length);
+  console.log(currentPage);
 
-  useEffect(() => {}, [orders]);
+  const firstUpdate = useRef(true);
+
+  const fetchOrders = () => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+    } else {
+      if (currentPage <= lastPage) {
+        apiClient.get("/sanctum/csrf-cookie").then(() => {
+          const userToken = JSON.parse(
+            localStorage.getItem("personalAccessToken")
+          );
+          apiClient
+            .get(`api/order/pagination/${currentPage}`, {
+              headers: {
+                Authorization: `Bearer ${userToken}`,
+              },
+            })
+            .then((response) => {
+              // console.log(response.data.total);
+              // const totalItemLengthFromResponse = response.data.total;
+              // const lastPageFromServer = response.data.last_page;
+              // setLastPage(lastPageFromServer);
+              const receivedOrderObj = response.data.data;
+
+              const transformedObjToArr = Object.values(receivedOrderObj).map(
+                (order) => {
+                  return order;
+                }
+              );
+
+              const transformedOrders = transformedObjToArr.map((order) => {
+                const products = order.map((product, index) => {
+                  // console.log(product);
+
+                  return new ProductInOrder(
+                    index,
+                    product.product_name,
+                    backendServerPath + product.model_image_url,
+                    product.quantity,
+                    product.price,
+                    product.model_name
+                  );
+                });
+
+                return new Order(
+                  order[0].uuid,
+                  order[0].status_id,
+                  order[0].total,
+                  order[0].created_at,
+                  products
+                );
+              });
+
+              // setDataLength();
+
+              setOrders((prevState) => {
+                return [...prevState, ...transformedOrders];
+              });
+              setCurrentPage((prevState) => {
+                return prevState + 1;
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .then(() => {});
+        });
+      } else {
+        setHasMore(false);
+      }
+    }
+  };
+  useEffect(() => {
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+      apiClient
+        .get(`api/order/pagination/1`, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          const lastPageFromServer = response.data.last_page;
+          setLastPage(lastPageFromServer);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .then(() => {});
+    });
+    fetchOrders();
+  }, []);
 
   const ordersAwaitingVerification = orders.filter(
-    (order) => order.status === 0
-  );
-  const ordersAwaitingReceivingProducts = orders.filter(
     (order) => order.status === 1
   );
-  const ordersOnTransit = orders.filter((order) => order.status === 2);
-  const ordersArrived = orders.filter((order) => order.status === 3);
-  const ordersSucceed = orders.filter((order) => order.status === 4);
-  const ordersCanceled = orders.filter((order) => order.status === 5);
+
+  const ordersAwaitingReceivingProducts = orders.filter(
+    (order) => order.status === 2
+  );
+
+  const ordersOnTransit = orders.filter((order) => order.status === 3);
+  const ordersArrived = orders.filter((order) => order.status === 4);
+  const ordersSucceed = orders.filter((order) => order.status === 5);
+  const ordersCanceled = orders.filter((order) => order.status === 6);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -248,10 +335,26 @@ const OrderContent = () => {
       </Box>
 
       <TabPanel value={tabValue} index={0}>
-        {/*Tất cả đơn hàng*/}
-        {orders.map((order, index) => {
-          return <OrderItem key={index} order={order} />;
-        })}
+        {/*/!*Tất cả đơn hàng*!/*/}
+        {/*/!*{orders.map((order, index) => {*!/*/}
+        {/*/!*  return <OrderItem key={index} order={order} />;*!/*/}
+        {/*/!*})}*!/*/}
+        <InfiniteScroll
+          dataLength={orders.length} //This is important field to render the next data
+          next={fetchOrders}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {/*Tất cả đơn hàng*/}
+          {orders.map((order, index) => {
+            return <OrderItem key={index} order={order} />;
+          })}
+        </InfiniteScroll>
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
         {ordersAwaitingVerification.map((order, index) => {

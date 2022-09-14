@@ -1,38 +1,34 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import StoreIcon from "@mui/icons-material/Store";
 import Chip from "@mui/material/Chip";
-import Link from "@mui/material/Link";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 const OrderStatusBar = (props) => {
   const statusId = props.order.status ?? undefined;
 
   let statusContent = "";
-  console.log(statusId);
   switch (statusId) {
-    case 0:
+    case 1:
       statusContent = (
         <Chip label="Chờ xác nhận" variant="outlined" color="primary" />
       );
       break;
-    case 1:
+    case 2:
       statusContent = (
         <Chip label="Chờ Lấy Hàng" variant="outlined" color="primary" />
       );
       break;
-    case 2:
+    case 3:
       statusContent = (
         <Chip label="Đang Giao" variant="outlined" color="primary" />
       );
       break;
-    case 3:
+    case 4:
       statusContent = (
         <Chip label="Đã Giao" variant="contained" color="success" />
       );
       break;
-    case 4:
+    case 5:
       statusContent = (
         <>
           <Chip
@@ -50,7 +46,7 @@ const OrderStatusBar = (props) => {
         </>
       );
       break;
-    case 5:
+    case 6:
       statusContent = (
         <Chip label="Đã Hủy" variant="contained" color="primary" />
       );
@@ -83,17 +79,8 @@ const OrderStatusBar = (props) => {
             display="inline"
             mr={1}
           >
-            {props.order.merchantName}
+            Mã đơn hàng: {props.order.orderId}
           </Typography>
-          <Button
-            component={Link}
-            href={props.order.merchantName}
-            sx={{ textTransform: "capitalize" }}
-            color="primary"
-            size="small"
-          >
-            <StoreIcon /> Xem Shop
-          </Button>
         </Box>
         <Box>{statusContent}</Box>
       </Box>
