@@ -16,6 +16,7 @@ export default function signInHandler(
             "personalAccessToken",
             JSON.stringify(response.data.token)
           );
+          localStorage.setItem("loggedIn", JSON.stringify(true));
           setLoggedIn({
             loggedIn: true,
             personalAccessToken: JSON.parse(

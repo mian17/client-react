@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 const OrderStatusBar = (props) => {
   const statusId = props.order.status ?? undefined;
@@ -28,27 +27,36 @@ const OrderStatusBar = (props) => {
         <Chip label="Đã Giao" variant="contained" color="success" />
       );
       break;
+    // case 5:
+    //   statusContent = (
+    //     <>
+    //       <Chip
+    //         label="Giao hàng thành công"
+    //         icon={<LocalShippingIcon fontSize="medium" />}
+    //         variant="contained"
+    //         color="success"
+    //       />
+    //       <Chip
+    //         sx={{ marginLeft: 1 }}
+    //         label="Đã Nhận Hàng"
+    //         variant="contained"
+    //         color="success"
+    //       />
+    //     </>
+    //   );
+    //   break;
     case 5:
       statusContent = (
-        <>
-          <Chip
-            label="Giao hàng thành công"
-            icon={<LocalShippingIcon fontSize="medium" />}
-            variant="contained"
-            color="success"
-          />
-          <Chip
-            sx={{ marginLeft: 1 }}
-            label="Đã Nhận Hàng"
-            variant="contained"
-            color="success"
-          />
-        </>
+        <Chip label="Đã Hủy" variant="contained" color="primary" />
       );
       break;
     case 6:
       statusContent = (
-        <Chip label="Đã Hủy" variant="contained" color="primary" />
+        <Chip
+          label="Yều cầu đổi trả, hoàn tiền"
+          variant="contained"
+          color="primary"
+        />
       );
       break;
     default:

@@ -12,7 +12,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ListItemText from "@mui/material/ListItemText";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+
 const drawerWidth = 240;
 
 const Drawer = styled(MuiDrawer, {

@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import AuthContext from "./auth-context";
 
 const authDefaultState = {
-  loggedIn: false,
+  loggedIn: localStorage.getItem("loggedIn")
+    ? localStorage.getItem("loggedIn")
+    : false,
   personalAccessToken: "",
 };
 const AuthProvider = (props) => {
@@ -17,7 +19,7 @@ const AuthProvider = (props) => {
     setAuthState(loggedInState);
   };
   const setLoggedOutHandler = () => {
-    sessionStorage.removeItem("personalAccessToken");
+    localStorage.removeItem("personalAccessToken");
     setAuthState(authDefaultState);
   };
 

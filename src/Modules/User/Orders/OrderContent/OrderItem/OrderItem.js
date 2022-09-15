@@ -2,7 +2,7 @@ import Paper from "@mui/material/Paper";
 
 import OrderStatusBar from "./OrderStatusBar/OrderStatusBar";
 
-import { currencyFormatOptions } from "../../../../../utils/utils";
+import {currencyFormatOptions} from "../../../../../utils/utils";
 import OrderProductInfo from "./OrderProductInfo/OrderProductInfo";
 import OrderTotalAmount from "./OrderTotalAmount/OrderTotalAmount";
 import OrderFunctions from "./OrderFunctions";
@@ -31,6 +31,7 @@ const OrderItem = (props) => {
     "vi-VN",
     currencyFormatOptions
   ).format(props.order.totalAmount);
+
   return (
     <Paper
       sx={{
@@ -46,7 +47,12 @@ const OrderItem = (props) => {
         return <OrderProductInfo key={index} product={product} />;
       })}
       <OrderTotalAmount totalAmount={totalAmount} />
-      <OrderFunctions status={props.order.status} order={props.order} />
+      <OrderFunctions
+        status={props.order.status}
+        order={props.order}
+        openAlertHandler={props.openAlertHandler}
+        transferAlertContent={props.transferAlertContent}
+      />
     </Paper>
   );
 };
