@@ -1,4 +1,4 @@
-import React, {useContext, useLayoutEffect} from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import Shop from "../Pages/Shop";
 import Homepage from "../Pages/Homepage";
 import ShopDetails from "../Pages/ShopDetails";
@@ -6,7 +6,7 @@ import ForgotPassword from "../Modules/ForgotPassword/ForgotPassword";
 import Checkout from "../Pages/Checkout";
 import SignUp from "../Modules/SignUp/SignUp";
 
-import {Navigate, Outlet, Route, Routes, useLocation} from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import SignInMobile from "../Modules/SignIn/SignInMobile";
 
 import Account from "../Modules/User/Account/Account";
@@ -20,7 +20,7 @@ import AuthContext from "../store/auth-context";
 import Footer from "./Footer";
 import ThankYou from "../Pages/ThankYou";
 
-const Wrapper = ({children}) => {
+const Wrapper = ({ children }) => {
   const location = useLocation();
   useLayoutEffect(() => {
     document.documentElement.scrollTo(0, 0);
@@ -44,8 +44,8 @@ const Content = () => {
           element={
             <>
               <ShopDetailsHeader />
-              <SignInMobile/>
-              <Footer/>
+              <SignInMobile />
+              <Footer />
             </>
           }
         />
@@ -54,12 +54,21 @@ const Content = () => {
           element={
             <>
               <ShopDetailsHeader />
-              <SignUp/>
-              <Footer/>
+              <SignUp />
+              <Footer />
             </>
           }
         />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route
+          path="/forgotpassword"
+          element={
+            <>
+              <ShopDetailsHeader />
+              <ForgotPassword />
+              <Footer />
+            </>
+          }
+        />
         {/*<Route path="/cart" element={<ShoppingCart />} />*/}
         <Route path="/checkout" element={<Checkout />} />
 
@@ -67,17 +76,17 @@ const Content = () => {
           path="/user"
           element={loggedIn ? <Outlet /> : <Navigate to="/signin" />}
         >
-          <Route path="/user/account" element={<Account/>}>
-            <Route path="profile" element={<Profile/>}/>
+          <Route path="/user/account" element={<Account />}>
+            <Route path="profile" element={<Profile />} />
             {/*<Route path="address" element={<Address/>}/>*/}
-            <Route path="changepassword" element={<ChangePassword/>}/>
+            <Route path="changepassword" element={<ChangePassword />} />
           </Route>
 
-          <Route path="/user/orders" element={<Orders/>}/>
-          <Route path="/user/notifications" element={<Notifications/>}/>
+          <Route path="/user/orders" element={<Orders />} />
+          <Route path="/user/notifications" element={<Notifications />} />
         </Route>
 
-        <Route path="/thank-you" element={<ThankYou/>}/>
+        <Route path="/thank-you" element={<ThankYou />} />
       </Routes>
     </Wrapper>
   );

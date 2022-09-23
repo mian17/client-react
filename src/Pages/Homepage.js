@@ -9,17 +9,17 @@ import SpotlightProduct from "../Modules/Product/SpotlightProduct/SpotlightProdu
 import ProductListing from "../Modules/Product/ProductListing/ProductListing";
 
 const Homepage = () => {
-    return (
-        <>
-            <Header/>
-            <Hero/>
-            <SpotlightProduct/>
-            {/*<FavoriteProducts />*/}
-            <Promotion/>
-            <ProductListing/>
-            <Categories/>
-            <MessageBanner/>
-            <Footer/>
+  return (
+    <>
+      <Header />
+      <Hero />
+      <SpotlightProduct />
+      {/*<FavoriteProducts />*/}
+      <Promotion />
+      <ProductListing />
+      <Categories />
+      <MessageBanner />
+      <Footer />
     </>
   );
 };

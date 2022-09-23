@@ -19,6 +19,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import CategoryDrawer from "../../Hero/CategoryDrawer/CategoryDrawer";
 
 import SubcategoryCollection from "../ShopBanner/SubcategoryCollection/SubcategoryCollection";
+import PersonIcon from "@mui/icons-material/Person";
+import { Menu } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Link from "@mui/material/Link";
+import apiClient from "../../../api";
+import AuthContext from "../../../store/auth-context";
 
 const ShopHeader = () => {
   const cartCtx = useContext(CartContext);
@@ -107,6 +113,7 @@ const ShopHeader = () => {
   const [subcategoryCount, setSubcategoryCount] = useState(null);
   const { id: categoryId } = useParams();
   const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
+  const { loggedIn, setLoggedOut } = useContext(AuthContext);
   useEffect(() => {
     async function fetchCategoryLength() {
       //Get Id from url
@@ -124,7 +131,42 @@ const ShopHeader = () => {
     }
 
     fetchCategoryLength();
-  }, [categoryId, currentCategoryId, subcategoryCount]);
+    if (loggedIn) {
+      apiClient.get("/sanctum/csrf-cookie").then(() => {
+        const userToken = JSON.parse(
+          localStorage.getItem("personalAccessToken")
+        );
+        apiClient
+          .get("api/user-is-admin", {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              Hashed:
+                "$2y$10$TDNaEhzST7979Sj6JQtSc.8kSZhQuQlfgkQ0IrIv/Tp4D7R04aeqq",
+            },
+          })
+          .then((response) => {
+            if (response.status === 204) {
+              setIsAdmin(true);
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              setIsAdmin(false);
+            }
+          });
+      });
+    }
+  }, [categoryId, currentCategoryId, loggedIn, subcategoryCount]);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -149,19 +191,6 @@ const ShopHeader = () => {
               changeLinkColorCondition={notTriggeredCase}
             />
 
-            {/*<HeaderMenu*/}
-            {/*  changeMenuButton={changeMenuButton}*/}
-            {/*  onClick={toggleLeftDrawerHandler}*/}
-            {/*  notTriggeredCase={notTriggeredCase}*/}
-            {/*  triggeredCase={triggeredCase}*/}
-            {/*  hideCategories={hideCategories}*/}
-            {/*  smallScreenMatch={smallScreenMatch}*/}
-            {/*  extraSmallScreenMatch={extraSmallScreenMatch}*/}
-            {/*  onClick1={toggleRightDrawerHandler}*/}
-            {/*  badgeContent={numberOfCartItems}*/}
-            {/*  hideCart={hideCart}*/}
-            {/*  changeCartToFullWidth={changeCartToFullWidth}*/}
-            {/*/>*/}
             <Box component="nav" className="container-fluid">
               <Box className="row align-items-center">
                 <div className="col-lg-3 col-2">
@@ -233,6 +262,86 @@ const ShopHeader = () => {
                 </div>
                 <Box className="col-lg-3 col-2">
                   <Box sx={{ textAlign: "right" }}>
+                    {loggedIn && (
+                      <>
+                        <IconButton
+                          color="customTransparent"
+                          size={smallScreenMatch ? "large" : "medium"}
+                          sx={{
+                            color: normalHeaderCondition
+                              ? "#321e1e"
+                              : "#f4f1e0",
+                            transition: "all 0.3s",
+                          }}
+                          onClick={handleClick}
+                        >
+                          <PersonIcon />
+                        </IconButton>
+                        <Menu
+                          id="basic-menu"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                          MenuListProps={{
+                            "aria-labelledby": "basic-button",
+                          }}
+                          disableScrollLock
+                        >
+                          {isAdmin && (
+                            <MenuItem
+                              component={Link}
+                              href="http://localhost:3001/"
+                              onClick={handleClose}
+                            >
+                              Trang Admin
+                            </MenuItem>
+                          )}
+
+                          <MenuItem
+                            component={NavLink}
+                            to="/user/account/profile"
+                            onClick={handleClose}
+                          >
+                            Hồ sơ tài khoản
+                          </MenuItem>
+                          <MenuItem
+                            component={NavLink}
+                            to="/user/orders"
+                            onClick={handleClose}
+                          >
+                            Đơn hàng của tôi
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              const userToken = JSON.parse(
+                                localStorage.getItem("personalAccessToken")
+                              );
+                              apiClient.get("/sanctum/csrf-cookie").then(() => {
+                                apiClient
+                                  .post(
+                                    "/logout",
+                                    {},
+                                    {
+                                      headers: {
+                                        Authorization: `Bearer ${userToken}`,
+                                      },
+                                    }
+                                  )
+                                  .then((response) => {
+                                    console.log(response);
+                                    setLoggedOut();
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
+                              });
+                            }}
+                          >
+                            Đăng xuất
+                          </MenuItem>
+                        </Menu>
+                      </>
+                    )}
                     <IconButton
                       color="customTransparent"
                       size={smallScreenMatch ? "large" : "medium"}

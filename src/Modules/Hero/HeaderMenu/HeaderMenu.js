@@ -1,7 +1,7 @@
 // React imports
 import * as PropTypes from "prop-types";
 import * as React from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Source imports
 import EmptyCart from "./EmptyCart/EmptyCart";
@@ -26,22 +26,65 @@ import { Menu } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import AuthContext from "../../../store/auth-context";
 import apiClient from "../../../api";
+import Link from "@mui/material/Link";
+import SearchBox from "../../SearchBox/SearchBox";
 
 export default function HeaderMenu(props) {
   const { loggedIn, setLoggedOut } = useContext(AuthContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
+  const openMenu = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const [openSearch, setOpenSearch] = React.useState(false);
+
+  const handleSearchClickOpen = () => {
+    setOpenSearch(true);
+  };
+
+  const handleSearchClose = () => {
+    setOpenSearch(false);
+  };
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (loggedIn) {
+      apiClient.get("/sanctum/csrf-cookie").then(() => {
+        const userToken = JSON.parse(
+          localStorage.getItem("personalAccessToken")
+        );
+        apiClient
+          .get("api/user-is-admin", {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              Hashed:
+                "$2y$10$TDNaEhzST7979Sj6JQtSc.8kSZhQuQlfgkQ0IrIv/Tp4D7R04aeqq",
+            },
+          })
+          .then((response) => {
+            if (response.status === 204) {
+              setIsAdmin(true);
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              setIsAdmin(false);
+            }
+          });
+      });
+    }
+  }, [loggedIn]);
+
   return (
     <Box component="nav" className="container-fluid">
       <Box className="row align-items-center">
-        <div className="col-lg-3 col-2">
+        <div className="col-lg-4 col-3">
           <div>
             {props.changeMenuButton ? (
               <Button
@@ -84,7 +127,7 @@ export default function HeaderMenu(props) {
             )}
           </div>
         </div>
-        <div className="col-lg-6 col-8">
+        <div className="col-lg-4 col-6">
           <Box
             sx={{
               padding: "30px 0",
@@ -119,8 +162,10 @@ export default function HeaderMenu(props) {
             </NavLink>
           </Box>
         </div>
-        <Box className="col-lg-3 col-2">
+        <Box className="col-lg-4 col-3">
           <Box sx={{ textAlign: "right" }}>
+            <SearchBox />
+
             {loggedIn && (
               <>
                 <IconButton
@@ -133,31 +178,41 @@ export default function HeaderMenu(props) {
                         : "#321e1e",
                     transition: "all 0.3s",
                   }}
-                  onClick={handleClick}
+                  onClick={handleMenuClick}
                 >
                   <PersonIcon />
                 </IconButton>
                 <Menu
                   id="basic-menu"
                   anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
+                  open={openMenu}
+                  onClose={handleMenuClose}
                   MenuListProps={{
                     "aria-labelledby": "basic-button",
                   }}
                   disableScrollLock
                 >
+                  {isAdmin && (
+                    <MenuItem
+                      component={Link}
+                      href="http://localhost:3001/"
+                      onClick={handleMenuClose}
+                    >
+                      Trang Admin
+                    </MenuItem>
+                  )}
+
                   <MenuItem
                     component={NavLink}
                     to="/user/account/profile"
-                    onClick={handleClose}
+                    onClick={handleMenuClose}
                   >
                     Hồ sơ tài khoản
                   </MenuItem>
                   <MenuItem
                     component={NavLink}
                     to="/user/orders"
-                    onClick={handleClose}
+                    onClick={handleMenuClose}
                   >
                     Đơn hàng của tôi
                   </MenuItem>

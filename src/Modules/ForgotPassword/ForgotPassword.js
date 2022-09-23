@@ -1,13 +1,9 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -69,10 +65,10 @@ const ForgotPassword = (props) => {
               <Link
                 onClick={props.closeModalHandler}
                 component={RouterLink}
-                to="/forgotpassword"
+                to="/signin"
                 variant="body2"
               >
-                Quên mật khẩu
+                Đăng nhập
               </Link>
             </Grid>
             <Grid item>

@@ -44,8 +44,8 @@ const defaultCartState = {
 
 const CartProvider = (props) => {
   const [cartState, setCartState] = useState(defaultCartState);
-  const {loggedIn} = useContext(AuthContext);
-
+  const authCtx = useContext(AuthContext);
+  const loggedIn = authCtx.loggedIn;
   /////////////////////////////////////////
   // GET CART ITEMS FROM SESSION IF USER IS NOT LOGGED IN
   // OR USER HAS NOT REGISTERED
@@ -107,67 +107,67 @@ const CartProvider = (props) => {
       // getCartFromServer();
       apiClient.get("/sanctum/csrf-cookie").then(() => {
         const userToken = JSON.parse(
-            localStorage.getItem("personalAccessToken")
+          localStorage.getItem("personalAccessToken")
         );
         apiClient
-            .get("api/user-cart", {
-              headers: {
-                Authorization: `Bearer ${userToken}`,
-              },
-            })
-            .then((response) => {
-              const userCartItems = response.data.itemsInCart.map((item) => {
-                // console.log(response);
-                const {
-                  id: cartIdFromServer,
-                  product_id: productId,
-                  model_id: modelId,
-                  image_1: productImgUrl,
-                  name: productName,
-                  price: productPrice,
-                  quantity: productQuantity,
-                } = item;
+          .get("api/user-cart", {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then((response) => {
+            const userCartItems = response.data.itemsInCart.map((item) => {
+              // console.log(response);
+              const {
+                id: cartIdFromServer,
+                product_id: productId,
+                model_id: modelId,
+                image_1: productImgUrl,
+                name: productName,
+                price: productPrice,
+                quantity: productQuantity,
+              } = item;
 
-                return new ProductStateToAddToCart(
-                    productId,
-                    modelId,
-                    backendServerPath + productImgUrl,
-                    productName,
-                    productPrice,
-                    productQuantity,
-                    cartIdFromServer
-                );
-              });
-              userCartItems.forEach(reAssignCartId());
-              // console.log(userCartItems);
-
-              if (trigger) {
-                const newState = {...cartState};
-                newState.items = userCartItems;
-                newState.totalMoney = calculateTotalMoney(newState.items);
-                setCartState(newState);
-                setTrigger(false);
-              } else {
-                setCartState((prevState) => {
-                  prevState.items = userCartItems;
-                  prevState.totalMoney = calculateTotalMoney(userCartItems);
-
-                  return prevState;
-                });
-              }
-            })
-            .catch((err) => {
-              console.log(err);
+              return new ProductStateToAddToCart(
+                productId,
+                modelId,
+                backendServerPath + productImgUrl,
+                productName,
+                productPrice,
+                productQuantity,
+                cartIdFromServer
+              );
             });
+            userCartItems.forEach(reAssignCartId());
+            // console.log(userCartItems);
+
+            if (trigger) {
+              const newState = { ...cartState };
+              newState.items = userCartItems;
+              newState.totalMoney = calculateTotalMoney(newState.items);
+              setCartState(newState);
+              setTrigger(false);
+            } else {
+              setCartState((prevState) => {
+                prevState.items = userCartItems;
+                prevState.totalMoney = calculateTotalMoney(userCartItems);
+
+                return prevState;
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     }
   }, [loggedIn, cartState, trigger]);
 
-  console.log(cartState);
+  console.log(loggedIn);
   /////////////////////////////////////////
   // HANDLERS
   const addItemToCartHandler = (item) => {
-    const newState = {...cartState};
+    const newState = { ...cartState };
 
     let alreadyInCart = false;
 
@@ -199,10 +199,10 @@ const CartProvider = (props) => {
   };
 
   const removeItemFromCartHandler = (id) => {
-    const newState = {...cartState};
+    const newState = { ...cartState };
 
     const cartItemIdToDelete = newState.items.find(
-        (item) => item.cartId === id
+      (item) => item.cartId === id
     ).cartIdFromServer;
 
     newState.items = newState.items.filter(removeItemFromCart(id));
@@ -285,7 +285,7 @@ const CartProvider = (props) => {
       items: [],
       totalMoney: 0,
     });
-  }
+  };
 
   /////////////////////////////////////////
   // SETTING CONTEXT'S VALUES
@@ -301,9 +301,9 @@ const CartProvider = (props) => {
   };
 
   return (
-      <CartContext.Provider value={cartContext}>
-        {props.children}
-      </CartContext.Provider>
+    <CartContext.Provider value={cartContext}>
+      {props.children}
+    </CartContext.Provider>
   );
 };
 export default CartProvider;

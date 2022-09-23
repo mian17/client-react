@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useContext, useState } from "react";
 
 import CartContext from "../store/cart-context";
@@ -7,7 +8,6 @@ import CategoryDrawer from "../Modules/Hero/CategoryDrawer/CategoryDrawer";
 import HeaderTop from "../Modules/Hero/HeaderTop/HeaderTop";
 import HeaderMenu from "../Modules/Hero/HeaderMenu/HeaderMenu";
 import AppBar from "@mui/material/AppBar";
-import * as React from "react";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -72,8 +72,6 @@ const Header = () => {
     ((headerBackgroundIndex || headerBackgroundIndex === 0) &&
       smallScreenMatch &&
       trigger);
-
-  // const [linkInDrawerHovered, setLinkInDrawerHovered] = useState(false);
 
   return (
     <Box component="header">

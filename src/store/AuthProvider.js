@@ -20,7 +20,11 @@ const AuthProvider = (props) => {
   };
   const setLoggedOutHandler = () => {
     localStorage.removeItem("personalAccessToken");
-    setAuthState(authDefaultState);
+    localStorage.removeItem("loggedIn");
+    setAuthState({
+      loggedIn: false,
+      personalAccessToken: "",
+    });
   };
 
   useEffect(() => {

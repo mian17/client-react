@@ -16,8 +16,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -78,19 +76,24 @@ const SignInMobile = (props) => {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Lưu mật khẩu"
-          />
-          {errors !== null &&
-            errors.length > 0 &&
-            errors.map((error, index) => {
-              return (
-                <Typography key={index} variant="subtitle1" color="red">
-                  {error}
-                </Typography>
-              );
-            })}
+          {/*<FormControlLabel*/}
+          {/*  control={<Checkbox value="remember" color="primary" />}*/}
+          {/*  label="Lưu mật khẩu"*/}
+          {/*/>*/}
+          {/*{errors !== null &&*/}
+          {/*  errors.length > 1 &&*/}
+          {/*  errors.map((error, index) => {*/}
+          {/*    return (*/}
+          {/*      <Typography key={index} variant="subtitle1" color="red">*/}
+          {/*        {error}*/}
+          {/*      </Typography>*/}
+          {/*    );*/}
+          {/*  })}*/}
+          {errors !== null && typeof errors === "string" && (
+            <Typography variant="subtitle1" color="red">
+              {errors}
+            </Typography>
+          )}
 
           <Button
             type="submit"

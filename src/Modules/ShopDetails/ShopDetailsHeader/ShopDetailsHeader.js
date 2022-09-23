@@ -1,9 +1,8 @@
+import * as React from "react";
 import { useContext, useEffect, useRef, useState } from "react";
 import CartContext from "../../../store/cart-context";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import * as React from "react";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import CategoryDrawer from "../../Hero/CategoryDrawer/CategoryDrawer";
 import Button from "@mui/material/Button";
@@ -17,7 +16,12 @@ import Drawer from "@mui/material/Drawer";
 import CloseIcon from "@mui/icons-material/Close";
 import EmptyCart from "../../Hero/HeaderMenu/EmptyCart/EmptyCart";
 import Cart from "../../Hero/HeaderMenu/Cart/Cart";
-import SubcategoryCollection from "../../Shop/ShopBanner/SubcategoryCollection/SubcategoryCollection";
+import PersonIcon from "@mui/icons-material/Person";
+import { Menu } from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import Link from "@mui/material/Link";
+import apiClient from "../../../api";
+import AuthContext from "../../../store/auth-context";
 
 const ShopDetailsHeader = () => {
   const cartCtx = useContext(CartContext);
@@ -76,14 +80,39 @@ const ShopDetailsHeader = () => {
 
   const navBarHeightRef = useRef();
   const [appBarBoxHeight, setAppBarBoxHeight] = useState(0);
-
+  const { loggedIn, setLoggedOut } = useContext(AuthContext);
   useEffect(() => {
     setAppBarBoxHeight(navBarHeightRef.current.clientHeight);
+    if (loggedIn) {
+      apiClient.get("/sanctum/csrf-cookie").then(() => {
+        const userToken = JSON.parse(
+          localStorage.getItem("personalAccessToken")
+        );
+        apiClient
+          .get("api/user-is-admin", {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              Hashed:
+                "$2y$10$TDNaEhzST7979Sj6JQtSc.8kSZhQuQlfgkQ0IrIv/Tp4D7R04aeqq",
+            },
+          })
+          .then((response) => {
+            if (response.status === 204) {
+              setIsAdmin(true);
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              setIsAdmin(false);
+            }
+          });
+      });
+    }
 
     return function cleanup() {
       setAppBarBoxHeight(0);
     };
-  }, [setAppBarBoxHeight, appBarBoxHeight]);
+  }, [setAppBarBoxHeight, appBarBoxHeight, loggedIn]);
 
   const normalHeaderCondition =
     hideCategories ||
@@ -103,6 +132,15 @@ const ShopDetailsHeader = () => {
   //     (headerBackgroundIndex || headerBackgroundIndex === 0) &&
   //     !hideCategories
   //   );
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -211,6 +249,86 @@ const ShopDetailsHeader = () => {
                 </div>
                 <Box className="col-lg-3 col-2">
                   <Box sx={{ textAlign: "right" }}>
+                    {loggedIn && (
+                      <>
+                        <IconButton
+                          color="customTransparent"
+                          size={smallScreenMatch ? "large" : "medium"}
+                          sx={{
+                            color: normalHeaderCondition
+                              ? "#321e1e"
+                              : "#f4f1e0",
+                            transition: "all 0.3s",
+                          }}
+                          onClick={handleClick}
+                        >
+                          <PersonIcon />
+                        </IconButton>
+                        <Menu
+                          id="basic-menu"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleClose}
+                          MenuListProps={{
+                            "aria-labelledby": "basic-button",
+                          }}
+                          disableScrollLock
+                        >
+                          {isAdmin && (
+                            <MenuItem
+                              component={Link}
+                              href="http://localhost:3001/"
+                              onClick={handleClose}
+                            >
+                              Trang Admin
+                            </MenuItem>
+                          )}
+
+                          <MenuItem
+                            component={NavLink}
+                            to="/user/account/profile"
+                            onClick={handleClose}
+                          >
+                            Hồ sơ tài khoản
+                          </MenuItem>
+                          <MenuItem
+                            component={NavLink}
+                            to="/user/orders"
+                            onClick={handleClose}
+                          >
+                            Đơn hàng của tôi
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              const userToken = JSON.parse(
+                                localStorage.getItem("personalAccessToken")
+                              );
+                              apiClient.get("/sanctum/csrf-cookie").then(() => {
+                                apiClient
+                                  .post(
+                                    "/logout",
+                                    {},
+                                    {
+                                      headers: {
+                                        Authorization: `Bearer ${userToken}`,
+                                      },
+                                    }
+                                  )
+                                  .then((response) => {
+                                    console.log(response);
+                                    setLoggedOut();
+                                  })
+                                  .catch((err) => {
+                                    console.log(err);
+                                  });
+                              });
+                            }}
+                          >
+                            Đăng xuất
+                          </MenuItem>
+                        </Menu>
+                      </>
+                    )}
                     <IconButton
                       color="customTransparent"
                       size={smallScreenMatch ? "large" : "medium"}

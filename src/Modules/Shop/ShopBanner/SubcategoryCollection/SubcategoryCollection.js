@@ -56,12 +56,15 @@ export default function SubcategoryCollection(props) {
       }
       centered={!props.laptopScreenMatch && categories.length < 8}
       textColor={props.onScrollTrigger ? "primary" : "secondary"}
-      // indicatorColor="transparentText"
       sx={{ display: "flex" }}
       TabScrollButtonProps={{
         sx: { color: props.onScrollTrigger ? "#321e1e" : "#f4f1e0" },
       }}
-      indicatorColor={props.onScrollTrigger ? "primary" : "secondary"}
+      // indicatorColor={props.onScrollTrigger ? "primary" : "secondary"}
+      // indicatorColor="customTransparent"
+      TabIndicatorProps={{
+        style: { display: "none" },
+      }}
       scrollButtons={true}
       allowScrollButtonsMobile
     >

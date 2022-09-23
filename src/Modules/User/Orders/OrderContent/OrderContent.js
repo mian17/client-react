@@ -209,7 +209,7 @@ const OrderContent = () => {
         content={alertContent.content}
         action={alertContent.action}
         selectedOrderId={alertContent.selectedOrderId}
-        onClickResetComponent={onClickResetComponent}
+        // onClickResetComponent={onClickResetComponent}
       />
 
       <TabPanel value={tabValue} index={0}>

@@ -27,13 +27,14 @@ export default function signInHandler(
         }
       })
       .catch((err) => {
-        if (err.response) {
-          const errorsObj = err.response.data.errors;
-          const errorArr = [];
-          for (const property in errorsObj) {
-            errorArr.push(errorsObj[property]);
-          }
-          setErrors(errorArr);
+        console.log(err);
+        if (err) {
+          const errorMessage = err.response.data.message;
+          // const errorArr = [];
+          // for (const property in errorsObj) {
+          //   errorArr.push(errorsObj[property]);
+          // }
+          setErrors(errorMessage);
         }
       });
   });
