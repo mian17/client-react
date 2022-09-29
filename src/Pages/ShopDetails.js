@@ -24,7 +24,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ShopDetailsHeader from "../Modules/ShopDetails/ShopDetailsHeader/ShopDetailsHeader";
 import ShopDetailsYouMayLike from "../Modules/ShopDetails/ShopDetailsYouMayLike/ShopDetailsYouMayLike";
 import apiClient from "../api";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProductStateToAddToCart from "../Modules/Product/ProductItemInfo/utils/productStateToAddToCart";
 import { backendServerPath } from "../Modules/common/utils/backendServerPath";
 import CartContext from "../store/cart-context";
@@ -178,9 +178,10 @@ const ShopDetails = () => {
     fetchProductData();
   }, [fetchProductData]);
 
-  const { pathname } = useLocation();
-  console.log(pathname);
+  // const { pathname } = useLocation();
+  // console.log(pathname);
 
+  // console.log(gallery);
   return (
     <Box>
       <ShopDetailsHeader />
@@ -219,7 +220,7 @@ const ShopDetails = () => {
                     // src={url}
                     // alt={""}
                     style={{
-                      background: `url(${url}) no-repeat center/cover`,
+                      background: `url("${url}") no-repeat center/cover`,
                       minHeight: "400px",
                       minWidth: "400px",
                     }}

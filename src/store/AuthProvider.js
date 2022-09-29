@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 // Source imports
 import AuthContext from "./auth-context";
+import { useNavigate } from "react-router-dom";
 
 const authDefaultState = {
   loggedIn: localStorage.getItem("loggedIn")
@@ -12,6 +13,8 @@ const authDefaultState = {
 };
 const AuthProvider = (props) => {
   const [authState, setAuthState] = useState(authDefaultState);
+
+  const navigate = useNavigate();
 
   /////////////////////////////////////////
   // HANDLERS
@@ -25,6 +28,7 @@ const AuthProvider = (props) => {
       loggedIn: false,
       personalAccessToken: "",
     });
+    navigate(0);
   };
 
   useEffect(() => {
