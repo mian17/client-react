@@ -100,7 +100,7 @@ const CategoryDrawer = (props) => {
       <Paper component="section" elevation={0} sx={paperSx} square>
         {backgrounds.map((background, index) => {
           const backgroundRemoveOnMediaQuery = removeBackgroundMatch
-            ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${background.imgUrl})`
+            ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("${background.imgUrl}")`
             : "#f4f1e0";
           return (
             <Box

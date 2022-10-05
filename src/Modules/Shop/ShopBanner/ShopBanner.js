@@ -42,7 +42,7 @@ const ShopBanner = () => {
     useState(null);
   const [currentParentCategoryTitle, setCurrentParentCategoryTitle] =
     useState(null);
-
+  console.log(currentParentCategoryImage);
   const { id: categoryId } = useParams();
   const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
 
@@ -88,7 +88,7 @@ const ShopBanner = () => {
         borderBottom: `1px solid ${
           hideSocialMediaLinks ? "transparent" : "#321e1e"
         }`,
-        backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url(${currentParentCategoryImage})`,
+        backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url("${currentParentCategoryImage}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "72vh",
