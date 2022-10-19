@@ -14,7 +14,6 @@ import Profile from "../Modules/User/Account/AccountContent/Profile/Profile";
 // import Address from "../Modules/User/Account/AccountContent/Address/Address";
 import ChangePassword from "../Modules/User/Account/AccountContent/ChangePassword/ChangePassword";
 import Orders from "../Modules/User/Orders/Orders";
-import Notifications from "../Modules/User/Notification/Notifications";
 import ShopDetailsHeader from "../Modules/ShopDetails/ShopDetailsHeader/ShopDetailsHeader";
 import AuthContext from "../store/auth-context";
 import Footer from "./Footer";
@@ -83,7 +82,7 @@ const Content = () => {
           </Route>
 
           <Route path="/user/orders" element={<Orders />} />
-          <Route path="/user/notifications" element={<Notifications />} />
+          {/*<Route path="/user/notifications" element={<Notifications />} />*/}
         </Route>
 
         <Route path="/thank-you" element={<ThankYou />} />

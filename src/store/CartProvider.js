@@ -163,7 +163,7 @@ const CartProvider = (props) => {
     }
   }, [loggedIn, cartState, trigger]);
 
-  console.log(loggedIn);
+  // console.log(loggedIn);
   /////////////////////////////////////////
   // HANDLERS
   const addItemToCartHandler = (item) => {

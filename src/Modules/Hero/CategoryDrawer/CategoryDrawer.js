@@ -163,6 +163,7 @@ const CategoryDrawer = (props) => {
                   }}
                   data-category={category.id}
                   onMouseEnter={props.getCategoryId}
+                  onClick={props.toggleLeftDrawerHandler}
                 >
                   <ListItemText
                     primaryTypographyProps={primaryTypographyProps}

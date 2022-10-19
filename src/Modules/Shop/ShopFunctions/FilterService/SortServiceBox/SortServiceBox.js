@@ -3,14 +3,15 @@ import FormControl from "@mui/material/FormControl";
 import { FormLabel, Radio, RadioGroup } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import * as PropTypes from "prop-types";
 import { useState } from "react";
 
 export default function SortServiceBox(props) {
   const [filteredValue, setFilteredValue] = useState(null);
   const radioButtonChangeHandler = (event) => {
     setFilteredValue(event.target.value);
+    props.getFilterValue(event.target.value);
   };
+  // console.log(filteredValue);
   return (
     <Grid
       lg={2}
@@ -38,18 +39,18 @@ export default function SortServiceBox(props) {
           onChange={radioButtonChangeHandler}
           name="radio-buttons-group"
         >
+          {/*<FormControlLabel*/}
+          {/*  value="notable"*/}
+          {/*  control={<Radio />}*/}
+          {/*  label="Nổi bật"*/}
+          {/*/>*/}
           <FormControlLabel
-            value="featured"
-            control={<Radio />}
-            label="Nổi bật"
-          />
-          <FormControlLabel
-            value="low-to-high"
+            value="asc"
             control={<Radio />}
             label="Giá từ thấp đến cao"
           />
           <FormControlLabel
-            value="high-to-low"
+            value="desc"
             control={<Radio />}
             label="Giá từ cao đến thấp"
           />

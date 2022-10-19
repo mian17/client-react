@@ -25,6 +25,7 @@ const Header = () => {
   const [hideCart, setHideCart] = useState(true);
 
   const toggleLeftDrawerHandler = () => {
+    // console.log("clicked");
     setHideCategories(!hideCategories);
     setTimeout(() => {
       setHeaderBackgroundIndex(undefined);
@@ -87,6 +88,7 @@ const Header = () => {
       >
         <CategoryDrawer
           hideCategories={hideCategories}
+          toggleLeftDrawerHandler={toggleLeftDrawerHandler}
           getCategoryId={changeHeaderBackgroundHandler}
           headerBackgroundIndex={headerBackgroundIndex}
           changeLinkColorCondition={notTriggeredCase || triggeredCase}

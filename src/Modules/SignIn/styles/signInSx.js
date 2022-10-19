@@ -6,6 +6,6 @@ export const signInSx = {
   position: "relative",
 };
 
-export const avatarSx = { m: 1, bgcolor: "secondary.main" };
+export const avatarSx = { m: 1, bgcolor: "#321e1e" };
 
 export const signInFormSx = { mt: 1 };

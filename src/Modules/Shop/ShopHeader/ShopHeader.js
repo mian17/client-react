@@ -25,6 +25,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
 import apiClient from "../../../api";
 import AuthContext from "../../../store/auth-context";
+import SearchDialog from "../../Modal/SearchDialog";
 
 const ShopHeader = () => {
   const cartCtx = useContext(CartContext);
@@ -39,10 +40,10 @@ const ShopHeader = () => {
   const [hideCart, setHideCart] = useState(true);
 
   const toggleLeftDrawerHandler = () => {
-    setHideCategories(!hideCategories);
     setTimeout(() => {
       setHeaderBackgroundIndex(undefined);
-    }, 10);
+      setHideCategories(!hideCategories);
+    }, 100);
   };
 
   const toggleRightDrawerHandler = () => {
@@ -167,7 +168,7 @@ const ShopHeader = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const phoneScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
       <Box sx={{ height: appBarBoxHeight }}></Box>
@@ -187,13 +188,14 @@ const ShopHeader = () => {
             <CategoryDrawer
               hideCategories={hideCategories}
               getCategoryId={changeHeaderBackgroundHandler}
+              toggleLeftDrawerHandler={toggleLeftDrawerHandler}
               headerBackgroundIndex={headerBackgroundIndex}
               changeLinkColorCondition={notTriggeredCase}
             />
 
             <Box component="nav" className="container-fluid">
               <Box className="row align-items-center">
-                <div className="col-lg-3 col-2">
+                <div className="col-lg-4 col-md-3 col-2">
                   <div>
                     {changeMenuButton ? (
                       <Button
@@ -230,7 +232,7 @@ const ShopHeader = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-lg-6 col-8">
+                <div className="col-lg-4 col-md-6 col-5">
                   <Box
                     sx={{
                       padding: "30px 0",
@@ -255,13 +257,18 @@ const ShopHeader = () => {
                           transition: "all 0.3s",
                         }}
                       >
-                        Wieder_ Markt
+                        {!phoneScreenMatch ? "Wieder_ Markt" : "W_Markt"}
                       </Typography>
                     </NavLink>
                   </Box>
                 </div>
-                <Box className="col-lg-3 col-2">
+                <Box className="col-lg-4 col-md-3 col-5">
                   <Box sx={{ textAlign: "right" }}>
+                    <SearchDialog
+                      smallScreenMatch={smallScreenMatch}
+                      notTriggeredCase={!normalHeaderCondition}
+                      triggeredCase={!normalHeaderCondition}
+                    />
                     {loggedIn && (
                       <>
                         <IconButton

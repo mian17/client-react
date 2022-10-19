@@ -42,7 +42,7 @@ const ShopBanner = () => {
     useState(null);
   const [currentParentCategoryTitle, setCurrentParentCategoryTitle] =
     useState(null);
-  console.log(currentParentCategoryImage);
+  // console.log(currentParentCategoryImage);
   const { id: categoryId } = useParams();
   const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
 

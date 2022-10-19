@@ -5,7 +5,7 @@ body {
   /*height: 100%;*/
   /*font-family: 'Cairo', sans-serif;*/
   font-family: 'Inter', sans-serif;
-  background-color: #f4f1e0;
+  background-color: #f4f1e0 !important;
 
   /*previously there was no background color*/
 }

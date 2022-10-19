@@ -40,6 +40,7 @@ const OrderItem = (props) => {
         paddingX: 4,
         paddingY: 4,
         marginBottom: 2,
+        // backgroundColor: "#eee",
       }}
     >
       <OrderStatusBar order={props.order} />

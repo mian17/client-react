@@ -39,7 +39,7 @@ const ShopProductListing = (props) => {
     setError(null);
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/category/${categoryId}/product?page=${pagePos}`
+        `http://127.0.0.1:8000/api/category/${categoryId}/product?page=${pagePos}&filter=${props.filteredState}`
       );
       if (!response.ok) {
         throw new Error("Không lấy được dữ liệu");
@@ -50,7 +50,7 @@ const ShopProductListing = (props) => {
       setPageNum(data.pagination.last_page);
 
       const productsReceived = data.pagination.data;
-      console.log(productsReceived);
+      // console.log(productsReceived);
 
       const transformedProductData = productsReceived.map(
         productListingPartition
@@ -61,7 +61,7 @@ const ShopProductListing = (props) => {
       setError(error.message);
     }
     setIsLoading(false);
-  }, [categoryId, id, pagePos]);
+  }, [categoryId, id, pagePos, props.filteredState]);
 
   // Request products
   useEffect(() => {

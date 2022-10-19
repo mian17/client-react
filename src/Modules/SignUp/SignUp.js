@@ -14,10 +14,15 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { FormLabel, Radio, RadioGroup } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import apiClient from "../../api";
+import { DatePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 export default function SignUp() {
   let navigate = useNavigate();
   const [userIsRegistered, setUserIsRegistered] = useState(false);
+
+  const [birthDate, setBirthDate] = React.useState(null);
+  const [error, setError] = useState(null);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +30,7 @@ export default function SignUp() {
       console.log("Bạn nhập sai mật khẩu");
       return;
     }
+    const transformedBirthDate = dayjs(birthDate).format("YYYY-MM-DD");
     const userInput = {
       username: data.get("username"),
       password: data.get("password"),
@@ -32,7 +38,8 @@ export default function SignUp() {
       email: data.get("email"),
       phone_number: data.get("phoneNumber"),
       name: data.get("fullName"),
-      birth_date: data.get("birthDate"),
+      // birth_date: data.get("birthDate"),
+      birth_date: transformedBirthDate,
       gender: data.get("gender"),
       address: data.get("address"),
       role_id: 3, // Customer role id
@@ -48,10 +55,15 @@ export default function SignUp() {
           );
           navigate("/");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          alert(err.response.data.message);
+        });
     });
   };
-
+  const [loading, setLoading] = React.useState(false);
+  function loadingHandler() {
+    setLoading(true);
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -134,13 +146,24 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/*<TextField*/}
+              {/*  required*/}
+              {/*  fullWidth*/}
+              {/*  name="birthDate"*/}
+              {/*  label="Ngày tháng năm sinh"*/}
+              {/*  type="text"*/}
+              {/*  id="birthDate"*/}
+              {/*/>*/}
+              <DatePicker
+                value={birthDate}
                 required
-                fullWidth
                 name="birthDate"
-                label="Ngày tháng năm sinh"
-                type="text"
                 id="birthDate"
+                label="Ngày tháng năm sinh"
+                onChange={(newValue) => {
+                  setBirthDate(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} fullWidth />}
               />
             </Grid>
             <Grid item xs={12}>
@@ -187,6 +210,7 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
             Đăng ký
           </Button>

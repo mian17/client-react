@@ -22,8 +22,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
 import apiClient from "../../../api";
 import AuthContext from "../../../store/auth-context";
+import SearchDialog from "../../Modal/SearchDialog";
 
-const ShopDetailsHeader = () => {
+const ShopDetailsHeader = (props) => {
   const cartCtx = useContext(CartContext);
 
   // cartCtx operations
@@ -141,12 +142,19 @@ const ShopDetailsHeader = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const phoneScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
-      <Box sx={{ height: appBarBoxHeight }}></Box>
+      {!props.noFixed && <Box sx={{ height: appBarBoxHeight }}></Box>}
       <Box component="header">
-        <Box sx={{ position: "fixed", width: "100%", top: 0, zIndex: 200 }}>
+        <Box
+          sx={{
+            position: props.noFixed ? "" : "fixed",
+            width: "100%",
+            top: 0,
+            zIndex: 200,
+          }}
+        >
           <Box
             sx={{
               backgroundColor: normalHeaderCondition
@@ -180,44 +188,49 @@ const ShopDetailsHeader = () => {
             {/*/>*/}
             <Box component="nav" className="container-fluid">
               <Box className="row align-items-center">
-                <div className="col-lg-3 col-2">
+                <div className="col-lg-4 col-md-3 col-2">
                   <div>
-                    {changeMenuButton ? (
-                      <Button
-                        variant="contained"
-                        size="large"
-                        color="customTransparent"
-                        onClick={toggleLeftDrawerHandler}
-                        sx={{
-                          textTransform: "capitalize",
-                          minWidth: 140,
-                          backgroundColor: hideCategories
-                            ? "#f4f1e0"
-                            : "transparent",
+                    {!props.noFixed &&
+                      (changeMenuButton ? (
+                        <Button
+                          variant="contained"
+                          size="large"
+                          color="customTransparent"
+                          onClick={toggleLeftDrawerHandler}
+                          sx={{
+                            textTransform: "capitalize",
+                            minWidth: 140,
+                            backgroundColor: hideCategories
+                              ? "#f4f1e0"
+                              : "transparent",
 
-                          color: normalHeaderCondition ? "#321e1e" : "#f4f1e0",
-                          transition: "all 0.3s",
-                        }}
-                      >
-                        {hideCategories ? "Danh mục" : "Đóng menu"}
-                      </Button>
-                    ) : (
-                      <IconButton
-                        color="customTransparent"
-                        onClick={toggleLeftDrawerHandler}
-                        sx={{
-                          textTransform: "capitalize",
-                          color: normalHeaderCondition ? "#321e1e" : "#f4f1e0",
-                          transition: "all 0.3s",
-                        }}
-                        size={smallScreenMatch ? "large" : "medium"}
-                      >
-                        <MenuIcon />
-                      </IconButton>
-                    )}
+                            color: normalHeaderCondition
+                              ? "#321e1e"
+                              : "#f4f1e0",
+                            transition: "all 0.3s",
+                          }}
+                        >
+                          {hideCategories ? "Danh mục" : "Đóng menu"}
+                        </Button>
+                      ) : (
+                        <IconButton
+                          color="customTransparent"
+                          onClick={toggleLeftDrawerHandler}
+                          sx={{
+                            textTransform: "capitalize",
+                            color: normalHeaderCondition
+                              ? "#321e1e"
+                              : "#f4f1e0",
+                            transition: "all 0.3s",
+                          }}
+                          size={smallScreenMatch ? "large" : "medium"}
+                        >
+                          <MenuIcon />
+                        </IconButton>
+                      ))}
                   </div>
                 </div>
-                <div className="col-lg-6 col-8">
+                <div className="col-lg-4 col-md-6 col-5">
                   <Box
                     sx={{
                       padding: "30px 0",
@@ -242,13 +255,18 @@ const ShopDetailsHeader = () => {
                           transition: "all 0.3s",
                         }}
                       >
-                        Wieder_ Markt
+                        {!phoneScreenMatch ? "Wieder_ Markt" : "W_Markt"}
                       </Typography>
                     </NavLink>
                   </Box>
                 </div>
-                <Box className="col-lg-3 col-2">
+                <Box className="col-lg-4 col-md-3 col-5">
                   <Box sx={{ textAlign: "right" }}>
+                    <SearchDialog
+                      smallScreenMatch={smallScreenMatch}
+                      notTriggeredCase={!normalHeaderCondition}
+                      triggeredCase={!normalHeaderCondition}
+                    />
                     {loggedIn && (
                       <>
                         <IconButton

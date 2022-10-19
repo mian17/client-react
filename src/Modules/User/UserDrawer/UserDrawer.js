@@ -11,7 +11,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PersonIcon from "@mui/icons-material/Person";
 import ListItemText from "@mui/material/ListItemText";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const drawerWidth = 240;
 
@@ -72,14 +71,14 @@ const UserDrawer = () => {
             <ListItemText primary="Đơn mua" />
           </ListItemButton>
         </Link>
-        <Link underline="none" component={NavLink} to="/user/notifications">
-          <ListItemButton>
-            <ListItemIcon>
-              <NotificationsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Thông báo" />
-          </ListItemButton>
-        </Link>
+        {/*<Link underline="none" component={NavLink} to="/user/notifications">*/}
+        {/*  <ListItemButton>*/}
+        {/*    <ListItemIcon>*/}
+        {/*      <NotificationsIcon />*/}
+        {/*    </ListItemIcon>*/}
+        {/*    <ListItemText primary="Thông báo" />*/}
+        {/*  </ListItemButton>*/}
+        {/*</Link>*/}
         {/*<Link underline="none" component={NavLink} to="/user/vouchers">*/}
         {/*  <ListItemButton>*/}
         {/*    <ListItemIcon>*/}
@@ -95,7 +94,12 @@ const UserDrawer = () => {
   );
   return (
     <>
-      <Drawer variant="permanent" open={true}>
+      <Drawer
+        variant="permanent"
+        open={true}
+        PaperProps={{ sx: { backgroundColor: "#f4f1e0" } }}
+        sx={{ zIndex: 1 }}
+      >
         {drawerContent}
       </Drawer>
       {/*<Button onClick={handleDrawerOpen} sx={{ display: "fixed" }} />*/}

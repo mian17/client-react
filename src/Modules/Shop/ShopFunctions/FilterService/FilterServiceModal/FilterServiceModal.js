@@ -14,7 +14,6 @@ import * as PropTypes from "prop-types";
 import * as React from "react";
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Grid from "@mui/material/Grid";
 
 export default function FilterServiceModal(props) {
   const laptopScreenMatch = useMediaQuery("(max-width: 707px)");
@@ -38,6 +37,11 @@ export default function FilterServiceModal(props) {
     setFilteredValue(event.target.value);
   };
 
+  function applyFilterHandler() {
+    props.getFilteredValue(filteredValue);
+    props.onClose();
+  }
+
   return (
     <Modal
       open={props.open}
@@ -60,84 +64,84 @@ export default function FilterServiceModal(props) {
           >
             <CloseIcon />
           </IconButton>
-          <Box sx={{ mb: 4 }}>
-            <Typography component="h4" variant="h4" fontFamily={"Libre Bodoni"}>
-              Lọc sản phẩm:
-            </Typography>
-            <Box sx={{ mb: 3 }}>
-              <Typography
-                component="h5"
-                variant="body"
-                fontFamily={"Libre Bodoni"}
-                sx={{ mt: 2, mb: 1 }}
-              >
-                Dịch vụ
-              </Typography>
-              <Box sx={{ display: "flex", gap: 2 }}>
-                {["Freeship", "Giao nhanh"].map((city, index) => {
-                  return (
-                    <Button
-                      key={index}
-                      sx={{
-                        textTransform: "capitalize",
+          {/*<Box sx={{ mb: 4 }}>*/}
+          {/*  <Typography component="h4" variant="h4" fontFamily={"Libre Bodoni"}>*/}
+          {/*    Lọc sản phẩm:*/}
+          {/*  </Typography>*/}
+          {/*  <Box sx={{ mb: 3 }}>*/}
+          {/*    <Typography*/}
+          {/*      component="h5"*/}
+          {/*      variant="body"*/}
+          {/*      fontFamily={"Libre Bodoni"}*/}
+          {/*      sx={{ mt: 2, mb: 1 }}*/}
+          {/*    >*/}
+          {/*      Dịch vụ*/}
+          {/*    </Typography>*/}
+          {/*    <Box sx={{ display: "flex", gap: 2 }}>*/}
+          {/*      {["Freeship", "Giao nhanh"].map((city, index) => {*/}
+          {/*        return (*/}
+          {/*          <Button*/}
+          {/*            key={index}*/}
+          {/*            sx={{*/}
+          {/*              textTransform: "capitalize",*/}
 
-                        fontSize: 14,
-                        px: 1,
-                        flexBasis: 120,
-                      }}
-                      variant="outlined"
-                    >
-                      {city}
-                    </Button>
-                  );
-                })}
-              </Box>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography
-                component="h5"
-                variant="body"
-                fontFamily={"Libre Bodoni"}
-                sx={{ mt: 2, mb: 1 }}
-              >
-                Nơi bán
-              </Typography>
-              <Grid container spacing={2}>
-                {["TP.HCM", "Hà Nội", "Cần Thơ", "Đà Nẵng", "Khánh Hòa"].map(
-                  (city, index) => {
-                    return (
-                      <Grid key={index} item>
-                        <Button
-                          sx={{
-                            textTransform: "capitalize",
-                            flexBasis: 120,
-                            fontSize: 14,
-                            px: 1,
-                          }}
-                          variant="outlined"
-                        >
-                          {city}
-                        </Button>
-                      </Grid>
-                    );
-                  }
-                )}
-                <Grid item>
-                  <Button
-                    sx={{
-                      textTransform: "capitalize",
-                      flexBasis: 120,
-                      fontSize: 14,
-                      px: 1,
-                    }}
-                    variant="outlined"
-                  >
-                    Xem thêm
-                  </Button>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
+          {/*              fontSize: 14,*/}
+          {/*              px: 1,*/}
+          {/*              flexBasis: 120,*/}
+          {/*            }}*/}
+          {/*            variant="outlined"*/}
+          {/*          >*/}
+          {/*            {city}*/}
+          {/*          </Button>*/}
+          {/*        );*/}
+          {/*      })}*/}
+          {/*    </Box>*/}
+          {/*  </Box>*/}
+          {/*  <Box sx={{ mb: 3 }}>*/}
+          {/*    <Typography*/}
+          {/*      component="h5"*/}
+          {/*      variant="body"*/}
+          {/*      fontFamily={"Libre Bodoni"}*/}
+          {/*      sx={{ mt: 2, mb: 1 }}*/}
+          {/*    >*/}
+          {/*      Nơi bán*/}
+          {/*    </Typography>*/}
+          {/*    <Grid container spacing={2}>*/}
+          {/*      {["TP.HCM", "Hà Nội", "Cần Thơ", "Đà Nẵng", "Khánh Hòa"].map(*/}
+          {/*        (city, index) => {*/}
+          {/*          return (*/}
+          {/*            <Grid key={index} item>*/}
+          {/*              <Button*/}
+          {/*                sx={{*/}
+          {/*                  textTransform: "capitalize",*/}
+          {/*                  flexBasis: 120,*/}
+          {/*                  fontSize: 14,*/}
+          {/*                  px: 1,*/}
+          {/*                }}*/}
+          {/*                variant="outlined"*/}
+          {/*              >*/}
+          {/*                {city}*/}
+          {/*              </Button>*/}
+          {/*            </Grid>*/}
+          {/*          );*/}
+          {/*        }*/}
+          {/*      )}*/}
+          {/*      <Grid item>*/}
+          {/*        <Button*/}
+          {/*          sx={{*/}
+          {/*            textTransform: "capitalize",*/}
+          {/*            flexBasis: 120,*/}
+          {/*            fontSize: 14,*/}
+          {/*            px: 1,*/}
+          {/*          }}*/}
+          {/*          variant="outlined"*/}
+          {/*        >*/}
+          {/*          Xem thêm*/}
+          {/*        </Button>*/}
+          {/*      </Grid>*/}
+          {/*    </Grid>*/}
+          {/*  </Box>*/}
+          {/*</Box>*/}
           <Box sx={{ mb: 3 }}>
             <FormControl>
               <FormLabel id="sort-by">
@@ -155,18 +159,18 @@ export default function FilterServiceModal(props) {
                 onChange={radioButtonChangeHandler}
                 name="radio-buttons-group"
               >
+                {/*<FormControlLabel*/}
+                {/*  value="notable"*/}
+                {/*  control={<Radio />}*/}
+                {/*  label="Nổi bật"*/}
+                {/*/>*/}
                 <FormControlLabel
-                  value="featured"
-                  control={<Radio />}
-                  label="Nổi bật"
-                />
-                <FormControlLabel
-                  value="low-to-high"
+                  value="asc"
                   control={<Radio />}
                   label="Giá từ thấp đến cao"
                 />
                 <FormControlLabel
-                  value="high-to-low"
+                  value="desc"
                   control={<Radio />}
                   label="Giá từ cao đến thấp"
                 />
@@ -179,7 +183,7 @@ export default function FilterServiceModal(props) {
             variant="contained"
             sx={{ mb: 2 }}
             fullWidth
-            onClick={props.onClose}
+            onClick={applyFilterHandler}
           >
             Áp dụng
           </Button>

@@ -1,13 +1,13 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {ButtonBase} from "@mui/material";
-import {useTheme} from "@mui/material/styles";
+import { ButtonBase } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {currencyFormatOptions} from "../../../utils/utils";
+import { currencyFormatOptions } from "../../../utils/utils";
 import ProductItemCategoricalList from "./ProductItemCategoricalList/ProductItemCategoricalList";
-import {useContext, useState} from "react";
+import { useContext, useState } from "react";
 import CartContext from "../../../store/cart-context";
-import {backendServerPath} from "../../common/utils/backendServerPath";
+import { backendServerPath } from "../../common/utils/backendServerPath";
 import ProductStateToAddToCart from "./utils/productStateToAddToCart";
 
 const ProductItemInfo = (props) => {
@@ -72,30 +72,30 @@ const ProductItemInfo = (props) => {
           : "",
         props.product.productKinds
           ? props.product.productKinds[position].name
-            : props.product.productName,
-          props.product.discountedPrice
-              ? props.product.discountedPrice
-              : props.product.price,
-          1
+          : props.product.productName,
+        props.product.discountedPrice
+          ? props.product.discountedPrice
+          : props.product.price,
+        1
       )
     );
   };
 
   const cartCtx = useContext(CartContext);
-  console.log(`Product props: ${props.product}`);
-  console.log(props.product);
-  console.log(`Selected product state:`);
-  console.log(selectedProduct);
+  // console.log(`Product props: ${props.product}`);
+  // console.log(props.product);
+  // console.log(`Selected product state:`);
+  // console.log(selectedProduct);
   return (
-      <Box
-          m={2}
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-end",
-            gap: 1,
-          }}
-      >
+    <Box
+      m={2}
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-end",
+        gap: 1,
+      }}
+    >
       <Box>
         <Typography
           component="h5"

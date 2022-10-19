@@ -19,7 +19,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
 import PersonIcon from "@mui/icons-material/Person";
-
 // React router dom imports
 import { NavLink } from "react-router-dom";
 import { Menu } from "@mui/material";
@@ -27,7 +26,9 @@ import MenuItem from "@mui/material/MenuItem";
 import AuthContext from "../../../store/auth-context";
 import apiClient from "../../../api";
 import Link from "@mui/material/Link";
-import SearchBox from "../../SearchBox/SearchBox";
+import SearchDialog from "../../Modal/SearchDialog";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export default function HeaderMenu(props) {
   const { loggedIn, setLoggedOut } = useContext(AuthContext);
@@ -80,11 +81,16 @@ export default function HeaderMenu(props) {
       });
     }
   }, [loggedIn]);
+  // Media Query for Close Menu Button
+  const theme = useTheme();
 
+  // Remove background changing effect on small devices
+  // and later on other effects too, such as hovering link to change text's color
+  const phoneScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box component="nav" className="container-fluid">
       <Box className="row align-items-center">
-        <div className="col-lg-4 col-3">
+        <div className="col-lg-4 col-md-3 col-2">
           <div>
             {props.changeMenuButton ? (
               <Button
@@ -127,7 +133,8 @@ export default function HeaderMenu(props) {
             )}
           </div>
         </div>
-        <div className="col-lg-4 col-6">
+
+        <div className="col-lg-4 col-md-6 col-5">
           <Box
             sx={{
               padding: "30px 0",
@@ -157,14 +164,31 @@ export default function HeaderMenu(props) {
                   transition: "all 0.3s",
                 }}
               >
-                Wieder_ Markt
+                {!phoneScreenMatch ? "Wieder_ Markt" : "W_Markt"}
               </Typography>
             </NavLink>
           </Box>
         </div>
-        <Box className="col-lg-4 col-3">
+        <Box className="col-lg-4 col-md-3 col-5">
           <Box sx={{ textAlign: "right" }}>
-            <SearchBox />
+            {/*<IconButton*/}
+            {/*  color="customTransparent"*/}
+            {/*  size={props.smallScreenMatch ? "large" : "medium"}*/}
+            {/*  sx={{*/}
+            {/*    color:*/}
+            {/*      props.notTriggeredCase || props.triggeredCase*/}
+            {/*        ? "#f4f1e0"*/}
+            {/*        : "#321e1e",*/}
+            {/*    transition: "all 0.3s",*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  <SearchIcon />*/}
+            {/*</IconButton>*/}
+            <SearchDialog
+              smallScreenMatch={props.smallScreenMatch}
+              notTriggeredCase={props.notTriggeredCase}
+              triggeredCase={props.triggeredCase}
+            />
 
             {loggedIn && (
               <>

@@ -1,11 +1,11 @@
 // Source imports
 
 import Grid from "@mui/material/Grid";
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
-import ShoppingFunctions from "../Modules/Shop/ShopFunctions/ShopFunctions";
+import ShopFunctions from "../Modules/Shop/ShopFunctions/ShopFunctions";
 
 import ShopProductListing from "../Modules/Shop/ShopProductListing/ShopProductListing";
 import SortServiceBox from "../Modules/Shop/ShopFunctions/FilterService/SortServiceBox/SortServiceBox";
@@ -45,11 +45,19 @@ const Shop = () => {
   //   setFilteredValue(event.target.value);
   // };
 
+  const [filteredState, setFilteredState] = useState("");
+
+  const getFilterValue = (val) => {
+    // console.log(val);
+    setFilteredState(val);
+  };
+
   return (
     <>
       <ShopHeader />
       <ShopBanner />
-      <ShoppingFunctions
+      <ShopFunctions
+        getFilterValue={getFilterValue}
         onClick={filterOnClickHandler}
         filterIsClicked={filterIsClicked}
         animatedIcon={animatedIcon}
@@ -58,18 +66,21 @@ const Shop = () => {
         filteredValueLabel={filteredValue}
       />
       <Grid container>
-        {!laptopScreenMatch && sortIsClicked && <SortServiceBox />}
+        {!laptopScreenMatch && sortIsClicked && (
+          <SortServiceBox getFilterValue={getFilterValue} />
+        )}
         {/*{!laptopScreenMatch && filterIsClicked && <FilterServiceBox />}*/}
 
         <ShopProductListing
           filterIsClicked={filterIsClicked}
           sortIsClicked={sortIsClicked}
+          filteredState={filteredState}
         />
         {/*{!laptopScreenMatch && sortIsClicked && <SortServiceBox />}*/}
       </Grid>
 
-        <MessageBanner/>
-        <Footer/>
+      <MessageBanner />
+      <Footer />
     </>
   );
 };

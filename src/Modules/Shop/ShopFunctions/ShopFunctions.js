@@ -46,14 +46,21 @@ const ShoppingFunctions = (props) => {
       console.log("Value is not in specified list of cases");
       break;
   }
-
+  const getFilteredValue = (val) => {
+    // console.log(val);
+    props.getFilterValue(val);
+  };
   const closeModalHandler = () => {
     setOpenFilterModal(false);
   };
 
   return (
     <Box>
-      <FilterServiceModal open={openFilterModal} onClose={closeModalHandler} />
+      <FilterServiceModal
+        open={openFilterModal}
+        onClose={closeModalHandler}
+        getFilteredValue={getFilteredValue}
+      />
       <Box component="section" sx={boxSX}>
         {laptopScreenMatch && (
           <>
@@ -65,7 +72,7 @@ const ShoppingFunctions = (props) => {
               disableRipple
               onClick={openFilterModalHandler}
             >
-              Lọc và sắp xếp
+              Sắp xếp
             </Button>
           </>
         )}
