@@ -1,16 +1,17 @@
 import Content from "./Widgets/Content";
 
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CartProvider from "./store/CartProvider";
 
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {LocalizationProvider} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 
 import "dayjs/locale/vi";
 import dayjs from "dayjs";
 import AuthProvider from "./store/AuthProvider";
+import Chat from "./Modules/Chat/Chat";
 
 const utc = require("dayjs/plugin/utc");
 const timezone = require("dayjs/plugin/timezone");
@@ -45,6 +46,9 @@ const theme = createTheme({
     secondary: {
       main: "#f4f1e0",
     },
+    customGreen: {
+      main: "#255957",
+    },
     customTransparent: {
       main: "rgba(255,255,255, 0)",
       contrastText: "#f4f1e0",
@@ -78,6 +82,7 @@ function App() {
 
               <Content />
               {/*<Footer />*/}
+              <Chat />
             </CartProvider>
           </AuthProvider>
         </BrowserRouter>
