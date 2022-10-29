@@ -40,15 +40,6 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 const UserDrawer = () => {
-  // const [open, setOpen] = React.useState(false);
-  //
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-  //
-  // const handleDrawerClose = () => {
-  //   setOpen(false);
-  // };
   const drawerContent = (
     <>
       <AvatarBox />

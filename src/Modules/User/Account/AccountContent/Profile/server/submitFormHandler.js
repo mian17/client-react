@@ -2,8 +2,15 @@ import dayjs from "dayjs";
 import apiClient from "../../../../../../api";
 import ProfileToServer from "../profileUtils/ProfileToServer";
 
-export default function submitFormHandler() {
-  return (values) => {
+export default function submitFormHandler(
+  setSnackbarType,
+  setOpenSnackbar,
+  setAlertContent,
+  setHasUploaded,
+  setIsLoadingProfile
+) {
+  return (values, { setSubmitting }) => {
+    setIsLoadingProfile(true);
     const { username, name, email, phoneNumber, gender, birthDate, address } =
       values;
     const formattedBirthDate = dayjs(birthDate).format("YYYY-MM-DD");
@@ -29,7 +36,22 @@ export default function submitFormHandler() {
             },
           }
         )
-        .then((response) => console.log(response));
+        .then((response) => {
+          setTimeout(() => {
+            setIsLoadingProfile(false);
+          }, 300);
+          setSnackbarType("success");
+          setOpenSnackbar(true);
+          setAlertContent("Đổi thông tin người dùng thành công");
+          setHasUploaded(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setTimeout(() => {
+            setIsLoadingProfile(false);
+          }, 300);
+        });
+      setSubmitting(false);
     });
   };
 }

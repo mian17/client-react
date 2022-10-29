@@ -21,12 +21,15 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import {useContext, useState} from "react";
 import AuthContext from "../../store/auth-context";
+import apiClient from "../../api";
+import {LinearProgress} from "@mui/material";
 
 const SignInMobile = (props) => {
   const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
   const { setLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
@@ -36,10 +39,35 @@ const SignInMobile = (props) => {
       email: data.get("email"),
       password: data.get("password"),
     };
-
-    signInHandler(userInput, navigate, setErrors, setLoggedIn);
+    signInHandler(userInput, navigate, setErrors, setLoggedIn, setIsLoading);
   };
 
+  const handleResendEmailVerification = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      apiClient
+        .post("api/email/verification-notification", { email: email })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Chúng tôi đã gửi email xác nhận cho bạn");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err) {
+            alert("Đã có lỗi xảy ra");
+          }
+        });
+    });
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
+  };
+
+  function emailOnChangeHandler(e) {
+    setEmail(e.target.value);
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -65,6 +93,7 @@ const SignInMobile = (props) => {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={emailOnChangeHandler}
           />
           <TextField
             margin="normal"
@@ -94,15 +123,25 @@ const SignInMobile = (props) => {
               {errors}
             </Typography>
           )}
-
+          {errors === "Bạn chưa xác nhận email" && (
+            <Typography>
+              Nhấn{" "}
+              <Link href="/#" onClick={handleResendEmailVerification}>
+                tại đây
+              </Link>{" "}
+              để chúng tôi gửi lại email xác nhận
+            </Typography>
+          )}
+          <Box sx={{ height: 4 }}>{isLoading && <LinearProgress />}</Box>
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 1, mb: 2 }}
           >
             Đăng nhập
           </Button>
+
           <Grid container>
             <Grid item xs>
               <Link

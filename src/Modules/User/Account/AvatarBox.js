@@ -4,8 +4,39 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import apiClient from "../../../api";
+import { backendServerPath } from "../../common/utils/backendServerPath";
+import { useCallback, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
-const AvatarBox = (props) => {
+const AvatarBox = () => {
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [username, setUsername] = useState("username");
+
+  const fetchUserInfo = useCallback(async () => {
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+      apiClient
+        .get("api/user/account/profile", {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          const data = response.data.user;
+          setAvatarUrl(backendServerPath + data.avatar);
+          setUsername(data.username);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, [fetchUserInfo]);
+
   return (
     <Grid
       justifyContent="center"
@@ -17,8 +48,8 @@ const AvatarBox = (props) => {
       pl={3}
     >
       <Grid item lg={4}>
-        {props.imgUrl ? (
-          <Avatar sx={{ width: 56, height: 56 }} src={props.imgUrl}></Avatar>
+        {avatarUrl.length > 0 ? (
+          <Avatar sx={{ width: 56, height: 56 }} src={avatarUrl}></Avatar>
         ) : (
           <Avatar sx={{ width: 56, height: 56 }}>
             <PersonOutlinedIcon sx={{ width: 32, height: 32 }} />
@@ -27,9 +58,20 @@ const AvatarBox = (props) => {
       </Grid>
       <Grid item lg={8}>
         <Typography sx={{ fontWeight: "bold" }} component="h3">
-          Username
+          {username}
         </Typography>
-        <Link href="/user/account/profile">Sửa hồ sơ</Link>
+        <Link
+          as={NavLink}
+          to="/user/account/profile"
+          sx={{
+            color: "#321e1e",
+            "&:hover": {
+              color: "inherit",
+            },
+          }}
+        >
+          Sửa hồ sơ
+        </Link>
       </Grid>
     </Grid>
   );

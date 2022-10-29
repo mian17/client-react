@@ -14,70 +14,67 @@ import ProductItem from "../ProductItem/ProductItem";
 import {useCallback, useEffect, useState} from "react";
 import {productListingPartition} from "../../common/utils/productListingPartition";
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+const randomNumber = getRandomIntInclusive(1, 10);
 const SpotlightProduct = () => {
-    const theme = useTheme();
-    const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const theme = useTheme();
+  const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-    const [spotlightProduct, setSpotlightProduct] = useState([]);
-    const [summary, setSummary] = useState("");
-    const [title, setTitle] = useState("");
+  const [spotlightProduct, setSpotlightProduct] = useState([]);
+  const [summary, setSummary] = useState("");
+  const [title, setTitle] = useState("");
 
-    // const formattedProductPrice = new Intl.NumberFormat(
-    //   "vi-VN",
-    //   currencyFormatOptions
-    // ).format(spotlightProduct.price);
+  // const formattedProductPrice = new Intl.NumberFormat(
+  //   "vi-VN",
+  //   currencyFormatOptions
+  // ).format(spotlightProduct.price);
 
-    // Ready for API connection
-    const [error, setError] = useState(null);
+  // Ready for API connection
+  const [error, setError] = useState(null);
 
-    function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1) + min);
+  const fetchSpotlightProduct = useCallback(async () => {
+    setError(null);
+    try {
+      // Get from api
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/product/show-front-page/${randomNumber}`
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+
+      const data = await response.json();
+      // console.log(data.product[0]);
+      const transformedProduct = [productListingPartition(data.product[0])];
+
+      setTitle(data.product[0].name);
+      setSummary(data.product[0].summary);
+      setSpotlightProduct(transformedProduct);
+    } catch (error) {
+      setError(error.message);
     }
+  }, []);
+  // Request;
+  // categories;
+  useEffect(() => {
+    fetchSpotlightProduct();
+  }, [fetchSpotlightProduct]);
 
-    const fetchSpotlightProduct = useCallback(async () => {
-        setError(null);
-        try {
-            // Get from api
-            const response = await fetch(
-                `http://127.0.0.1:8000/api/product/show-front-page/${getRandomIntInclusive(
-                    1,
-                    10
-                )}`
-            );
-            if (!response.ok) {
-                throw new Error("Không lấy được dữ liệu");
-            }
-
-            const data = await response.json();
-            // console.log(data.product[0]);
-            const transformedProduct = [productListingPartition(data.product[0])];
-
-            setTitle(data.product[0].name);
-            setSummary(data.product[0].summary);
-            setSpotlightProduct(transformedProduct);
-        } catch (error) {
-            setError(error.message);
-        }
-    }, []);
-    // Request;
-    // categories;
-    useEffect(() => {
-        fetchSpotlightProduct();
-    }, [fetchSpotlightProduct]);
-
-    console.log(spotlightProduct);
-    return (
-        <Grid
-            component="section"
-            sx={{borderBottom: "1px solid #bdb498"}}
-            container
-        >
-            <Grid
-                md={4}
-                item
-                sx={{
+  console.log(spotlightProduct);
+  return (
+    <Grid
+      component="section"
+      sx={{ borderBottom: "1px solid #bdb498" }}
+      container
+    >
+      <Grid
+        md={4}
+        item
+        sx={{
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -98,7 +95,7 @@ const SpotlightProduct = () => {
           sx={{ fontWeight: 700, m: 4 }}
           textAlign={tabletScreenMatch ? "left" : "center"}
         >
-            {title}
+          {title}
         </Typography>
         {!tabletScreenMatch && (
           <Box
@@ -124,45 +121,45 @@ const SpotlightProduct = () => {
             lineHeight: 1.3,
             position: "absolute",
 
-              bottom: 0,
-              right: 0,
+            bottom: 0,
+            right: 0,
           }}
         >
-            {summary}
+          {summary}
         </Typography>
-            </Grid>
-            <Grid md={8} sx={{position: "relative"}} item>
-                {/*<HoverableProductItemImage product={spotlightProduct} />*/}
+      </Grid>
+      <Grid md={8} sx={{ position: "relative" }} item>
+        {/*<HoverableProductItemImage product={spotlightProduct} />*/}
 
-                {/*<Box*/}
-                {/*  m={4}*/}
-                {/*  sx={{*/}
-                {/*    display: "flex",*/}
-                {/*    justifyContent: "space-between",*/}
-                {/*    alignItems: "center",*/}
-                {/*    gap: 2,*/}
-                {/*  }}*/}
-                {/*>*/}
-                {/*  <Typography*/}
-                {/*    component="h5"*/}
-                {/*    variant={tabletScreenMatch ? "h6" : "h5"}*/}
-                {/*    sx={{ fontWeight: 700 }}*/}
-                {/*    fontFamily="Libre Bodoni"*/}
-                {/*  >*/}
-                {/*    {spotlightProduct.productName}*/}
-                {/*  </Typography>*/}
-                {/*  <Button*/}
-                {/*    variant="contained"*/}
-                {/*    size="large"*/}
-                {/*    sx={{ fontSize: tabletScreenMatch ? 14 : null }}*/}
-                {/*  >*/}
-                {/*    Chọn mua - {formattedProductPrice}*/}
-                {/*  </Button>*/}
-                {/*</Box>*/}
-                {spotlightProduct.map((product, index) => {
-                    return <ProductItem key={index} product={product}/>;
-                })}
-            </Grid>
+        {/*<Box*/}
+        {/*  m={4}*/}
+        {/*  sx={{*/}
+        {/*    display: "flex",*/}
+        {/*    justifyContent: "space-between",*/}
+        {/*    alignItems: "center",*/}
+        {/*    gap: 2,*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  <Typography*/}
+        {/*    component="h5"*/}
+        {/*    variant={tabletScreenMatch ? "h6" : "h5"}*/}
+        {/*    sx={{ fontWeight: 700 }}*/}
+        {/*    fontFamily="Libre Bodoni"*/}
+        {/*  >*/}
+        {/*    {spotlightProduct.productName}*/}
+        {/*  </Typography>*/}
+        {/*  <Button*/}
+        {/*    variant="contained"*/}
+        {/*    size="large"*/}
+        {/*    sx={{ fontSize: tabletScreenMatch ? 14 : null }}*/}
+        {/*  >*/}
+        {/*    Chọn mua - {formattedProductPrice}*/}
+        {/*  </Button>*/}
+        {/*</Box>*/}
+        {spotlightProduct.map((product, index) => {
+          return <ProductItem key={index} product={product} />;
+        })}
+      </Grid>
     </Grid>
   );
 };

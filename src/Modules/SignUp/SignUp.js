@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { FormLabel, Radio, RadioGroup } from "@mui/material";
+import { FormLabel, LinearProgress, Radio, RadioGroup } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import apiClient from "../../api";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -19,11 +19,13 @@ import dayjs from "dayjs";
 
 export default function SignUp() {
   let navigate = useNavigate();
-  const [userIsRegistered, setUserIsRegistered] = useState(false);
+  // const [userIsRegistered, setUserIsRegistered] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [birthDate, setBirthDate] = React.useState(null);
   const [error, setError] = useState(null);
   const handleSubmit = (event) => {
+    setIsLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if (data.get("password") !== data.get("reenterPassword")) {
@@ -49,21 +51,27 @@ export default function SignUp() {
       apiClient
         .post("/register", userInput)
         .then(() => {
-          setUserIsRegistered(true);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 300);
           alert(
             "Đăng ký người dùng thành công, bạn vui lòng check hộp thư để xác nhận email"
           );
+
           navigate("/");
         })
         .catch((err) => {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 300);
           alert(err.response.data.message);
         });
     });
   };
-  const [loading, setLoading] = React.useState(false);
-  function loadingHandler() {
-    setLoading(true);
-  }
+  // const [loading, setLoading] = React.useState(false);
+  // function loadingHandler() {
+  //   setLoading(true);
+  // }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -205,18 +213,19 @@ export default function SignUp() {
             {/*  />*/}
             {/*</Grid>*/}
           </Grid>
+          <Box sx={{ height: 4 }}>{isLoading && <LinearProgress />}</Box>
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            disabled={loading}
+            disabled={isLoading}
           >
             Đăng ký
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link component={RouterLink} to="/signinmobile" variant="body2">
+              <Link component={RouterLink} to="/signin" variant="body2">
                 Bạn đã có tài khoản? Đăng nhập ngay
               </Link>
             </Grid>

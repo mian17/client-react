@@ -58,7 +58,7 @@ const ShopDetailsHeader = (props) => {
   // Media Query for Close Menu Button
 
   const theme = useTheme();
-  const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
+  // const laptopScreenMatch = useMediaQuery(theme.breakpoints.down("lg"));
 
   // Remove background changing effect on small devices
   // and later on other effects too, such as hovering link to change text's color

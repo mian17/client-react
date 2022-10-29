@@ -40,6 +40,11 @@ const ChangePassword = () => {
     },
     validationSchema: changePasswordSchema,
     onSubmit: (values) => {
+      setHasError(false);
+      setAlertContent({
+        title: "",
+        content: "",
+      });
       const { oldPassword, newPassword, reEnterNewPassword } = values;
 
       apiClient.get("/sanctum/csrf-cookie").then(() => {

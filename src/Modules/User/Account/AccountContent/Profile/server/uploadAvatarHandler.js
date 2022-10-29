@@ -11,6 +11,9 @@ export default function uploadAvatarHandler(e) {
           Authorization: `Bearer ${userToken}`,
         },
       })
-      .then((response) => console.log(response));
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log(error);
+      });
   });
 }

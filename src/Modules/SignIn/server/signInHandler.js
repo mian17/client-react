@@ -4,8 +4,10 @@ export default function signInHandler(
   userInput,
   navigate,
   setErrors,
-  setLoggedIn
+  setLoggedIn,
+  setIsLoading
 ) {
+  setIsLoading(true);
   apiClient.get("/sanctum/csrf-cookie").then(() => {
     apiClient
       .post("/login", userInput)
@@ -30,12 +32,11 @@ export default function signInHandler(
         console.log(err);
         if (err) {
           const errorMessage = err.response.data.message;
-          // const errorArr = [];
-          // for (const property in errorsObj) {
-          //   errorArr.push(errorsObj[property]);
-          // }
           setErrors(errorMessage);
         }
       });
   });
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 300);
 }

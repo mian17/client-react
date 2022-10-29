@@ -5,7 +5,6 @@ import CartContext from "../store/cart-context";
 
 import Box from "@mui/material/Box";
 import CategoryDrawer from "../Modules/Hero/CategoryDrawer/CategoryDrawer";
-import HeaderTop from "../Modules/Hero/HeaderTop/HeaderTop";
 import HeaderMenu from "../Modules/Hero/HeaderMenu/HeaderMenu";
 import AppBar from "@mui/material/AppBar";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
@@ -93,7 +92,7 @@ const Header = () => {
           headerBackgroundIndex={headerBackgroundIndex}
           changeLinkColorCondition={notTriggeredCase || triggeredCase}
         />
-        <HeaderTop />
+        {/*<HeaderTop />*/}
 
         <HeaderMenu
           changeMenuButton={changeMenuButton}

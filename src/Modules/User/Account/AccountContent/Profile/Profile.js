@@ -3,12 +3,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import FormControl from "@mui/material/FormControl";
-import { FormLabel, Input, Radio, RadioGroup } from "@mui/material";
+import {
+  FormLabel,
+  Input,
+  LinearProgress,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { MobileDatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 
 import Toolbar from "@mui/material/Toolbar";
@@ -16,19 +22,111 @@ import { useFormik } from "formik";
 
 import apiClient from "../../../../../api";
 import { profileSchema } from "../../../../common/validationSchema/schema";
-import fetchUserInfo from "./server/fetchUserInfo";
-import ProfileToServer from "./profileUtils/ProfileToServer";
-
-import dayjs from "dayjs";
+// import fetchUserInfo from "./server/fetchUserInfo";
+// import ProfileToServer from "./profileUtils/ProfileToServer";
+// import dayjs from "dayjs";
 import submitFormHandler from "./server/submitFormHandler";
-import uploadAvatarHandler from "./server/uploadAvatarHandler";
+// import uploadAvatarHandler from "./server/uploadAvatarHandler";
+import { backendServerPath } from "../../../../common/utils/backendServerPath";
+import useSnackbar from "../../../../../hooks/use-snackbar";
+import CommonSnackbar from "../../../../common/component/CommonSnackbar";
 
 const Profile = () => {
   const [avatarUrl, setAvatarUrl] = useState("");
+  // const [error, setError] = useState("");
+  const [isLoadingNewAvatar, setIsLoadingNewAvatar] = useState(false);
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false);
+
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent,
+    setAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
+
+  const [hasUploaded, setHasUploaded] = useState(false);
+
+  const uploadAvatarHandler = (e) => {
+    setOpenSnackbar(false);
+    setAlertContent("");
+    setIsLoadingNewAvatar(true);
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+      const avatarFormData = new FormData();
+      avatarFormData.append("avatar_file", e.target.files[0]);
+      apiClient
+        .post("api/user-update-avatar", avatarFormData, {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        })
+        .then((response) => {
+          setTimeout(() => {
+            setIsLoadingNewAvatar(false);
+          }, 300);
+          setSnackbarType("success");
+          setOpenSnackbar(true);
+          setAlertContent(response.data.message);
+          setHasUploaded(true);
+        })
+        .catch((error) => {
+          setTimeout(() => {
+            setIsLoadingNewAvatar(false);
+          }, 300);
+          setSnackbarType("error");
+          setOpenSnackbar(true);
+          setAlertContent(error.response.data.message);
+        });
+    });
+  };
+  const fetchUserInfoCallback = useCallback(async () => {
+    try {
+      const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
+
+      await apiClient.get("/sanctum/csrf-cookie");
+      const response = await apiClient.get("/api/user/account/profile", {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      const {
+        username,
+        name,
+        email,
+        phone_number: phoneNumber,
+        gender,
+        birth_date: birthDate,
+        address,
+        avatar,
+      } = response.data.user;
+
+      setUserState({
+        username,
+        name,
+        email,
+        phoneNumber,
+        gender,
+        birthDate,
+        address,
+      });
+      setAvatarUrl(backendServerPath + avatar);
+    } catch (error) {
+      setSnackbarType("error");
+      setOpenSnackbar(true);
+      setAlertContent("Không lấy được thông tin người dùng");
+    }
+    setHasUploaded(false);
+  }, [setAlertContent, setOpenSnackbar, setSnackbarType]);
 
   useEffect(() => {
-    fetchUserInfo(setUserState, setAvatarUrl);
-  }, []);
+    // fetchUserInfo(setUserState, setAvatarUrl);
+    fetchUserInfoCallback();
+  }, [hasUploaded, fetchUserInfoCallback]);
 
   const [userState, setUserState] = useState({
     username: "",
@@ -43,17 +141,18 @@ const Profile = () => {
   const formik = useFormik({
     initialValues: userState,
     validationSchema: profileSchema,
-    onSubmit: submitFormHandler(),
+    onSubmit: submitFormHandler(
+      setSnackbarType,
+      setOpenSnackbar,
+      setAlertContent,
+      setHasUploaded,
+      setIsLoadingProfile
+    ),
     enableReinitialize: true,
   });
-
+  // console.log(formik.isSubmitting, formik.isValid);
   return (
-    <Box
-      component="form"
-      onSubmit={formik.handleSubmit}
-      noValidate
-      sx={{ mt: 1 }}
-    >
+    <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 1 }}>
       <Grid container spacing={2}>
         <Grid item xl={8} md={8}>
           <Typography component="span" variant="h5">
@@ -71,6 +170,7 @@ const Profile = () => {
               label="Tên đăng nhập"
               value={formik.values.username}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.username && Boolean(formik.errors.username)}
               helperText={formik.touched.username && formik.errors.username}
               autoComplete="username"
@@ -83,6 +183,7 @@ const Profile = () => {
               label="Tên"
               value={formik.values.name}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
               autoComplete="name"
@@ -96,6 +197,7 @@ const Profile = () => {
               id="email"
               value={formik.values.email}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={
                 formik.touched.email && formik.errors.email
@@ -113,6 +215,7 @@ const Profile = () => {
               id="phoneNumber"
               value={formik.values.phoneNumber}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
               }
@@ -130,6 +233,7 @@ const Profile = () => {
               id="address"
               value={formik.values.address}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               error={formik.touched.address && Boolean(formik.errors.address)}
               helperText={formik.touched.address && formik.errors.address}
             />
@@ -145,6 +249,7 @@ const Profile = () => {
                     name="gender"
                     id="gender"
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.gender}
                     defaultValue="0"
                     error={
@@ -180,6 +285,7 @@ const Profile = () => {
                     onChange={(val) => {
                       formik.setFieldValue("birthDate", val, true);
                     }}
+                    onBlur={formik.handleBlur}
                     error={
                       formik.touched.birthDate &&
                       Boolean(formik.errors.birthDate)
@@ -216,7 +322,14 @@ const Profile = () => {
                 sx={{ display: "none" }}
                 onChange={uploadAvatarHandler}
               />
-              <Button component="span" variant="outlined" sx={{ flexGrow: 0 }}>
+              <Box sx={{ height: 4 }}>
+                {isLoadingNewAvatar && <LinearProgress />}
+              </Box>
+              <Button
+                component="span"
+                variant="outlined"
+                sx={{ flexGrow: 0, mt: 1 }}
+              >
                 Chọn ảnh
               </Button>
             </label>
@@ -232,13 +345,42 @@ const Profile = () => {
           </Box>
         </Grid>
       </Grid>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ mt: 3, mb: 2, textAlign: "center" }}
-      >
-        Lưu thông tin
-      </Button>
+      <Box sx={{ width: "fit-content" }}>
+        <Box
+          sx={{
+            height: 4,
+          }}
+        >
+          {isLoadingProfile && <LinearProgress />}
+        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 1, mb: 2, textAlign: "center" }}
+          disabled={formik.isSubmitting || !formik.isValid}
+        >
+          Lưu thông tin
+        </Button>
+      </Box>
+      {/*<Snackbar*/}
+      {/*  open={openSnackbar}*/}
+      {/*  autoHideDuration={6000}*/}
+      {/*  onClose={handleCloseSnackbar}*/}
+      {/*>*/}
+      {/*  <Alert*/}
+      {/*    onClose={handleCloseSnackbar}*/}
+      {/*    severity={snackbarType}*/}
+      {/*    sx={{ width: "100%" }}*/}
+      {/*  >*/}
+      {/*    {alertContent}*/}
+      {/*  </Alert>*/}
+      {/*</Snackbar>*/}
+      <CommonSnackbar
+        openSnackbar={openSnackbar}
+        handleClostSnackbar={handleCloseSnackbar}
+        snackbarType={snackbarType}
+        alertContent={alertContent}
+      />
     </Box>
   );
 };
