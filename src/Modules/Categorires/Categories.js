@@ -17,17 +17,18 @@ import {
     mostPopularCategoriesWithImage
 } from "../common/utils/mostPopularCategories-test-data/mostPopularCategoriesWithImage";
 import {NavLink} from "react-router-dom";
+import {arrowIconSx, titleBoxSx} from "./categoriesSx/categoriesSx";
 
 const categoriesBreakpointsOption = {
-    900: {
-        slidesPerView: 3,
-    },
+  900: {
+    slidesPerView: 3,
+  },
 };
 
 const Categories = () => {
-    const theme = useTheme();
-    const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
-    // const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const theme = useTheme();
+  const smallScreenMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  // const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   // Ready for API connection
   // const [error, setError] = useState(null);
@@ -60,9 +61,9 @@ const Categories = () => {
   const backgroundProps = {
     backgroundSize: "cover",
     backgroundPosition: "center",
-
     height: "80vh",
   };
+
   return (
     <Box component="section">
       <Box
@@ -83,16 +84,7 @@ const Categories = () => {
                   backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url(${category.imageUrl})`,
                 }}
               >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    textAlign: "center",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    zIndex: 100,
-                  }}
-                >
+                <Box sx={titleBoxSx}>
                   <Typography
                     fontFamily={"Libre Bodoni"}
                     color="#f4f1e0"
@@ -106,22 +98,12 @@ const Categories = () => {
                   </Typography>
                 </Box>
                 <IconButton
-                    component={NavLink}
-                    to={`${category.url}`}
-                    variant="outlined"
-                    size={smallScreenMatch ? "small" : "medium"}
-                    sx={{
-                    color: "#f4f1e0",
-                    border: "2px solid #f4f1e0",
-                    position: "absolute",
-                    bottom: 24,
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    ":hover": {
-                      color: "#f4f1e0",
-                    },
-                  }}
-                    disableRipple
+                  component={NavLink}
+                  to={`${category.url}`}
+                  variant="outlined"
+                  size={smallScreenMatch ? "small" : "medium"}
+                  sx={arrowIconSx}
+                  disableRipple
                 >
                   <EastIcon />
                 </IconButton>

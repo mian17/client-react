@@ -1,5 +1,5 @@
 // React imports
-import { useState, useCallback, useEffect } from "react";
+import { useState } from "react";
 
 // Source imports
 import classes from "../Hero.module.css";
@@ -10,7 +10,6 @@ import ProductSlide from "../../Product/ProductSlide/ProductSlide";
 //Swiper imports
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Banner from "./bannerSwiperUtils/Banner";
 
 const BannerSwiper = () => {
   const [banners, setBanners] = useState(bannersDumpData);
@@ -44,17 +43,18 @@ const BannerSwiper = () => {
   //     fetchBanners();
   // }, [fetchBanners]);
 
+  const paginationConfig = {
+    clickable: true,
+    type: "bullets",
+    bulletActiveClass: `swiper-pagination-bullet-active ${classes["pagination-active"]}`,
+    bulletClass: `swiper-pagination-bullet ${classes["pagination-normal"]}`,
+  };
   return (
     <Swiper
       slidesPerView={1}
       modules={[Pagination]}
       loop
-      pagination={{
-        clickable: true,
-        type: "bullets",
-        bulletActiveClass: `swiper-pagination-bullet-active ${classes["pagination-active"]}`,
-        bulletClass: `swiper-pagination-bullet ${classes["pagination-normal"]}`,
-      }}
+      pagination={paginationConfig}
       grabCursor
     >
       {banners.map((banner, index) => {

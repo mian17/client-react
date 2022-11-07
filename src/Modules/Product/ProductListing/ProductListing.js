@@ -3,13 +3,13 @@ import ProductItem from "../ProductItem/ProductItem";
 import ProductItemTitle from "../ProductItemTitle/ProductItemTitle";
 
 // Mui Imports
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 
 // Test data
-import {useCallback, useEffect, useState} from "react";
-import {productListingPartition} from "../../common/utils/productListingPartition";
+import { useCallback, useEffect, useState } from "react";
+import { productListingPartition } from "../../common/utils/productListingPartition";
 
 const ProductListing = () => {
   const theme = useTheme();
@@ -23,14 +23,14 @@ const ProductListing = () => {
     try {
       // Get from api
       const response = await fetch(
-          "http://127.0.0.1:8000/api/product/show-products-front-page"
+        "http://127.0.0.1:8000/api/product/show-products-front-page"
       );
       if (!response.ok) {
         throw new Error("Không lấy được dữ liệu");
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       const transformedProducts = data.products.map(productListingPartition);
 
       setProducts(transformedProducts);
@@ -47,20 +47,19 @@ const ProductListing = () => {
   let count = 1;
 
   return (
-      <Box
-          component="section"
-          display="grid"
-          gridTemplateColumns={`${
-              tabletScreenMatch ? "1fr 1fr" : "repeat(3, 1fr)"
+    <Box
+      component="section"
+      display="grid"
+      gridTemplateColumns={`${
+        tabletScreenMatch ? "1fr 1fr" : "repeat(3, 1fr)"
       }`}
       gridTemplateRows={`${tabletScreenMatch ? "" : "repeat(4, 1fr)"}`}
     >
       <ProductItemTitle
-          title="Các sản phẩm bạn có thể thích"
-          description="A id laborum minus necessitatibus unde. Dolores laboriosam porro quo recusandae tempore velit vitae!"
+        title="Các sản phẩm bạn có thể thích"
+        description="A id laborum minus necessitatibus unde. Dolores laboriosam porro quo recusandae tempore velit vitae!"
       />
       {products.map((product, i) => {
-        // console.log(typeof product);
         const conditionToApplySpecialLayout = i % 3 === 0 && i > 0;
 
         if (conditionToApplySpecialLayout) {

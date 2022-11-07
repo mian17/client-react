@@ -11,24 +11,30 @@ import { useTheme } from "@mui/material/styles";
 
 // React router dom imports
 import { NavLink } from "react-router-dom";
+import { innerBoxSx } from "./productSlideSx/productSlideSx";
 
 const ProductSlide = (props) => {
   const theme = useTheme();
   const smallScreenMatch = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const innerBoxSx = {
-    position: "absolute",
-    top: "55%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
+  // Logic styles Sx
+  const bannerBackgroundSx = {
+    backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.4), rgba(85, 85, 85, 0.4)), url(${props.imgUrl})`,
+    height: smallScreenMatch ? "88vh" : "96vh",
   };
+  const bannerTitleSx = {
+    fontSize: smallScreenMatch ? 48 : 38,
+    marginBottom: 1,
+  };
+  const bannerSubtitleSx = {
+    fontSize: smallScreenMatch ? 20 : 16,
+    marginBottom: 4,
+  };
+
   return (
     <Box
       component="section"
-      sx={{
-        backgroundImage: `linear-gradient(rgba(85, 85, 85, 0.4), rgba(85, 85, 85, 0.4)), url(${props.imgUrl})`,
-        height: smallScreenMatch ? "88vh" : "96vh",
-      }}
+      sx={bannerBackgroundSx}
       className={classes["background-slide"]}
     >
       <Box sx={innerBoxSx}>
@@ -36,7 +42,7 @@ const ProductSlide = (props) => {
           fontFamily={"Libre Bodoni"}
           component="h2"
           color="#f4f1e0"
-          sx={{ fontSize: smallScreenMatch ? 48 : 38, marginBottom: 1 }}
+          sx={bannerTitleSx}
           textAlign="center"
         >
           {props.title}
@@ -45,7 +51,7 @@ const ProductSlide = (props) => {
           fontFamily={"Inter"}
           component="h2"
           color="#f4f1e0"
-          sx={{ fontSize: smallScreenMatch ? 20 : 16, marginBottom: 4 }}
+          sx={bannerSubtitleSx}
           textAlign="center"
         >
           {props.subtitle}

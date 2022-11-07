@@ -19,6 +19,7 @@ const ShoppingFunctions = (props) => {
     setOpenFilterModal(!openFilterModal);
   };
 
+  // Logic styles Sx
   const boxSX = {
     display: "flex",
     justifyContent: "space-between",

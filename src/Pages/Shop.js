@@ -40,15 +40,11 @@ const Shop = () => {
     setSortIsClicked(!sortIsClicked);
     if (filterIsClicked) setFilterIsClicked(!filterIsClicked);
   };
-  const [filteredValue, setFilteredValue] = useState(null);
-  // const radioButtonChangeHandler = (event) => {
-  //   setFilteredValue(event.target.value);
-  // };
 
+  const [filteredValue, setFilteredValue] = useState(null);
   const [filteredState, setFilteredState] = useState("");
 
   const getFilterValue = (val) => {
-    // console.log(val);
     setFilteredState(val);
   };
 
@@ -69,14 +65,12 @@ const Shop = () => {
         {!laptopScreenMatch && sortIsClicked && (
           <SortServiceBox getFilterValue={getFilterValue} />
         )}
-        {/*{!laptopScreenMatch && filterIsClicked && <FilterServiceBox />}*/}
 
         <ShopProductListing
           filterIsClicked={filterIsClicked}
           sortIsClicked={sortIsClicked}
           filteredState={filteredState}
         />
-        {/*{!laptopScreenMatch && sortIsClicked && <SortServiceBox />}*/}
       </Grid>
 
       <MessageBanner />

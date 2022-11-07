@@ -9,7 +9,6 @@ import Link from "@mui/material/Link";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { IconButton } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
@@ -37,7 +36,6 @@ const Footer = () => {
                 px: 24,
                 borderBottom: "1px solid #321e1e",
                 gap: 4,
-                // height: "225px",
               }}
             >
               <Box

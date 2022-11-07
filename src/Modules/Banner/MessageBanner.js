@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { textBoxSx } from "./messageBannerSx/messageBannerSx";
 
 const MessageBanner = () => {
   const theme = useTheme();
@@ -44,23 +45,10 @@ const MessageBanner = () => {
         borderBottom: `1px solid ${
           hideSocialMediaLinks ? "transparent" : "#321e1e"
         }`,
-        // backgroundImage:
-        //   "linear-gradient(rgba(85, 85, 85, 0.266), rgba(85, 85, 85, 0.26)), url('/img/message-banner/message-banner.jpg')",
-        // backgroundSize: "cover",
-        // backgroundPosition: "center",
         height: "90vh",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          textAlign: "center",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 30,
-        }}
-      >
+      <Box sx={textBoxSx}>
         <Typography
           fontFamily={"Libre Bodoni"}
           color="#321e1e"

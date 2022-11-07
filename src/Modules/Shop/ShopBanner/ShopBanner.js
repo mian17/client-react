@@ -5,44 +5,18 @@ import Typography from "@mui/material/Typography";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { backendServerPath } from "../../common/utils/backendServerPath";
+import { textBoxSx } from "./shopbannerSx/shopBannerSx";
 
 const ShopBanner = () => {
   const theme = useTheme();
   const hideSocialMediaLinks = useMediaQuery(theme.breakpoints.down("lg"));
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
 
-  // Ready for API connection
-  // const [error, setError] = useState(null);
-  // const fetchCategories = useCallback(async () => {
-  //   setError(null);
-  //   try {
-  //     // Get from api
-  //     const response = await fetch("https://example.com");
-  //     if (!response.ok) {
-  //       throw new Error("Không lấy được dữ liệu");
-  //     }
-  //
-  //     const data = await response.json();
-  //     // console.log(data);
-  //     const transformedCategory = data.map((categoryData) => {
-  //       return new Category()
-  //     });
-  //
-  //     setCategories(transformedCategory);
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  //
-  // }, []);
-  // Request categories
-  // useEffect(() => {
-  //     fetchCategories();
-  // }, [fetchCategories]);
   const [currentParentCategoryImage, setCurrentParentCategoryImage] =
     useState(null);
   const [currentParentCategoryTitle, setCurrentParentCategoryTitle] =
     useState(null);
-  // console.log(currentParentCategoryImage);
+
   const { id: categoryId } = useParams();
   const [currentCategoryId, setCurrentCategoryId] = useState(categoryId);
 
@@ -94,16 +68,7 @@ const ShopBanner = () => {
         height: "72vh",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          textAlign: "center",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 30,
-        }}
-      >
+      <Box sx={textBoxSx}>
         <Typography
           fontFamily={"Libre Bodoni"}
           color="#f4f1e0"

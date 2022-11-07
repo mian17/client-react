@@ -3,6 +3,7 @@ import HoverableProductItemImage from "../HoverableProductItemImage/HoverablePro
 import ProductItemInfo from "../ProductItemInfo/ProductItemInfo";
 
 import { useState } from "react";
+import { productItemContainerSx } from "./productItemSx/productItemSx";
 
 const ProductItem = (props) => {
   const [selectedCategoryPos, setSelectedCategoryPos] = useState(0);
@@ -10,17 +11,9 @@ const ProductItem = (props) => {
   const getSelectedCategoryPositionForImageChange = (position) => {
     setSelectedCategoryPos(position);
   };
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        // minHeight: 200,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-      }}
-    >
+    <Box sx={productItemContainerSx}>
       <HoverableProductItemImage
         selectedPosition={selectedCategoryPos}
         product={props.product}

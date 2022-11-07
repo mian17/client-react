@@ -13,12 +13,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import ProductItem from "../ProductItem/ProductItem";
 import {useCallback, useEffect, useState} from "react";
 import {productListingPartition} from "../../common/utils/productListingPartition";
+import {getRandomIntInclusive} from "../../common/utils/helpers";
+import {textLeftSideContainerBackgroundOnSmallerScreenSizeSx} from "./spotlightProductSx/spotlightProductSx";
 
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
 const randomNumber = getRandomIntInclusive(1, 10);
 const SpotlightProduct = () => {
   const theme = useTheme();
@@ -64,30 +61,39 @@ const SpotlightProduct = () => {
     fetchSpotlightProduct();
   }, [fetchSpotlightProduct]);
 
-  console.log(spotlightProduct);
+  // Logic style Sx
+  const textLeftSideContainerSx = {
+    display: "flex",
+    flexDirection: "column",
+    position: "relative",
+    borderRight: "1px solid #bdb498",
+    height: tabletScreenMatch ? "32vh" : null,
+    width: tabletScreenMatch ? "100%" : null,
+    backgroundImage: tabletScreenMatch
+      ? "url('/img/spotlight-product/spotlight-product-background.png')"
+      : null,
+    backgroundPosition: tabletScreenMatch ? "bottom" : null,
+    backgroundSize: tabletScreenMatch ? "cover" : null,
+  };
+
+  const textLeftSideSummarySx = {
+    p: 2,
+    width: "70%",
+    color: "inherit",
+    fontSize: tabletScreenMatch ? 14 : 16,
+    textAlign: "center",
+    lineHeight: 1.3,
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+  };
   return (
     <Grid
       component="section"
       sx={{ borderBottom: "1px solid #bdb498" }}
       container
     >
-      <Grid
-        md={4}
-        item
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
-          borderRight: "1px solid #bdb498",
-          height: tabletScreenMatch ? "32vh" : null,
-          width: tabletScreenMatch ? "100%" : null,
-          backgroundImage: tabletScreenMatch
-            ? "url('/img/spotlight-product/spotlight-product-background.png')"
-            : null,
-          backgroundPosition: tabletScreenMatch ? "bottom" : null,
-          backgroundSize: tabletScreenMatch ? "cover" : null,
-        }}
-      >
+      <Grid md={4} item sx={textLeftSideContainerSx}>
         <Typography
           component="h4"
           variant={tabletScreenMatch ? "h5" : "h4"}
@@ -98,64 +104,14 @@ const SpotlightProduct = () => {
           {title}
         </Typography>
         {!tabletScreenMatch && (
-          <Box
-            sx={{
-              flexGrow: 1,
-              backgroundImage:
-                "url('/img/spotlight-product/spotlight-product-background.png')",
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-          ></Box>
+          <Box sx={textLeftSideContainerBackgroundOnSmallerScreenSizeSx} />
         )}
 
-        <Typography
-          paragraph
-          variant="body"
-          sx={{
-            p: 2,
-            width: "70%",
-            color: "inherit",
-            fontSize: tabletScreenMatch ? 14 : 16,
-            textAlign: "center",
-            lineHeight: 1.3,
-            position: "absolute",
-
-            bottom: 0,
-            right: 0,
-          }}
-        >
+        <Typography paragraph variant="body" sx={textLeftSideSummarySx}>
           {summary}
         </Typography>
       </Grid>
       <Grid md={8} sx={{ position: "relative" }} item>
-        {/*<HoverableProductItemImage product={spotlightProduct} />*/}
-
-        {/*<Box*/}
-        {/*  m={4}*/}
-        {/*  sx={{*/}
-        {/*    display: "flex",*/}
-        {/*    justifyContent: "space-between",*/}
-        {/*    alignItems: "center",*/}
-        {/*    gap: 2,*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  <Typography*/}
-        {/*    component="h5"*/}
-        {/*    variant={tabletScreenMatch ? "h6" : "h5"}*/}
-        {/*    sx={{ fontWeight: 700 }}*/}
-        {/*    fontFamily="Libre Bodoni"*/}
-        {/*  >*/}
-        {/*    {spotlightProduct.productName}*/}
-        {/*  </Typography>*/}
-        {/*  <Button*/}
-        {/*    variant="contained"*/}
-        {/*    size="large"*/}
-        {/*    sx={{ fontSize: tabletScreenMatch ? 14 : null }}*/}
-        {/*  >*/}
-        {/*    Chọn mua - {formattedProductPrice}*/}
-        {/*  </Button>*/}
-        {/*</Box>*/}
         {spotlightProduct.map((product, index) => {
           return <ProductItem key={index} product={product} />;
         })}
