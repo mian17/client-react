@@ -2,39 +2,39 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { favoriteProducts } from "../../Product/FavoriteProducts/favoriteProducts-test-data/favoriteProducts";
 import ProductItem from "../../Product/ProductItem/ProductItem";
+import { useCallback, useEffect, useState } from "react";
+import { productListingPartition } from "../../common/utils/productListingPartition";
 
 const ShopDetailsYouMayLike = () => {
   const theme = useTheme();
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   // Ready for API connection
-  // const [error, setError] = useState(null);
-  // const fetchCategories = useCallback(async () => {
-  //   setError(null);
-  //   try {
-  //     // Get from api
-  //     const response = await fetch("https://example.com");
-  //     if (!response.ok) {
-  //       throw new Error("Không lấy được dữ liệu");
-  //     }
-  //
-  //     const data = await response.json();
-  //     // console.log(data);
-  //     const transformedCategory = data.map((categoryData) => {
-  //       return new Category()
-  //     });
-  //
-  //     setCategories(transformedCategory);
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  //
-  // }, []);
-  // Request categories
-  // useEffect(() => {
-  //     fetchCategories();
-  // }, [fetchCategories]);
+  const [error, setError] = useState(null);
+  const fetchProductsOneMayLike = useCallback(async () => {
+    setError(null);
+    try {
+      // Get from api
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/products-one-may-like"
+      );
+      if (!response.ok) {
+        throw new Error("Không lấy được dữ liệu");
+      }
+      const data = await response.json();
+      console.log(data);
+      const transformedProducts = data.products.map(productListingPartition);
+
+      setFavoriteProducts(transformedProducts);
+    } catch (error) {
+      setError(error.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProductsOneMayLike();
+  }, [fetchProductsOneMayLike]);
 
   return (
     <Grid component="section" container>

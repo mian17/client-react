@@ -300,14 +300,14 @@ const Checkout = () => {
                     </Typography>
                   </Box>
                 )}
-                <Box sx={cartBoxInfoSx}>
-                  <Typography component="p" variant="body1">
-                    Phí vận chuyển:
-                  </Typography>
-                  <Typography component="p" variant="body1">
-                    Sẽ được tính khi bạn nhập địa chỉ
-                  </Typography>
-                </Box>
+                {/*<Box sx={cartBoxInfoSx}>*/}
+                {/*  <Typography component="p" variant="body1">*/}
+                {/*    Phí vận chuyển:*/}
+                {/*  </Typography>*/}
+                {/*  <Typography component="p" variant="body1">*/}
+                {/*    Sẽ được tính khi bạn nhập địa chỉ*/}
+                {/*  </Typography>*/}
+                {/*</Box>*/}
                 <Divider sx={dividerMarginBottomSpacingSx} />
                 <Box sx={totalMoneyCartBoxSx}>
                   <Typography
@@ -534,14 +534,14 @@ const Checkout = () => {
               </Box>
             )}
 
-            <Box sx={cartBoxInfoSx}>
-              <Typography component="p" variant="body1">
-                Phí vận chuyển:
-              </Typography>
-              <Typography component="p" variant="body1">
-                Sẽ được tính khi bạn nhập địa chỉ
-              </Typography>
-            </Box>
+            {/*<Box sx={cartBoxInfoSx}>*/}
+            {/*  <Typography component="p" variant="body1">*/}
+            {/*    Phí vận chuyển:*/}
+            {/*  </Typography>*/}
+            {/*  <Typography component="p" variant="body1">*/}
+            {/*    Sẽ được tính khi bạn nhập địa chỉ*/}
+            {/*  </Typography>*/}
+            {/*</Box>*/}
             <Divider sx={dividerMarginBottomSpacingSx} />
             <Box sx={totalMoneyCartBoxSx}>
               <Typography

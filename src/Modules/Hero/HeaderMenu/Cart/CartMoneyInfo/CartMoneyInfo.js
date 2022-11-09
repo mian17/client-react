@@ -30,12 +30,12 @@ const CartMoneyInfo = (props) => {
           alignItems: "center",
         }}
       >
-        <Typography component="h6" variant="subtitle1">
-          Phí ship:
-        </Typography>
-        <Typography component="h6" variant="subtitle1">
-          Sẽ được tính khi thanh toán
-        </Typography>
+        {/*<Typography component="h6" variant="subtitle1">*/}
+        {/*  Phí ship:*/}
+        {/*</Typography>*/}
+        {/*<Typography component="h6" variant="subtitle1">*/}
+        {/*  Sẽ được tính khi thanh toán*/}
+        {/*</Typography>*/}
       </Box>
     </>
   );

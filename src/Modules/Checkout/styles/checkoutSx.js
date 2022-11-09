@@ -35,7 +35,8 @@ export const discountBoxSx = {
 export const cartBoxInfoSx = {
   display: "flex",
   justifyContent: "space-between",
-  mb: 1,
+
+  mb: 2,
 };
 export const checkoutLogoHeadingLink = {
   textDecoration: "none",
