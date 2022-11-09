@@ -6,7 +6,6 @@ import { chatInputSx, chatLayoutSx } from "./ChatInputSx";
 import Pusher from "pusher-js";
 import { useEffect, useState } from "react";
 import apiClient from "../../../api";
-import { userToken } from "../../common/utils/helpers";
 
 const pusher = new Pusher("23dcf659521322c3c5c3", {
   cluster: "ap1",
@@ -21,23 +20,25 @@ const ChatInput = (props) => {
   const [currentUserUuid, setCurrentUserUuid] = useState("");
 
   Pusher.logToConsole = true;
+  const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
-    apiClient
-      .get("api/user/account/profile", {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          Accept: "application/json",
-        },
-      })
-      .then((response) => {
-        setCurrentUserUuid(response.data.user.uuid);
-        props.getUserUuid(response.data.user.uuid);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    apiClient.get("/sanctum/csrf-cookie").then(() => {
+      apiClient
+        .get("api/user/account/profile", {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          setCurrentUserUuid(response.data.user.uuid);
+          props.getUserUuid(response.data.user.uuid);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
     channel.bind(currentUserUuid, function (data) {
       // channel.bind("my-event", function (data) {
       setMessages([...messages, { content: data.content, uuid: data.uuid }]);

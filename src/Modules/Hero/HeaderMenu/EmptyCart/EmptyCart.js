@@ -5,6 +5,7 @@ import * as React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { mostPopularCategories as mostPopularCategoriesDumpData } from "../../../common/utils/mostPopularCategories-test-data/mostPopularCategories";
+
 const EmptyCart = (props) => {
   const [mostPopularCategories, setMostPopularCategories] = useState(
     mostPopularCategoriesDumpData
@@ -53,20 +54,20 @@ const EmptyCart = (props) => {
           alignItems: "center",
         }}
       >
-        <Button
-          component={NavLink}
-          to="/product/all"
-          size="large"
-          sx={{
-            width: "fit-content",
-            ":hover": {
-              color: "inherit",
-            },
-          }}
-          variant="outlined"
-        >
-          Xem tất cả sản phẩm
-        </Button>
+        {/*<Button*/}
+        {/*  component={NavLink}*/}
+        {/*  to="/product/all"*/}
+        {/*  size="large"*/}
+        {/*  sx={{*/}
+        {/*    width: "fit-content",*/}
+        {/*    ":hover": {*/}
+        {/*      color: "inherit",*/}
+        {/*    },*/}
+        {/*  }}*/}
+        {/*  variant="outlined"*/}
+        {/*>*/}
+        {/*  Xem tất cả sản phẩm*/}
+        {/*</Button>*/}
         {mostPopularCategories.map((category, index) => {
           return (
             <Button

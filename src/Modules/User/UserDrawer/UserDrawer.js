@@ -3,7 +3,6 @@ import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import AvatarBox from "../Account/AvatarBox";
 import Link from "@mui/material/Link";
 import { NavLink } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -42,7 +41,7 @@ const Drawer = styled(MuiDrawer, {
 const UserDrawer = () => {
   const drawerContent = (
     <>
-      <AvatarBox />
+      {/*<AvatarBox />*/}
       <Divider />
       <List component="nav">
         {/*{mainListItems}*/}

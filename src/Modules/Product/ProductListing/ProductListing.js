@@ -56,7 +56,7 @@ const ProductListing = () => {
       gridTemplateRows={`${tabletScreenMatch ? "" : "repeat(4, 1fr)"}`}
     >
       <ProductItemTitle
-        title="Các sản phẩm bạn có thể thích"
+        title="Một số sản phẩm của shop"
         description="A id laborum minus necessitatibus unde. Dolores laboriosam porro quo recusandae tempore velit vitae!"
       />
       {products.map((product, i) => {

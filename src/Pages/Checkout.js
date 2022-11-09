@@ -176,7 +176,7 @@ const Checkout = () => {
       cartCtx,
       products
     );
-  }, [cartCtx, getPaymentMethods, isChecked, loggedIn, products]);
+  }, [getPaymentMethods, isChecked, loggedIn]);
 
   return (
     <ResponsiveContainer>
