@@ -256,12 +256,14 @@ export default function HeaderMenu(props) {
                               },
                             }
                           )
+
                           .then((response) => {
                             console.log(response);
                             setLoggedOut();
                           })
                           .catch((err) => {
                             console.log(err);
+                            setLoggedOut();
                           });
                       });
                     }}

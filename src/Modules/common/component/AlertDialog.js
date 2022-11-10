@@ -29,6 +29,7 @@ export default function AlertDialog(props) {
         )
         .then((response) => {
           console.log(response);
+          navigate(0);
         })
         .catch((err) => {
           console.log(err);
@@ -55,7 +56,6 @@ export default function AlertDialog(props) {
     }
 
     handleClose();
-    navigate(0);
   };
 
   return (

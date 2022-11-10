@@ -496,6 +496,7 @@ const Checkout = () => {
                           })
                           .catch((err) => {
                             setDiscountCodeError(err.response.data.message);
+                            setDiscount(0);
                             console.log(err.response.data.message);
                           });
                       });
