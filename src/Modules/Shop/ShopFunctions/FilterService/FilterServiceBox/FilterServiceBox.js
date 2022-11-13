@@ -2,7 +2,6 @@ import Grid from "@mui/material/Grid";
 import FilterService from "../FilterService";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useState } from "react";
 
 export default function FilterServiceBox() {
   return (

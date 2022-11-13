@@ -80,7 +80,8 @@ export default function SearchDialog(props) {
 
   useEffect(() => {
     if (keyword.length > 3) {
-      fetchSearchResult();
+      const getData = setTimeout(fetchSearchResult, 2000);
+      return () => clearTimeout(getData);
     }
   }, [fetchSearchResult, keyword.length]);
 

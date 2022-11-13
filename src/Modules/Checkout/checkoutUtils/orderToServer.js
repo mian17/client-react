@@ -1,14 +1,14 @@
 export default class OrderToServer {
   constructor(
-      receiver_name,
-      receiver_email,
-      receiver_phone_number,
-      receiver_address,
-      total,
-      payment_method_id,
-      cart,
-      discount_code,
-      discount_percent
+    receiver_name,
+    receiver_email,
+    receiver_phone_number,
+    receiver_address,
+    total,
+    payment_method_id,
+    cart,
+    discount_code,
+    discount_percent
   ) {
     this.receiver_name = receiver_name;
     this.receiver_email = receiver_email;

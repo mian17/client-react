@@ -1,19 +1,37 @@
 import { Alert, Snackbar } from "@mui/material";
 import * as React from "react";
 
-const CommonSnackbar = (props) => {
+const CommonSnackbar = ({
+  openSnackbar,
+  handleCloseSnackbar,
+  snackbarType,
+  alertContent,
+}) => {
+  let content = "";
+
+  if (typeof alertContent === "string" && alertContent.length > 0) {
+    content = alertContent;
+  } else if (alertContent instanceof Array) {
+    content = alertContent.map((content, index) => (
+      <React.Fragment key={index}>
+        <>{content}</>
+        <br />
+      </React.Fragment>
+    ));
+  }
+
   return (
     <Snackbar
-      open={props.openSnackbar}
+      open={openSnackbar}
       autoHideDuration={6000}
-      onClose={props.handleCloseSnackbar}
+      onClose={handleCloseSnackbar}
     >
       <Alert
-        onClose={props.handleCloseSnackbar}
-        severity={props.snackbarType}
+        onClose={handleCloseSnackbar}
+        severity={snackbarType}
         sx={{ width: "100%" }}
       >
-        {props.alertContent}
+        {content}
       </Alert>
     </Snackbar>
   );

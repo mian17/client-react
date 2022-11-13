@@ -5,17 +5,19 @@
     padding-bottom: 20px;
     margin-bottom: 25px;
 }
+
 .error-message {
     color: #dd2222;
     margin-top: 2px;
     margin-left: 10px;
 }
+
 .invalid {
     background-color: #FFCCCC;
 }
 
 .invalid::placeholder {
-    color:  #111 !important;
+    color: #111 !important;
 }
 
 .disabled-btn {

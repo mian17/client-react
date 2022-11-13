@@ -15,7 +15,7 @@ export const banners = [
     "Dâu tây Đà Lạt các loại",
     "Giàu Vitamin C, tăng sức đề kháng",
     "Mua ngay",
-      "/product/2"
+    "/product/2"
   ),
   new Banner(
     2,
@@ -23,6 +23,6 @@ export const banners = [
     "Trứng gà tươi V.Farm",
     "Đóng gói vệ sinh, an toàn, nhiều Omega-3",
     "Mua ngay",
-      "/product/8"
+    "/product/8"
   ),
 ];

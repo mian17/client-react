@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import AddressItemInfoItem from "./AddressItemInfoItem";
 import AddressItemFirstInfoItem from "./AddressItemFirstInfoItem";
-import classes from "./AddressItemInfo.module.css";
+
 const AddressItemInfo = (props) => {
   return (
     <Box sx={{ flex: 1 }}>

@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 const Chat = () => {
   const [open, setOpen] = useState(false);
   const { loggedIn } = useContext(AuthContext);
+
   function toggleChatBoxHandler() {
     setTimeout(() => {
       setOpen(!open);

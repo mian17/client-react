@@ -11,12 +11,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 // import { spotlightProduct } from "./spotlightProduct-test-data/spotlightProduct";
 import ProductItem from "../ProductItem/ProductItem";
+import * as React from "react";
 import {useCallback, useEffect, useState} from "react";
 import {productListingPartition} from "../../common/utils/productListingPartition";
-import {getRandomIntInclusive} from "../../common/utils/helpers";
+import {setAlert} from "../../common/utils/helpers";
 import {textLeftSideContainerBackgroundOnSmallerScreenSizeSx} from "./spotlightProductSx/spotlightProductSx";
+import CommonSnackbar from "../../common/component/CommonSnackbar";
+import useSnackbar from "../../../hooks/use-snackbar";
 
-const randomNumber = getRandomIntInclusive(1, 10);
 const SpotlightProduct = () => {
   const theme = useTheme();
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,30 +33,46 @@ const SpotlightProduct = () => {
   // ).format(spotlightProduct.price);
 
   // Ready for API connection
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent,
+    setAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
 
   const fetchSpotlightProduct = useCallback(async () => {
-    setError(null);
+    // setError(null);
     try {
       // Get from api
       const response = await fetch(
-        `http://127.0.0.1:8000/api/product/show-front-page/${randomNumber}`
+        `http://127.0.0.1:8000/api/product/show-random-spotlight-product`
       );
       if (!response.ok) {
         throw new Error("Không lấy được dữ liệu");
       }
 
       const data = await response.json();
-      // console.log(data.product[0]);
-      const transformedProduct = [productListingPartition(data.product[0])];
+      const dataResponse = data.product;
+      const transformedProduct = [productListingPartition(dataResponse)];
 
-      setTitle(data.product[0].name);
-      setSummary(data.product[0].summary);
+      setTitle(dataResponse.name);
+      setSummary(dataResponse.summary);
       setSpotlightProduct(transformedProduct);
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
+      setAlert(
+        setSnackbarType,
+        "error",
+        setOpenSnackbar,
+        setAlertContent,
+        error.message
+      );
     }
-  }, []);
+  }, []); // DO NOT UPDATE THIS SPECIFIC DEPENDENCY WITH SNACKBAR STATE
   // Request;
   // categories;
   useEffect(() => {
@@ -116,6 +134,12 @@ const SpotlightProduct = () => {
           return <ProductItem key={index} product={product} />;
         })}
       </Grid>
+      <CommonSnackbar
+        openSnackbar={openSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
+        snackbarType={snackbarType}
+        alertContent={alertContent}
+      />
     </Grid>
   );
 };

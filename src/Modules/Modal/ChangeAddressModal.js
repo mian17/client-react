@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -12,10 +13,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
-import { useEffect } from "react";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
+
 const validationSchema = yup.object({
   name: yup.string().required("Không để trống họ tên"),
   phoneNumber: yup

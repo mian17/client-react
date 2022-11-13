@@ -1,5 +1,5 @@
 // function toggleSlide() {
-//   $(".hero__categories ul").slideToggle(400);
+// $(".hero__categories ul").slideToggle(400);
 // }
 
 {/*<div className="container">*/}
@@ -79,7 +79,6 @@
       {/*    </div>*/}
       {/*  </div>*/}
       {/*</div>*/}
-
 
 Nav
 {/*<ul>*/}

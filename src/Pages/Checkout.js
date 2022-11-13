@@ -26,7 +26,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import { Select } from "@mui/material";
+import { LinearProgress, Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {
   accordionDetailsSx,
@@ -54,6 +54,8 @@ import AuthContext from "../store/auth-context";
 import { orderSchema } from "../Modules/common/validationSchema/schema";
 import autoCompleteBuyerInfo from "../Modules/Checkout/server/autoCompleteBuyerInfo";
 import submitHandler from "../Modules/Checkout/server/submitHandler";
+import useSnackbar from "../hooks/use-snackbar";
+import CommonSnackbar from "../Modules/common/component/CommonSnackbar";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -126,6 +128,8 @@ const Checkout = () => {
     cart: products,
   });
 
+  const [isProcessingCart, setIsProcessingCart] = useState(false);
+
   // DO NOT UPDATE DEPENDENCY, WHICH WILL CAUSE INFINITE RERENDER
 
   function checkBoxOnChangeHandlerAndResetFormInputs(e) {
@@ -153,6 +157,16 @@ const Checkout = () => {
   };
   const [discountCodeError, setDiscountCodeError] = useState("");
 
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent,
+    setAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
+
   const formik = useFormik({
     initialValues: authorizedUserInfo,
     validationSchema: orderSchema,
@@ -162,7 +176,14 @@ const Checkout = () => {
       discountCode,
       discountPercent,
       navigate,
-      cartCtx.resetCart
+      cartCtx.resetCart,
+      setIsProcessingCart,
+      snackbarType,
+      setSnackbarType,
+      openSnackbar,
+      setOpenSnackbar,
+      alertContent,
+      setAlertContent
     ),
     enableReinitialize: true,
   });
@@ -176,7 +197,7 @@ const Checkout = () => {
       cartCtx,
       products
     );
-  }, [getPaymentMethods, isChecked, loggedIn]);
+  }, [getPaymentMethods, isChecked, loggedIn]); // DO NOT UPDATE THIS DEPENDENCY WITH cartCtx and products
 
   return (
     <ResponsiveContainer>
@@ -186,6 +207,9 @@ const Checkout = () => {
         component="form"
         onSubmit={formik.handleSubmit}
       >
+        {isProcessingCart && (
+          <LinearProgress sx={{ width: "100%", position: "fixed", top: 0 }} />
+        )}
         {tabletScreenMatch && (
           <Grid lg={12} md={12} sm={12} xs={12} item>
             <NavLink to="/" style={logoLinkSx}>
@@ -562,6 +586,12 @@ const Checkout = () => {
             </Box>
           </Grid>
         )}
+        <CommonSnackbar
+          openSnackbar={openSnackbar}
+          handleCloseSnackbar={handleCloseSnackbar}
+          snackbarType={snackbarType}
+          alertContent={alertContent}
+        />
       </Grid>
     </ResponsiveContainer>
   );

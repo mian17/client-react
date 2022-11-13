@@ -1,4 +1,5 @@
 import Category from "../categoryDrawerUtils/Category";
+
 export const categories = [
   new Category(0, "Tất cả", "/product/all", "/img/categories/category-all.jpg"),
   new Category(

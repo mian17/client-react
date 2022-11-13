@@ -11,7 +11,6 @@
 }
 
 
-
 .background-slide {
 
     /*backgroundImage: linear-gradient(rgba(85, 85, 85, 0.4), rgba(85, 85, 85, 0.4)), url(${hero}`;*/
@@ -32,6 +31,7 @@
     height: 14px !important;
     margin: 0 8px !important;
 }
+
 @keyframes toggle {
     from {
         visibility: hidden;

@@ -22,6 +22,9 @@ import { NavLink } from "react-router-dom";
 import Background from "./categoryDrawerUtils/Background";
 import { backendServerPath } from "../../common/utils/backendServerPath";
 import Category from "./categoryDrawerUtils/Category";
+import useSnackbar from "../../../hooks/use-snackbar";
+import CommonSnackbar from "../../common/component/CommonSnackbar";
+import { setAlert } from "../../common/utils/helpers";
 
 const CategoryDrawer = (props) => {
   const [categories, setCategories] = useState([]);
@@ -36,9 +39,16 @@ const CategoryDrawer = (props) => {
   });
 
   // Ready for API connection
-  const [error, setError] = useState(null);
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent,
+    setAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
   const fetchCategories = useCallback(async () => {
-    setError(null);
     try {
       // Get from api
       const response = await fetch(
@@ -61,9 +71,16 @@ const CategoryDrawer = (props) => {
 
       setCategories(transformedCategory);
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
+      setAlert(
+        setSnackbarType,
+        "error",
+        setOpenSnackbar,
+        setAlertContent,
+        error.message
+      );
     }
-  }, []);
+  }, []); // DO NOT UPDATE THIS DEPENDENCY WITH SNACKBAR STATE
   // Request categories
   useEffect(() => {
     fetchCategories();
@@ -175,6 +192,12 @@ const CategoryDrawer = (props) => {
             );
           })}
         </List>
+        <CommonSnackbar
+          openSnackbar={openSnackbar}
+          handleCloseSnackbar={handleCloseSnackbar}
+          snackbarType={snackbarType}
+          alertContent={alertContent}
+        />
       </Paper>
     </Fade>
   );

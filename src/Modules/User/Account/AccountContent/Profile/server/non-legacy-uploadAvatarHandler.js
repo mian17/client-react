@@ -1,6 +1,6 @@
 import apiClient from "../../../../../../api";
 
-export default function uploadAvatarHandler(e) {
+export default function nonLegacyUploadAvatarHandler(e) {
   apiClient.get("/sanctum/csrf-cookie").then(() => {
     const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
     const avatarFormData = new FormData();

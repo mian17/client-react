@@ -377,7 +377,7 @@ const Profile = () => {
       {/*</Snackbar>*/}
       <CommonSnackbar
         openSnackbar={openSnackbar}
-        handleClostSnackbar={handleCloseSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
         snackbarType={snackbarType}
         alertContent={alertContent}
       />

@@ -1,6 +1,7 @@
 import MostPopularCategory from "./MostPopularCategory";
 
-export default class MostPopularCategoryWithImage extends MostPopularCategory {
+// DON'T DELETE
+export default class NonLegacyMostPopularCategoryWithImage extends MostPopularCategory {
   constructor(id, categoryId, name, url, imageUrl) {
     super(id, categoryId, name, url);
     this.imageUrl = imageUrl;

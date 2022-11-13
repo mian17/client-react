@@ -13,6 +13,7 @@ export const orderSchema = Yup.object().shape({
     .email("Email chưa phù hợp, bạn vui lòng kiểm tra lại.")
     .required("Bạn cần điền email mà bạn đang sử dụng."),
   phoneNumber: Yup.string()
+    .trim()
     .matches(
       phoneNumberRegex,
       "Số điện thoại của người nhận không đúng định dạng"
@@ -40,6 +41,7 @@ export const profileSchema = Yup.object({
     .max(64, "Email cần ngắn hơn 64 ký tự")
     .required("Không để trống email"),
   phoneNumber: Yup.string()
+    .trim()
     .matches(phoneNumberRegex, "Số điện thoại không đúng định dạng")
     .min(10, "Số điện thoại cần dài hơn 10 ký tự")
     .required("Không để trống số điện thoại"),

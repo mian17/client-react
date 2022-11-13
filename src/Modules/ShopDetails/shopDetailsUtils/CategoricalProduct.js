@@ -1,4 +1,5 @@
 import Product from "./Product";
+
 export default class CategoricalProduct extends Product {
   constructor(
     id,

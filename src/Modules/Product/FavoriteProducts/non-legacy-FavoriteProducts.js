@@ -1,12 +1,13 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import {useTheme} from "@mui/material/styles";
 import ProductItem from "../ProductItem/ProductItem";
 
-import { favoriteProducts } from "./favoriteProducts-test-data/favoriteProducts";
+import {favoriteProducts} from "./favoriteProducts-test-data/favoriteProducts";
 
-const FavoriteProducts = () => {
+// DONT DELETE
+const NonLegacyFavoriteProducts = () => {
   const theme = useTheme();
   const tabletScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   // Ready for API connection
@@ -97,4 +98,4 @@ const FavoriteProducts = () => {
     </Grid>
   );
 };
-export default FavoriteProducts;
+export default NonLegacyFavoriteProducts;

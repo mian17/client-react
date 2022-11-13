@@ -24,7 +24,7 @@ const ChatBox = () => {
   useEffect(() => {
     scrollToBottom();
   }, [scrollToBottom, messages]);
-  console.log(messages);
+  // console.log(messages);
   return (
     <Box
       sx={{

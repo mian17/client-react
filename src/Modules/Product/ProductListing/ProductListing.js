@@ -8,8 +8,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Box from "@mui/material/Box";
 
 // Test data
+import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 import { productListingPartition } from "../../common/utils/productListingPartition";
+import useSnackbar from "../../../hooks/use-snackbar";
+import CommonSnackbar from "../../common/component/CommonSnackbar";
+import { setAlert } from "../../common/utils/helpers";
 
 const ProductListing = () => {
   const theme = useTheme();
@@ -17,9 +21,16 @@ const ProductListing = () => {
   const [products, setProducts] = useState([]);
 
   // Ready for API connection
-  const [error, setError] = useState(null);
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent,
+    setAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
   const fetchProducts = useCallback(async () => {
-    setError(null);
     try {
       // Get from api
       const response = await fetch(
@@ -35,9 +46,16 @@ const ProductListing = () => {
 
       setProducts(transformedProducts);
     } catch (error) {
-      setError(error.message);
+      // setError(error.message);
+      setAlert(
+        setSnackbarType,
+        "error",
+        setOpenSnackbar,
+        setAlertContent,
+        error.message
+      );
     }
-  }, []);
+  }, []); // DO NOT UPDATE THIS DEPENDENCY WITH SNACKBAR STATE
   // Request categories
   useEffect(() => {
     fetchProducts();
@@ -105,6 +123,12 @@ const ProductListing = () => {
           </Box>
         );
       })}
+      <CommonSnackbar
+        openSnackbar={openSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
+        snackbarType={snackbarType}
+        alertContent={alertContent}
+      />
     </Box>
   );
 };

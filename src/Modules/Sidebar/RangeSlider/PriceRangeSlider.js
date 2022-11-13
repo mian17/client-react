@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 
 import Slider from "@mui/material/Slider";
+
 // import Input from "@mui/material/Input";
 
 function valuetext(val) {
@@ -10,6 +11,7 @@ function valuetext(val) {
     currency: "VND",
   }).format((val + 1) * 10000);
 }
+
 const minDistance = 10;
 
 const marks = [

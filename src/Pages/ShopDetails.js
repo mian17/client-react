@@ -56,6 +56,17 @@ const ShopDetails = () => {
 
   const [models, setModels] = useState(undefined);
 
+  const [isAvailableToPurchase, setIsAvailableToPurchase] = useState(true);
+  // const {
+  //   snackbarType,
+  //   setSnackbarType,
+  //   openSnackbar,
+  //   setOpenSnackbar,
+  //   alertContent,
+  //   setAlertContent,
+  //   handleCloseSnackbar,
+  // } = useSnackbar();
+
   const cartCtx = useContext(CartContext);
 
   const [clickedButtons, setClickedButtons] = useState(undefined);
@@ -72,8 +83,12 @@ const ShopDetails = () => {
         .then((response) => {
           // 1 model case
           const product = response.data.product;
+          // console.log(product);
+          const productTitleForProductState = `${product.name} ${
+            product.status === "-1" ? "(hết hàng)" : ""
+          }`;
 
-          setProductTitle(product.name);
+          setProductTitle(productTitleForProductState);
           setProductBrand(product.brand);
 
           const cleanedSummary = DOMPurify.sanitize(product.summary);
@@ -111,13 +126,12 @@ const ShopDetails = () => {
                 1
               )
             );
-          } else if (product.kinds.length > 1) {
+          } else if (product.kinds && product.kinds.length > 1) {
             setProductId(product.id);
 
             const kinds = product.kinds.map((kind) => {
               return { name: kind.name, modelId: kind.id };
             });
-
             setModels(kinds);
 
             if (models && clickedButtons === undefined)
@@ -158,9 +172,21 @@ const ShopDetails = () => {
               )
             );
           }
+          ///////////////////////////////////
+          // DEALING WITH TRASHED PRODUCT
+          if (product.status === -1) {
+            setIsAvailableToPurchase(false);
+          }
         })
         .catch((err) => {
           console.log(err);
+          // setAlert(
+          //   setSnackbarType,
+          //   "error",
+          //   setOpenSnackbar,
+          //   setAlertContent,
+          //   err.message
+          // );
         });
     });
   }, [
@@ -385,6 +411,7 @@ const ShopDetails = () => {
                 onClick={() => {
                   cartCtx.addItem(selectedProduct);
                 }}
+                disabled={!isAvailableToPurchase}
               >
                 Thêm vào giỏ hàng
               </Button>
@@ -452,6 +479,12 @@ const ShopDetails = () => {
       </Grid>
       <ShopDetailsYouMayLike />
       <Footer />
+      {/*<CommonSnackbar*/}
+      {/*  openSnackbar={openSnackbar}*/}
+      {/*  handleCloseSnackbar={handleCloseSnackbar}*/}
+      {/*  snackbarType={snackbarType}*/}
+      {/*  alertContent={alertContent}*/}
+      {/*/>*/}
     </Box>
   );
 };
