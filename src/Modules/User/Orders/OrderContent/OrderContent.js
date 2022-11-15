@@ -15,6 +15,9 @@ import OrderTabContent from "./OrderItem/OrderTabContent/OrderTabContent";
 
 import OrderItemLoading from "./OrderItem/OrderItemLoading/OrderItemLoading";
 import AlertDialog from "../../../common/component/AlertDialog";
+import CommonSnackbar from "../../../common/component/CommonSnackbar";
+import useSnackbar from "../../../../hooks/use-snackbar";
+import { setAlert } from "../../../common/utils/helpers";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,6 +70,16 @@ const OrderContent = () => {
 
   const firstUpdate = useRef(true);
 
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent: snackbarAlertContent,
+    setAlertContent: setSnackbarAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
+
   const fetchOrders = () => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -83,11 +96,17 @@ const OrderContent = () => {
               },
             })
             .then((response) => {
-              // console.log(response.data.total);
-              // const totalItemLengthFromResponse = response.data.total;
-              // const lastPageFromServer = response.data.last_page;
-              // setLastPage(lastPageFromServer);
+              if (response.status !== 200) {
+                throw new Error(
+                  "Đã có lỗi xảy ra trong quá trình tải các đơn hàng"
+                );
+              }
+
               const receivedOrderObj = response.data.data;
+
+              if (receivedOrderObj.length === 0) {
+                setHasMore(false);
+              }
 
               const transformedObjToArr = Object.values(receivedOrderObj).map(
                 (order) => {
@@ -97,8 +116,6 @@ const OrderContent = () => {
 
               const transformedOrders = transformedObjToArr.map((order) => {
                 const products = order.map((product, index) => {
-                  // console.log(product);
-
                   return new ProductInOrder(
                     index,
                     product.product_name,
@@ -128,7 +145,13 @@ const OrderContent = () => {
               });
             })
             .catch((error) => {
-              console.log(error);
+              setAlert(
+                setSnackbarType,
+                "error",
+                setOpenSnackbar,
+                setSnackbarAlertContent,
+                error.message
+              );
             })
             .then(() => {});
         });
@@ -153,12 +176,18 @@ const OrderContent = () => {
           setLastPage(lastPageFromServer);
         })
         .catch((error) => {
-          console.log(error);
+          setAlert(
+            setSnackbarType,
+            "error",
+            setOpenSnackbar,
+            setSnackbarAlertContent,
+            error.message
+          );
         })
         .then(() => {});
     });
     fetchOrders();
-  }, []);
+  }, []); //DO NOT UPDATE THIS DEPENDENCY
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
@@ -266,11 +295,21 @@ const OrderContent = () => {
         />
       </TabPanel>
       <TabPanel value={tabValue} index={5}>
-        <OrderTabContent orderStatusId={5} />
+        <OrderTabContent
+          orderStatusId={5}
+          openAlertHandler={openAlertHandler}
+          transferAlertContent={transferAlertContent}
+        />
       </TabPanel>
       <TabPanel value={tabValue} index={6}>
         <OrderTabContent orderStatusId={6} />
       </TabPanel>
+      <CommonSnackbar
+        openSnackbar={openSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
+        snackbarType={snackbarType}
+        alertContent={snackbarAlertContent}
+      />
     </Box>
   );
 };

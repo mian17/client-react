@@ -15,7 +15,6 @@ export default function SearchItem(props) {
   const [isHovered, setIsHovered] = useState(false);
   const onHoveredMouseEnterHandler = () => {
     setIsHovered(true);
-    console.log("hovered");
   };
   const onHoveredMouseOutHandler = () => {
     setIsHovered(false);

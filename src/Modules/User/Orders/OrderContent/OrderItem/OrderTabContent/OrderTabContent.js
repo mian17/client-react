@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import apiClient from "../../../../../../api";
 import ProductInOrder from "../../orderContentUtils/ProductInOrder";
@@ -6,12 +7,25 @@ import Order from "../../orderContentUtils/Order";
 import OrderItem from "../OrderItem";
 import InfiniteScroll from "react-infinite-scroll-component";
 import OrderItemLoading from "../OrderItemLoading/OrderItemLoading";
+import useSnackbar from "../../../../../../hooks/use-snackbar";
+import { setAlert } from "../../../../../common/utils/helpers";
+import CommonSnackbar from "../../../../../common/component/CommonSnackbar";
 
 const OrderTabContent = ({
   orderStatusId,
   openAlertHandler,
   transferAlertContent,
 }) => {
+  const {
+    snackbarType,
+    setSnackbarType,
+    openSnackbar,
+    setOpenSnackbar,
+    alertContent: snackbarAlertContent,
+    setAlertContent: setSnackbarAlertContent,
+    handleCloseSnackbar,
+  } = useSnackbar();
+
   const [orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(2);
@@ -40,6 +54,10 @@ const OrderTabContent = ({
               // setLastPage(lastPageFromServer);
               const receivedOrderObj = response.data.data;
 
+              if (receivedOrderObj.length === 0) {
+                setHasMore(false);
+              }
+
               const transformedObjToArr = Object.values(receivedOrderObj).map(
                 (order) => {
                   return order;
@@ -48,8 +66,6 @@ const OrderTabContent = ({
 
               const transformedOrders = transformedObjToArr.map((order) => {
                 const products = order.map((product, index) => {
-                  // console.log(product);
-
                   return new ProductInOrder(
                     index,
                     product.product_name,
@@ -79,7 +95,13 @@ const OrderTabContent = ({
               });
             })
             .catch((error) => {
-              console.log(error);
+              setAlert(
+                setSnackbarType,
+                "error",
+                setOpenSnackbar,
+                setSnackbarAlertContent,
+                error.message
+              );
             })
             .then(() => {});
         });
@@ -88,7 +110,6 @@ const OrderTabContent = ({
       }
     }
   };
-  console.log(currentPage);
   useEffect(() => {
     apiClient.get("/sanctum/csrf-cookie").then(() => {
       const userToken = JSON.parse(localStorage.getItem("personalAccessToken"));
@@ -103,36 +124,50 @@ const OrderTabContent = ({
           setLastPage(lastPageFromServer);
         })
         .catch((error) => {
-          console.log(error);
+          setAlert(
+            setSnackbarType,
+            "error",
+            setOpenSnackbar,
+            setSnackbarAlertContent,
+            error.message
+          );
         })
         .then(() => {});
     });
     fetchOrders();
-  }, []);
+  }, []); // DO NOT UPDATE THIS DEPENDENCY
   return (
-    <InfiniteScroll
-      dataLength={orders.length} //This is important field to render the next data
-      next={fetchOrders}
-      hasMore={hasMore}
-      loader={<OrderItemLoading />}
-      endMessage={
-        <p style={{ textAlign: "center" }}>
-          <b>Bạn đã xem hết đơn hàng</b>
-        </p>
-      }
-    >
-      {/*Tất cả đơn hàng*/}
-      {orders.map((order, index) => {
-        return (
-          <OrderItem
-            key={index}
-            order={order}
-            openAlertHandler={openAlertHandler}
-            transferAlertContent={transferAlertContent}
-          />
-        );
-      })}
-    </InfiniteScroll>
+    <>
+      <InfiniteScroll
+        dataLength={orders.length} //This is important field to render the next data
+        next={fetchOrders}
+        hasMore={hasMore}
+        loader={<OrderItemLoading />}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Bạn đã xem hết đơn hàng</b>
+          </p>
+        }
+      >
+        {/*Tất cả đơn hàng*/}
+        {orders.map((order, index) => {
+          return (
+            <OrderItem
+              key={index}
+              order={order}
+              openAlertHandler={openAlertHandler}
+              transferAlertContent={transferAlertContent}
+            />
+          );
+        })}
+      </InfiniteScroll>
+      <CommonSnackbar
+        openSnackbar={openSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
+        snackbarType={snackbarType}
+        alertContent={snackbarAlertContent}
+      />
+    </>
   );
 };
 export default OrderTabContent;

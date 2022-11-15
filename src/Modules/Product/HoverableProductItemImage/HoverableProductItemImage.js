@@ -27,7 +27,11 @@ const HoverableProductItemImage = (props) => {
       onMouseEnter={hoverOnImageHandler}
       onMouseLeave={hoverOutImageHandler}
       onTouchStart={hoverOnImageHandler}
-      sx={{ position: "relative", width: "100%", height: "auto" }}
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: "auto",
+      }}
       component={NavLink}
       to={"/product/" + props.product.productId}
     >

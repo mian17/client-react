@@ -60,7 +60,6 @@ export default function SearchDialog(props) {
           setEmptyResult("Không có sản phẩm đúng theo yêu cầu của bạn.");
         }
 
-        console.log(response.data);
         const transformedItems = response.data.map((item) => {
           return new Item(
             item.id,
@@ -71,7 +70,6 @@ export default function SearchDialog(props) {
         });
         setSearchedItems(transformedItems);
       } catch (error) {
-        console.log(error);
         setError("Đã có lỗi xảy ra");
       }
       setIsLoading(false);
@@ -79,7 +77,7 @@ export default function SearchDialog(props) {
   }, [keyword]);
 
   useEffect(() => {
-    if (keyword.length > 3) {
+    if (keyword.length > 2) {
       const getData = setTimeout(fetchSearchResult, 2000);
       return () => clearTimeout(getData);
     }

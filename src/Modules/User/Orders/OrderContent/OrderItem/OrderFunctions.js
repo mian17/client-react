@@ -39,6 +39,17 @@ const OrderFunctions = (props) => {
     });
   };
 
+  const cancelRefundOrReturnRequest = () => {
+    props.openAlertHandler(true);
+    props.transferAlertContent({
+      title: "Hủy yêu cầu đổi trả, hoàn tiền",
+      content:
+        "Nếu bạn xác nhận lại rằng sản phẩm trong đơn hàng của bạn không có lỗi hoặc trục trặc, đơn hàng sẽ được chuyển lại sang trạng thái đang giao hàng.",
+      action: "cancel-return-or-refund",
+      selectedOrderId: props.order.orderId,
+    });
+  };
+
   switch (status) {
     case 1:
       functions = (
@@ -65,7 +76,7 @@ const OrderFunctions = (props) => {
           <Button onClick={confirmOrderReceivedHandler} variant="contained">
             Đã nhận hàng
           </Button>
-          <Button variant="outlined" disabled>
+          <Button variant="outlined" onClick={refundOrReturnRequest}>
             Yêu cầu trả hàng/Hoàn tiền
           </Button>
         </>
@@ -77,7 +88,7 @@ const OrderFunctions = (props) => {
           <Button disabled variant="contained">
             Đã nhận hàng
           </Button>
-          <Button onClick={refundOrReturnRequest} variant="outlined">
+          <Button disabled variant="outlined">
             Yêu cầu trả hàng/Hoàn tiền
           </Button>
         </>
@@ -94,7 +105,14 @@ const OrderFunctions = (props) => {
       break;
     case 6:
       // functions = <Button variant={"outlined"}>Mua lại</Button>;
-      functions = <></>;
+      functions = (
+        <>
+          <Button variant={"outlined"} onClick={cancelRefundOrReturnRequest}>
+            Hủy yêu cầu
+          </Button>
+          ;
+        </>
+      );
       break;
     default:
       functions = (

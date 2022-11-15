@@ -14,7 +14,7 @@ import {useTheme} from "@mui/material/styles";
 import EastIcon from "@mui/icons-material/East";
 import {IconButton} from "@mui/material";
 import {
-    mostPopularCategoriesWithImage
+  mostPopularCategoriesWithImage
 } from "../common/utils/mostPopularCategories-test-data/mostPopularCategoriesWithImage";
 import {NavLink} from "react-router-dom";
 import {arrowIconSx, titleBoxSx} from "./categoriesSx/categoriesSx";
