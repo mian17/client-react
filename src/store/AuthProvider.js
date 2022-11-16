@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // Source imports
 import AuthContext from "./auth-context";
 import { useNavigate } from "react-router-dom";
+import { useIdleTimer } from "react-idle-timer";
 
 const authDefaultState = {
   loggedIn: localStorage.getItem("loggedIn")
@@ -14,13 +15,13 @@ const authDefaultState = {
 const AuthProvider = (props) => {
   const [authState, setAuthState] = useState(authDefaultState);
 
+  // console.log(getRemainingTime());
+
   const navigate = useNavigate();
 
   /////////////////////////////////////////
   // HANDLERS
-  const setLoggedInHandler = (loggedInState) => {
-    setAuthState(loggedInState);
-  };
+
   const setLoggedOutHandler = () => {
     localStorage.removeItem("personalAccessToken");
     localStorage.removeItem("loggedIn");
@@ -30,6 +31,35 @@ const AuthProvider = (props) => {
     });
     navigate(0);
   };
+
+  const setLoggedInHandler = (loggedInState) => {
+    setAuthState(loggedInState);
+    start();
+  };
+
+  const onIdle = () => {
+    if (authState.loggedIn) {
+      console.log(getRemainingTime());
+      if (getRemainingTime() === 0) {
+        setLoggedOutHandler();
+      }
+    }
+  };
+  const onActive = () => {
+    if (authState.loggedIn) {
+      reset();
+    }
+  };
+
+  const { start, reset, getRemainingTime } = useIdleTimer({
+    timeout: 1000 * 60 * 30,
+    onIdle,
+    onActive,
+    startOnMount: true,
+    startManually: true,
+    crossTab: true,
+  });
+  console.log(getRemainingTime());
 
   useEffect(() => {
     if (localStorage.getItem("personalAccessToken") !== null) {

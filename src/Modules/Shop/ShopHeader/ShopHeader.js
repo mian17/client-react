@@ -340,6 +340,7 @@ const ShopHeader = () => {
                                   })
                                   .catch((err) => {
                                     console.log(err);
+                                    setLoggedOut();
                                   });
                               });
                             }}

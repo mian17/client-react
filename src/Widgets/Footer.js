@@ -45,6 +45,20 @@ const Footer = () => {
                   ":hover": {
                     color: "inherit",
                   },
+                  borderRadius: "13px",
+
+                  animation: "larger 1s linear infinite",
+                  "@keyframes larger": {
+                    "0%": {
+                      boxShadow: "0 0 0 0 rgb(50, 30, 30, 0.2)",
+                    },
+                    "70%": {
+                      boxShadow: "0 0 0 10px rgb(50, 30, 30, 0)",
+                    },
+                    "100%": {
+                      boxShadow: "0 0 0 0 rgb(50, 30, 30, 0)",
+                    },
+                  },
                 }}
               >
                 <FacebookIcon sx={{ fontSize: 32 }} />
@@ -225,6 +239,20 @@ const Footer = () => {
                   sx={{
                     ":hover": {
                       color: "inherit",
+                    },
+                    borderRadius: "13px",
+
+                    animation: "larger 1s linear infinite",
+                    "@keyframes larger": {
+                      "0%": {
+                        boxShadow: "0 0 0 0 rgb(50, 30, 30, 0.2)",
+                      },
+                      "70%": {
+                        boxShadow: "0 0 0 10px rgb(50, 30, 30, 0)",
+                      },
+                      "100%": {
+                        boxShadow: "0 0 0 0 rgb(50, 30, 30, 0)",
+                      },
                     },
                   }}
                 >

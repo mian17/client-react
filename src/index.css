@@ -27,6 +27,26 @@ code {
 /*  !*-webkit-transform: translateY(-35px);*!*/
 /*  background: #ffffff;*/
 /*}*/
+/*@keyframes shake {*/
+/*    from {*/
+/*        transform: translateY(-12px);*/
+/*    }*/
+/*    to {*/
+/*        transform: translateY(12px);*/
+/*    }*/
+/*}*/
 
+/*#facebook-profile-icon-animation-desktop {*/
+/*    position: absolute;*/
+/*    animation-name: shake;*/
+/*    animation-duration: 4s;*/
+/*    animation-iteration-count: infinite;*/
+/*}*/
+/*#facebook-profile-icon-animation-mobile {*/
+/*    position: absolute;*/
+/*    animation-name: shake;*/
+/*    animation-duration: 4s;*/
+/*    animation-iteration-count: infinite;*/
+/*}*/
 
 
